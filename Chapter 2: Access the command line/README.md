@@ -1,20 +1,20 @@
 # Chapter 2: Access the command line
 ## Basic Command Syntax
 
-Which user is running 
+**Which user is running** 
 ```console
 [user@host ~]$ whoami
 user
 ```
 
-Typing more than one command in a single line
+**Typing more than one command in a single line**
 ```console
 [user@host ~]$ command1 ; command2
 command1 output
 command2 output
 ```
 
-Get the current time
+**Get the current time**
 ```console
 [user@host ~]$ date
 Sun Feb 27 08:32:42 PM EST 2022
@@ -24,7 +24,7 @@ Sun Feb 27 08:32:42 PM EST 2022
 02/27/2022
 ```
 
-Change current user password
+**Change current user password**
 ```console
 [user@host ~]$ passwd
 Changing password for user user.
@@ -34,7 +34,7 @@ Retype new password: new_password
 passwd: all authentication tokens updated successfully.
 ```
 
-Display the actual type of a file and its name
+****Display the actual type of a file and its name**
 ```console
 [user@host ~]$ file /etc/passwd
 /etc/passwd: ASCII text
@@ -44,7 +44,7 @@ Display the actual type of a file and its name
 /home: directory
 ```
 
-View the content of a file
+**View the content of a file**
 ```console
 [user@host ~]$ cat /etc/passwd
 root:x:0:0:root:/root:/bin/bash
@@ -81,7 +81,7 @@ gnome-initial-setup:x:980:978::/run/gnome-initial-setup/:/sbin/nologin
 dnsmasq:x:979:977:Dnsmasq DHCP and DNS server:/var/lib/dnsmasq:/sbin/nologin
 ```
 
-Counts lines, words, and characters in a file. Use the -l, -w, or -c options to display only the given number of lines, words, or characters, respectively.
+**Counts lines, words, and characters in a file.** Use the -l, -w, or -c options to display only the given number of lines, words, or characters, respectively.
 ```console
 [user@host ~]$ wc /etc/passwd
 41   98 2338 /etc/passwd
@@ -94,7 +94,7 @@ Counts lines, words, and characters in a file. Use the -l, -w, or -c options to 
 997 total
 ```
 
-Write a Long Command on Multiple Lines
+**Write a Long Command on Multiple Lines**
 ```console
 [user@host ~]$ head -n 3 \
 /usr/share/dict/words \
@@ -110,7 +110,7 @@ Write a Long Command on Multiple Lines
 10th
 ```
 
-Display the Command History
+**Display the Command History**
 ```console
 [user@host ~]$ history
 ...output omitted...
@@ -136,7 +136,7 @@ aliases                  hosts.deny                qemu-ga
 ```
 The exclamation point character (!) is a metacharacter to expand previous commands without retyping them. The !number command expands to the command that matches the specified number. The !string command expands to the most recent command that begins with the specified string.
 
-Useful Command-line Editing Shortcuts
+**Useful Command-line Editing Shortcuts**
 | Shortcut | Description |
 | :---: | --- |
 | Ctrl+A	| Jump to the beginning of the command line. |
