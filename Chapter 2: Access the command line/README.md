@@ -73,11 +73,25 @@ shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
 halt:x:7:0:halt:/sbin:/sbin/halt
 mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
 operator:x:11:0:operator:/root:/sbin/nologin
+```
+```console
 [user@host ~]$ tail -n 3 /etc/passwd
 gdm:x:42:42::/var/lib/gdm:/sbin/nologin
 gnome-initial-setup:x:980:978::/run/gnome-initial-setup/:/sbin/nologin
 dnsmasq:x:979:977:Dnsmasq DHCP and DNS server:/var/lib/dnsmasq:/sbin/nologin
 ```
 
+Counts lines, words, and characters in a file. Use the -l, -w, or -c options to display only the given number of lines, words, or characters, respectively.
+```console
+[user@host ~]$ wc /etc/passwd
+41   98 2338 /etc/passwd
+[user@host ~]$ wc -l /etc/passwd ; wc -l /etc/group
+41 /etc/passwd
+63 /etc/group
+[user@host ~]$ wc -c /etc/group /etc/hosts
+883 /etc/group
+114 /etc/hosts
+997 total
+```
 
 
