@@ -60,7 +60,24 @@ Hello World!!
 Introduction to Linux commands.
 ```
 
-
+View first or last ~n (default:10) lines of a file 
+```console
+[user@host ~]$ head /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+[user@host ~]$ tail -n 3 /etc/passwd
+gdm:x:42:42::/var/lib/gdm:/sbin/nologin
+gnome-initial-setup:x:980:978::/run/gnome-initial-setup/:/sbin/nologin
+dnsmasq:x:979:977:Dnsmasq DHCP and DNS server:/var/lib/dnsmasq:/sbin/nologin
+```
 
 
 
