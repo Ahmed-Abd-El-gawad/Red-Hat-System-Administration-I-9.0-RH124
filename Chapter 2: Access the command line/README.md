@@ -134,5 +134,15 @@ adjtime                  hosts.allow               purple
 aliases                  hosts.deny                qemu-ga
 ...output omitted...
 ```
+The exclamation point character (!) is a metacharacter to expand previous commands without retyping them. The !number command expands to the command that matches the specified number. The !string command expands to the most recent command that begins with the specified string.
 
-
+Useful Command-line Editing Shortcuts
+| Shortcut | Description |
+| :---: | --- |
+| Ctrl+A	| Jump to the beginning of the command line. |
+| Ctrl+E	| Jump to the end of the command line. |
+| Ctrl+U	| Clear from the cursor to the beginning of the command line. |
+| Ctrl+K	| Clear from the cursor to the end of the command line. |
+| Ctrl+LeftArrow	| Jump to the beginning of the previous word on the command line. |
+| Ctrl+RightArrow	| Jump to the end of the next word on the command line. |
+| Ctrl+R	| Search the history list of commands for a pattern. |
