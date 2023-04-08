@@ -2,7 +2,7 @@
 ## Basic Command Syntax
 
 | Main commands |
-| --- | --- |
+| --- |
 | [whoami](#whoami) |
 | [date](#date) |
 | [password](#password) |
