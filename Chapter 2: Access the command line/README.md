@@ -2,6 +2,6 @@
 ## Basic Command Syntax
 
 To know whic user is running 
-''' bash
+'''console
 whoami
 '''
