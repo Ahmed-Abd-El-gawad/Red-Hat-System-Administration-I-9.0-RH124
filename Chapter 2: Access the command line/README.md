@@ -33,3 +33,34 @@ New password: new_password
 Retype new password: new_password
 passwd: all authentication tokens updated successfully.
 ```
+
+Display the actual type of a file and its name
+```console
+[user@host ~]$ file /etc/passwd
+/etc/passwd: ASCII text
+[user@host ~]$ file /bin/passwd
+/bin/passwd: setuid ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a467cb9c8fa7306d41b96a820b0178f3a9c66055, for GNU/Linux 3.2.0, stripped
+[user@host ~]$ file /home
+/home: directory
+```
+
+View the content of a file
+```console
+[user@host ~]$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+...output omitted...
+```
+it also can be used on multiple files
+```console
+[user@host ~]$ cat file1 file2
+Hello World!!
+Introduction to Linux commands.
+```
+
+
+
+
+
