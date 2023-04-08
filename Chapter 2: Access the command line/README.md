@@ -94,4 +94,45 @@ Counts lines, words, and characters in a file. Use the -l, -w, or -c options to 
 997 total
 ```
 
+Write a Long Command on Multiple Lines
+```console
+[user@host ~]$ head -n 3 \
+/usr/share/dict/words \
+/usr/share/dict/linux.words
+==> /usr/share/dict/words <==
+1080
+10-point
+10th
+
+==> /usr/share/dict/linux.words <==
+1080
+10-point
+10th
+```
+
+Display the Command History
+```console
+[user@host ~]$ history
+...output omitted...
+   23  clear
+   24  who
+   25  pwd
+   26  ls /etc
+   27  uptime
+   28  ls -l
+   29  date
+   30  history
+[user@host ~]$ !ls
+ls -l
+total 0
+drwxr-xr-x. 2 student student 6 Feb 27 19:24 Desktop
+...output omitted...
+[user@host ~]$ !26
+ls /etc
+abrt                     hosts                     pulse
+adjtime                  hosts.allow               purple
+aliases                  hosts.deny                qemu-ga
+...output omitted...
+```
+
 
