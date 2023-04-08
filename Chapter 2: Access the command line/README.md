@@ -1,7 +1,7 @@
 # Chapter 2: Access the command line
 ## Basic Command Syntax
 
-To know which user is running 
+Which user is running 
 ```console
 [user@host ~]$ whoami
 user
@@ -14,7 +14,7 @@ command1 output
 command2 output
 ```
 
-get the current time
+Get the current time
 ```console
 [user@host ~]$ date
 Sun Feb 27 08:32:42 PM EST 2022
@@ -24,3 +24,12 @@ Sun Feb 27 08:32:42 PM EST 2022
 02/27/2022
 ```
 
+Change current user password
+```console
+[user@host ~]$ passwd
+Changing password for user user.
+Current password: old_password
+New password: new_password
+Retype new password: new_password
+passwd: all authentication tokens updated successfully.
+```
