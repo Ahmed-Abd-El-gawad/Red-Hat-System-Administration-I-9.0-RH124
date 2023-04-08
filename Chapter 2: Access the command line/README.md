@@ -34,7 +34,7 @@ Retype new password: new_password
 passwd: all authentication tokens updated successfully.
 ```
 
-****Display the actual type of a file and its name**
+**Display the actual type of a file and its name**
 ```console
 [user@host ~]$ file /etc/passwd
 /etc/passwd: ASCII text
