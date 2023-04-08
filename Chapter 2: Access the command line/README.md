@@ -7,3 +7,9 @@ To know which user is running
 user
 ```
 
+Typing more than one command in a single line
+```console
+[user@host ~]$ command1 ; command2
+command1 output
+command2 output
+```
