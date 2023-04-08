@@ -1,8 +1,9 @@
 # Chapter 2: Access the command line
 ## Basic Command Syntax
 
-To know whic user is running 
+To know which user is running 
 ```console
 [user@host ~]$ whoami
 user
 ```
+
