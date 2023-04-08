@@ -2,6 +2,7 @@
 ## Basic Command Syntax
 
 To know whic user is running 
-'''console
-whoami
-'''
+```console
+[user@host ~]$ whoami
+user
+```
