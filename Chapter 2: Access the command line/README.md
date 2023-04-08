@@ -4,6 +4,16 @@
 | Main commands |
 | --- |
 | [whoami](#whoami) |
+| [date](#date) |
+| [password](#password) |
+| [file](#file) |
+| [cat](#cat) |
+| [head](#head) |
+| [tail](#tail) |
+| [wc](#wc) |
+| [\\](#\\) |
+| [history](#history) |
+| [Shortcuts](#Shortcuts) |
 
 <a name="whoami"></a>
 **Which user is running** 
@@ -19,6 +29,7 @@ command1 output
 command2 output
 ```
 
+<a name="date"></a>
 **Get the current time**
 ```console
 [user@host ~]$ date
@@ -29,6 +40,7 @@ Sun Feb 27 08:32:42 PM EST 2022
 02/27/2022
 ```
 
+<a name="password"></a>
 **Change current user password**
 ```console
 [user@host ~]$ passwd
@@ -39,6 +51,7 @@ Retype new password: new_password
 passwd: all authentication tokens updated successfully.
 ```
 
+<a name="file"></a>
 **Display the actual type of a file and its name**
 ```console
 [user@host ~]$ file /etc/passwd
@@ -49,6 +62,7 @@ passwd: all authentication tokens updated successfully.
 /home: directory
 ```
 
+<a name="cat"></a>
 **View the content of a file**
 ```console
 [user@host ~]$ cat /etc/passwd
@@ -65,6 +79,8 @@ Hello World!!
 Introduction to Linux commands.
 ```
 
+<a name="head"></a>
+<a name="tail"></a>
 View first or last ~n (default:10) lines of a file 
 ```console
 [user@host ~]$ head /etc/passwd
@@ -86,6 +102,7 @@ gnome-initial-setup:x:980:978::/run/gnome-initial-setup/:/sbin/nologin
 dnsmasq:x:979:977:Dnsmasq DHCP and DNS server:/var/lib/dnsmasq:/sbin/nologin
 ```
 
+<a name="wc"></a>
 **Counts lines, words, and characters in a file.** Use the -l, -w, or -c options to display only the given number of lines, words, or characters, respectively.
 ```console
 [user@host ~]$ wc /etc/passwd
@@ -99,6 +116,7 @@ dnsmasq:x:979:977:Dnsmasq DHCP and DNS server:/var/lib/dnsmasq:/sbin/nologin
 997 total
 ```
 
+<a name="\"></a>
 **Write a Long Command on Multiple Lines**
 ```console
 [user@host ~]$ head -n 3 \
@@ -115,6 +133,7 @@ dnsmasq:x:979:977:Dnsmasq DHCP and DNS server:/var/lib/dnsmasq:/sbin/nologin
 10th
 ```
 
+<a name="history"></a>
 **Display the Command History**
 ```console
 [user@host ~]$ history
@@ -141,6 +160,7 @@ aliases                  hosts.deny                qemu-ga
 ```
 The exclamation point character (!) is a metacharacter to expand previous commands without retyping them. The !number command expands to the command that matches the specified number. The !string command expands to the most recent command that begins with the specified string.
 
+<a name="Shortcuts"></a>
 **Useful Command-line Editing Shortcuts**
 | Shortcut | Description |
 | :---: | --- |
