@@ -1,6 +1,11 @@
 # Chapter 2: Access the command line
 ## Basic Command Syntax
 
+| Main commands |
+| --- |
+| [whoami](#whoami) |
+
+<a name="whoami"></a>
 **Which user is running** 
 ```console
 [user@host ~]$ whoami
