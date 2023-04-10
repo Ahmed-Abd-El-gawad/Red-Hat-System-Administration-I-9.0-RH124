@@ -140,4 +140,11 @@ Updates the time stamp of a file to the current date and time without otherwise 
 | [mkdir](#mkdir) |
 
 <a name="mkdir"></a>
+Creates one or more directories or subdirectories.
+```console
+[user@host ~]$ cd Documents
+[user@host Documents]$ mkdir ProjectX ProjectY ProjectZ
+[user@host Documents]$ ls
+ProjectX  ProjectY ProjectZ
+```
 
