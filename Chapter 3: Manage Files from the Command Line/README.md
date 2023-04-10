@@ -63,6 +63,17 @@ drwxr-xr-x.  2 user user    6 Mar  2 02:45 Documents
 ...output omitted...
 ```
 3. ```-R``` (recursive, to include the contents of all subdirectories)
+```console
+[user@host Documents]$ ls -R Thesis/
+Thesis/:
+Chapter1  Chapter2  Chapter3
+
+Thesis/Chapter1:
+
+Thesis/Chapter2:
+
+Thesis/Chapter3:
+```
 
 <a name="cd"></a>
 Change your shell's current working directory. 
@@ -147,4 +158,18 @@ Creates one or more directories or subdirectories.
 [user@host Documents]$ ls
 ProjectX  ProjectY ProjectZ
 ```
+The ```mkdir``` command ```-p``` (parent) option creates any missing parent directories for the requested destination.
+```console
+[user@host Documents]$ mkdir -p Thesis/Chapter1 Thesis/Chapter2 Thesis/Chapter3
+[user@host Documents]$ ls -R Thesis/
+Thesis/:
+Chapter1  Chapter2  Chapter3
+
+Thesis/Chapter1:
+
+Thesis/Chapter2:
+
+Thesis/Chapter3:
+```
+
 
