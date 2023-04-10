@@ -28,7 +28,7 @@ Lists directory contents for the specified directory or, if no directory is give
 Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
 ```
 ```ls``` command has multiple options for displaying attributes on files.
-```-l``` (long listing format)
+1. ```-l``` (long listing format)
 ```console
 [user@host ~]$ ls -l
 total 0
@@ -41,7 +41,7 @@ drwxr-xr-x. 2 user user 6 Mar  2 02:45 Public
 drwxr-xr-x. 2 user user 6 Mar  2 02:45 Templates
 drwxr-xr-x. 2 user user 6 Mar  2 02:45 Videos
 ```
-```-a``` (all files, including hidden files)
+2. ```-a``` (all files, including hidden files)
 * One dot ```.``` refers to the current directory.
 * Two dots ```..``` refer to the parent directory.
 * File names that begin with a dot ```.``` indicate hidden files.
@@ -61,8 +61,7 @@ drwxr-xr-x.  2 user user    6 Mar  2 02:45 Desktop
 drwxr-xr-x.  2 user user    6 Mar  2 02:45 Documents
 ...output omitted...
 ```
-
-```-R``` (recursive, to include the contents of all subdirectories)
+3. ```-R``` (recursive, to include the contents of all subdirectories)
 
 <a name="cd"></a>
 Change your shell's current working directory. 
@@ -78,6 +77,49 @@ Change your shell's current working directory.
 [user@host Documents]$ cd
 [user@host ~]$ pwd
 /home/user
+```
+The ```cd``` command has many options.
+1. ```-``` changes to the previous directory.
+```console
+[user@host ~]$ cd Videos
+[user@host Videos]$ pwd
+/home/user/Videos
+[user@host Videos]$ cd /home/user/Documents
+[user@host Documents]$ pwd
+/home/user/Documents
+[user@host Documents]$ cd -
+[user@host Videos]$ pwd
+/home/user/Videos
+[user@host Videos]$ cd -
+[user@host Documents]$ pwd
+/home/user/Documents
+[user@host Documents]$ cd -
+[user@host Videos]$ pwd
+/home/user/Videos
+[user@host Videos]$ cd
+[user@host ~]$
+```
+2. ```..``` command uses the ```..``` hidden directory to move up one level to the parent directory, without needing to know the exact parent name.
+3. The other hidden directory ```.``` specifies the current directory on commands where the current location is either the source or destination argument, and avoids the need to type the directory's absolute path name.
+```console
+[user@host Videos]$ pwd
+/home/user/Videos
+[user@host Videos]$ cd .
+[user@host Videos]$ pwd
+/home/user/Videos
+[user@host Videos]$ cd ..
+[user@host ~]$ pwd
+/home/user
+[user@host ~]$ cd ..
+[user@host home]$ pwd
+/home
+[user@host home]$ cd ..
+[user@host /]$ pwd
+/
+[user@host /]$ cd
+[user@host ~]$ pwd
+/home/user
+[user@host ~]$
 ```
 
 <a name="touch"></a>
