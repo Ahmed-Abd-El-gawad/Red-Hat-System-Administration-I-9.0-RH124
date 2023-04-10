@@ -3,6 +3,7 @@
 | content |
 | --- |
 | [3.3 Specify Files by name](#3.3) |
+| [3.5 Manage Files with Command-line Tools](#3.5) |
 
 <a name="3.3"></a>
 ## 3.3 specify Files by name
@@ -130,4 +131,12 @@ Updates the time stamp of a file to the current date and time without otherwise 
 [user@host ~]$ touch Documents/thesis_chapter1.odf
 [user@host ~]$ touch Documents/thesis_chapter2.odf
 ```
+
+<a name="3.5"></a>
+## 3.5 Manage Files with Command-line Tools
+
+| Commands |
+| --- | 
+| [](#) |
+
 
