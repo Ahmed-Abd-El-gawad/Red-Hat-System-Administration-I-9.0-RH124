@@ -12,6 +12,7 @@
 | [pwd](#pwd) |
 | [ls](#ls) |
 | [cd](#cd) |
+| [touch](#touch) |
 
 <a name="pwd"></a>
 Display the full path name of the current working directory.
@@ -26,6 +27,41 @@ Lists directory contents for the specified directory or, if no directory is give
 [user@host ~]$ ls
 Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
 ```
+```ls``` command has multiple options for displaying attributes on files.
+```-l``` (long listing format)
+```console
+[user@host ~]$ ls -l
+total 0
+drwxr-xr-x. 2 user user 6 Mar  2 02:45 Desktop
+drwxr-xr-x. 2 user user 6 Mar  2 02:45 Documents
+drwxr-xr-x. 2 user user 6 Mar  2 02:45 Downloads
+drwxr-xr-x. 2 user user 6 Mar  2 02:45 Music
+drwxr-xr-x. 2 user user 6 Mar  2 02:45 Pictures
+drwxr-xr-x. 2 user user 6 Mar  2 02:45 Public
+drwxr-xr-x. 2 user user 6 Mar  2 02:45 Templates
+drwxr-xr-x. 2 user user 6 Mar  2 02:45 Videos
+```
+```-a``` (all files, including hidden files)
+One dot ```.``` refers to the current directory.
+Two dots ```..``` refer to the parent directory.
+File names that begin with a dot ```.``` indicate hidden files.
+```console
+[user@host ~]$ ls -la
+total 40
+drwx------. 17 user user 4096 Mar  2 03:07 .
+drwxr-xr-x.  4 root root   35 Feb 10 10:48 ..
+drwxr-xr-x.  4 user user   27 Mar  2 03:01 .ansible
+-rw-------.  1 user user  444 Mar  2 04:32 .bash_history
+-rw-r--r--.  1 user user   18 Aug  9  2021 .bash_logout
+-rw-r--r--.  1 user user  141 Aug  9  2021 .bash_profile
+-rw-r--r--.  1 user user  492 Aug  9  2021 .bashrc
+drwxr-xr-x.  9 user user 4096 Mar  2 02:45 .cache
+drwxr-xr-x.  9 user user 4096 Mar  2 04:32 .config
+drwxr-xr-x.  2 user user    6 Mar  2 02:45 Desktop
+drwxr-xr-x.  2 user user    6 Mar  2 02:45 Documents
+...output omitted...
+```
+```-R``` (recursive, to include the contents of all subdirectories)
 
 <a name="cd"></a>
 Change your shell's current working directory. 
@@ -41,5 +77,14 @@ Change your shell's current working directory.
 [user@host Documents]$ cd
 [user@host ~]$ pwd
 /home/user
+```
+
+<a name="touch"></a>
+Updates the time stamp of a file to the current date and time without otherwise modifying it. This command is useful for creating empty files.
+```console
+[user@host ~]$ touch Videos/blockbuster1.ogg
+[user@host ~]$ touch Videos/blockbuster2.ogg
+[user@host ~]$ touch Documents/thesis_chapter1.odf
+[user@host ~]$ touch Documents/thesis_chapter2.odf
 ```
 
