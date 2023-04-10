@@ -1,5 +1,5 @@
 # Red-Hat-System-Administration-I-9.0-RH124
-A learning guide.
+A learning guide to keep track of the command used.
 
 | Content |
 | --- |
