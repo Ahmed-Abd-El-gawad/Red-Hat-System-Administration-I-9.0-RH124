@@ -42,9 +42,9 @@ drwxr-xr-x. 2 user user 6 Mar  2 02:45 Templates
 drwxr-xr-x. 2 user user 6 Mar  2 02:45 Videos
 ```
 ```-a``` (all files, including hidden files)
-One dot ```.``` refers to the current directory.
-Two dots ```..``` refer to the parent directory.
-File names that begin with a dot ```.``` indicate hidden files.
+* One dot ```.``` refers to the current directory.
+* Two dots ```..``` refer to the parent directory.
+* File names that begin with a dot ```.``` indicate hidden files.
 ```console
 [user@host ~]$ ls -la
 total 40
@@ -61,6 +61,7 @@ drwxr-xr-x.  2 user user    6 Mar  2 02:45 Desktop
 drwxr-xr-x.  2 user user    6 Mar  2 02:45 Documents
 ...output omitted...
 ```
+
 ```-R``` (recursive, to include the contents of all subdirectories)
 
 <a name="cd"></a>
