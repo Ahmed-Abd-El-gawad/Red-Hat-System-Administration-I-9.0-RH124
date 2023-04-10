@@ -1,5 +1,11 @@
 # Chapter 3: Manage files from the Command Line
 
+| content |
+| --- |
+| [3.3 Specify Files by name](#3.3) |
+
+<a name="3.3"></a>
+## 3.3 specify Files by name
 | Commands |
 | --- | 
 | [pwd](#pwd) |
