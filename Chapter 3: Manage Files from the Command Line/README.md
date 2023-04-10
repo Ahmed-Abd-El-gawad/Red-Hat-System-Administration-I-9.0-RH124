@@ -4,6 +4,7 @@
 | --- |
 | [3.3 Specify Files by name](#3.3) |
 | [3.5 Manage Files with Command-line Tools](#3.5) |
+| [3.7 Make Links Between Files](#3.7) |
 
 <a name="3.3"></a>
 ## 3.3 specify Files by name
@@ -289,3 +290,10 @@ rmdir: failed to remove 'ProjectX': Directory not empty
 [user@host Documents]$ rm -r ProjectX
 [user@host Documents]$
 ```
+
+<a name="3.7"></a>
+## 3.7 Make Links Between Files
+
+| Commands |
+| --- | 
+| [](#) |
