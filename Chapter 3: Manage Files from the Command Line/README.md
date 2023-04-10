@@ -150,6 +150,7 @@ Updates the time stamp of a file to the current date and time without otherwise 
 | --- | 
 | [mkdir](#mkdir) |
 | [cp](#cp) |
+| [mv](#mv) |
 
 <a name="mkdir"></a>
 Creates one or more directories or subdirectories.
@@ -220,4 +221,31 @@ total 0
 
 ./Thesis/Chapter3:
 total 0
+```
+
+<a name="mv"></a>
+* Moves files from one location to another.
+*  If you think of the absolute path to a file as its full name, then moving a file is effectively the same as renaming a file. The content of the files that are moved remain unchanged.
+```console
+[user@host Documents]$ ls -l
+-rw-r--r--. 1 user user  7100 Mar  7 14:37 thesis_chapter1.txt
+-rw-r--r--. 1 user user 11431 Mar  7 14:39 thesis_chapter2.txt
+...output omitted...
+[user@host Documents]$ mv thesis_chapter2.txt thesis_chapter2_reviewed.txt
+[user@host Documents]$ ls -l
+-rw-r--r--. 1 user user  7100 Mar  7 14:37 thesis_chapter1.txt
+-rw-r--r--. 1 user user 11431 Mar  7 14:39 thesis_chapter2_reviewed.txt
+...output omitted...
+```
+1. ```-v``` display a detailed output of the command operations.
+```console
+[user@host Documents]$ ls Thesis/Chapter1
+[user@host Documents]$
+[user@host Documents]$ mv -v thesis_chapter1.txt Thesis/Chapter1
+renamed 'thesis_chapter1.txt' -> 'Thesis/Chapter1/thesis_chapter1.txt'
+[user@host Documents]$ ls Thesis/Chapter1
+thesis_chapter1.txt
+[user@host Documents]$ ls -l
+-rw-r--r--. 1 user user 11431 Mar  7 14:39 thesis_chapter2_reviewed.txt
+...output omitted...
 ```
