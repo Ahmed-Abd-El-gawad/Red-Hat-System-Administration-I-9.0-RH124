@@ -151,6 +151,8 @@ Updates the time stamp of a file to the current date and time without otherwise 
 | [mkdir](#mkdir) |
 | [cp](#cp) |
 | [mv](#mv) |
+| [rm](#rm) |
+| [rmdir](#rmdir) |
 
 <a name="mkdir"></a>
 Creates one or more directories or subdirectories.
@@ -248,4 +250,42 @@ thesis_chapter1.txt
 [user@host Documents]$ ls -l
 -rw-r--r--. 1 user user 11431 Mar  7 14:39 thesis_chapter2_reviewed.txt
 ...output omitted...
+```
+
+<a name="rm"></a>
+* Removes files.
+* By default, ```rm``` does not remove directories. You can use the ```rm``` command ```-r```or ```--recursive``` option to enable the rm command to delete directories and their contents. The ```rm -r``` command traverses each subdirectory first, and individually removes their files before removing each directory.
+```console
+[user@host Documents]$ ls -l Thesis/Chapter1
+-rw-r--r--. 1 user user 7100 Mar  7 14:37 thesis_chapter1.txt
+[user@host Documents]$ rm Thesis/Chapter1/thesis_chapter1.txt
+[user@host Documents]$ rm Thesis/Chapter1
+rm: cannot remove 'Thesis/Chapter1': Is a directory
+[user@host Documents]$ rm -r Thesis/Chapter1
+[user@host Documents]$ ls -l Thesis
+drwxr-xr-x. 2 user user 6 Mar  7 12:37 Chapter2
+drwxr-xr-x. 2 user user 6 Mar  7 12:37 Chapter3
+```
+* You can use the ```rm``` command ```-i``` option to interactively prompt for confirmation before deleting. This option is essentially the opposite of using the ```rm``` command ```-f``` option, which forces the removal without prompting the user for confirmation.
+* If you specify both the ```-i``` and ```-f``` options, then the ```-f``` option takes priority and you are not prompted for confirmation before rm deletes files.
+```console
+[user@host Documents]$ rm -ri Thesis
+rm: descend into directory 'Thesis'? y
+rm: descend into directory 'Thesis/Chapter2'? y
+rm: remove regular empty file 'Thesis/Chapter2/thesis_chapter2.txt'? y
+rm: remove directory 'Thesis/Chapter2'? y
+rm: remove directory 'Thesis/Chapter3'? y
+rm: remove directory 'Thesis'? y
+```
+
+<a name="rmdir"></a>
+You can also use the ```rmdir``` command to remove empty directories. Use the ```rm``` command ```-r``` option to delete non-empty directories.
+```console
+[user@host Documents]$ pwd
+/home/user/Documents
+[user@host Documents]$ rmdir ProjectZ
+[user@host Documents]$ rmdir ProjectX
+rmdir: failed to remove 'ProjectX': Directory not empty
+[user@host Documents]$ rm -r ProjectX
+[user@host Documents]$
 ```
