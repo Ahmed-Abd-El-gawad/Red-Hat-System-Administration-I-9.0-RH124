@@ -18,6 +18,10 @@
 | 2 |	stderr | Standard | error	| Terminal | write only |
 | 3+ | filename	| Other | files	| none | read, write, or both |
 
+### Output Redirection Operators
+| Usage |	Explanation | Visual aid |
+| --- | --- | --- |
+| ```> file``` | Redirect ```stdout``` to overwrite a file. | ![combine-overwrite](https://user-images.githubusercontent.com/87609369/231502630-4aad8949-c5e4-453f-a526-ec2724bce6b2.svg) |
 
 
 <a name="5.3"></a>
