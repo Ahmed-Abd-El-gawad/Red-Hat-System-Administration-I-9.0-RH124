@@ -28,6 +28,19 @@
 | ```> file 2>&1``` == ```&> file``` | Redirect ```stdout``` and ```stder```r to overwrite the same file. | ![combine-overwrite](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%205.%20Create%2C%20View%2C%20and%20Edit%20Text%20Files/combine-overwrite.png) |
 | ```>> file 2>&1``` == ```&>> file``` | Redirect ```stdout``` and ```stderr``` to append to the same file. | ![combine-append](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%205.%20Create%2C%20View%2C%20and%20Edit%20Text%20Files/combine-append.png) |
 
+### Examples and Notes
+
+* Redirects standard output to the ```output.log``` file and then redirects standard error messages to the same place as standard output (```output.log```).
+```bash
+> output.log 2>&1
+```
+* redirects standard error messages to the default place for standard output (the terminal window, so **no change**) and then redirects only standard output to ```output.log```.
+```bash
+2>&1 > output.log
+```
+* ```&> output.log``` instead of ```> output.log 2>&1```
+* ```&>> output.log``` instead of ```>> output.log 2>&1``` (in Bash 4 / RHEL 6 and later)
+
 <a name="5.3"></a>
 ## 5.3 Edit Text Files from the Shell Prompt
 
