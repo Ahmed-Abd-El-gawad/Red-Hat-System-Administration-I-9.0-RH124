@@ -24,3 +24,18 @@
 | Shift+G	| Go to the end of the man page. |
 | Q	| Exit man and return to the command shell prompt. |
 
+### Search for man Pages by Keyword
+
+```console
+[user@host ~]$ man -k passwd
+chgpasswd (8)        - update group passwords in batch mode
+chpasswd (8)         - update passwords in batch mode
+fgetpwent_r (3)      - get passwd file entry reentrantly
+getpwent_r (3)       - get passwd file entry reentrantly
+...
+passwd (1)           - update user's authentication tokens
+passwd (1ossl)       - OpenSSL application commands
+passwd (5)           - password file
+passwd2des (3)       - RFS password encryption
+...
+```
