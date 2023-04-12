@@ -393,6 +393,9 @@ cat: /tmp/newfile-symlink.txt: No such file or directory
 | [Pattern Matching](#pattern) |
 | [Tilde Expansion ```~```](#tilde) |
 | [Brace Expansion](#brace) |
+| [Variable Expansion](#variable) |
+| [Command Substitution](#command) |
+
 
 <a name="pattern"></a>
 ### Pattern Matching
@@ -472,5 +475,33 @@ filea1.txt filea2.txt fileb.txt filec.txt
 [user@host glob]$ mkdir ../RHEL{7,8,9}
 [user@host glob]$ ls ../RHEL*
 RHEL7 RHEL8 RHEL9
+```
+
+<a name="variable"></a>
+### Variable Expansion
+
+You can assign data as a value to a variable with the following syntax:
+```console
+[user@host ~]$ VARIABLENAME=value
+```
+```console
+[user@host ~]$ USERNAME=operator
+[user@host ~]$ echo $USERNAME
+operator
+```
+```console
+[user@host ~]$ USERNAME=operator
+[user@host ~]$ echo ${USERNAME}
+operator
+```
+
+<a name="command"></a>
+### Command Substitution
+
+```console
+[user@host glob]$ echo Today is $(date +%A).
+Today is Wednesday.
+[user@host glob]$ echo The time is $(date +%M) minutes past $(date +%l%p).
+The time is 26 minutes past 11AM.
 ```
 
