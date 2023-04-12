@@ -5,6 +5,7 @@
 | [3.3 Specify Files by name](#3.3) |
 | [3.5 Manage Files with Command-line Tools](#3.5) |
 | [3.7 Make Links Between Files](#3.7) |
+| [3.9 Match File Names with Shell Expansions](#3.9) |
 
 <a name="3.3"></a>
 ## 3.3 specify Files by name
@@ -294,7 +295,7 @@ rmdir: failed to remove 'ProjectX': Directory not empty
 <a name="3.7"></a>
 ## 3.7 Make Links Between Files
 
-| Commands |
+| Content |
 | --- | 
 | [Hard Links](#hard) |
 | [Symbolic Links](#symbolic) |
@@ -383,4 +384,11 @@ cat: /tmp/newfile-symlink.txt: No such file or directory
 /etc
 ```
 * ```cd -P``` command is equivalent to ```cd -L```, which is used to force cd to not follow symbolic links and display the actual path of the directory.
+
+<a name="3.9"></a>
+## 3.9 Match File Names with Shell Expansions
+
+| Commands |
+| --- | 
+| [](#) |
 
