@@ -391,6 +391,7 @@ cat: /tmp/newfile-symlink.txt: No such file or directory
 | Content |
 | --- | 
 | [Pattern Matching](#pattern) |
+| [Tilde Expansion ```~```](#tilde) |
 
 <a name="pattern"></a>
 ### Pattern Matching
@@ -436,3 +437,18 @@ able  alpha  cast  easy  echo
 [user@host glob]$ ls ?????
 baker  bravo  delta
 ```
+
+<a name="tilde"></a>
+### Tilde Expansion ```~```
+
+```console
+[user@host glob]$ echo ~root
+/root
+[user@host glob]$ echo ~user
+/home/user
+[user@host glob]$ echo ~/glob
+/home/user/glob
+[user@host glob]$ echo ~nonexistinguser
+~nonexistinguser
+```
+
