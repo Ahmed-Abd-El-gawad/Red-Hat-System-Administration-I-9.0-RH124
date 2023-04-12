@@ -349,5 +349,38 @@ tmpfs                           180420       0    180420   0% /run/user/1000
 <a name="symbolic"></a>
 ### Symbolic Links
 
+* The ```ln``` command ```-s``` option creates a symbolic link, which is also called a "soft link". 
+* A symbolic link is not a regular file, but a special type of file that points to an existing file or directory.
+* Symbolic links can link two files on different file systems.
+* Symbolic links can point to a directory or special file, not just to a regular file.
+```concole
+[user@host ~]$ ln -s /home/user/newfile-link2.txt /tmp/newfile-symlink.txt
+[user@host ~]$ ls -l newfile-link2.txt /tmp/newfile-symlink.txt
+-rw-rw-r--. 1 user user 12 Mar 11 19:19 newfile-link2.txt
+lrwxrwxrwx. 1 user user 11 Mar 11 20:59 /tmp/newfile-symlink.txt -> /home/user/newfile-link2.txt
+[user@host ~]$ cat /tmp/newfile-symlink.txt
+Symbolic Hello World
+```
+* The first character of the long listing for the ```/tmp/newfile-symlink.txt``` file is ```l``` (letter ```l```) instead of ```-```. This character indicates that the file is a symbolic link and not a regular file.
+* When the original regular file is deleted, the symbolic link still points to the file but the target is gone. A symbolic link that points to a missing file is called a "dangling symbolic link".
+```console
+[user@host ~]$ rm -f newfile-link2.txt
+[user@host ~]$ ls -l /tmp/newfile-symlink.txt
+lrwxrwxrwx. 1 user user 11 Mar 11 20:59 /tmp/newfile-symlink.txt -> /home/user/newfile-link2.txt
+[user@host ~]$ cat /tmp/newfile-symlink.txt
+cat: /tmp/newfile-symlink.txt: No such file or directory
+```
+* A hard link points a name to data on a storage device.
+* A symbolic link points a name to another name, which points to data on a storage device.
+* If you use ```cd``` to change to the symbolic link, then the current working directory becomes the linked directory. Some tools might track that you followed a symbolic link to get there. For example, by default, cd updates your current working directory by using the name of the symbolic link rather than the name of the actual directory. If you want to update the current working directory by using the name of the actual directory, then you can use the ```-P``` option.
+```console
+[user@host ~]$ ln -s /etc /home/user/configfiles
+[user@host ~]$ cd /home/user/configfiles
+[user@host configfiles]$ pwd
+/home/user/configfiles
+[user@host configfiles]$ cd -P /home/user/configfiles
+[user@host etc]$ pwd
+/etc
+```
 
 
