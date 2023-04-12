@@ -388,7 +388,25 @@ cat: /tmp/newfile-symlink.txt: No such file or directory
 <a name="3.9"></a>
 ## 3.9 Match File Names with Shell Expansions
 
-| Commands |
+| Content |
 | --- | 
-| [](#) |
+| [Pattern Matching](#pattern) |
 
+<a name="pattern"></a>
+### Pattern Matching
+
+| Metacharacters | Matches |
+| --- | --- |
+| Pattern |	Matches |
+| *	| Any string of zero or more characters. |
+| ?	| Any single character. |
+| [abc…​]	| Any one character in the enclosed class (between the square brackets). |
+| [!abc…​]	| Any one character not in the enclosed class. |
+| [^abc…​]	| Any one character not in the enclosed class. |
+| [[:alpha:]]	| Any alphabetic character. |
+| [[:lower:]]	| Any lowercase character. |
+| [[:upper:]]	| Any uppercase character. |
+| [[:alnum:]]	| Any alphabetic character or digit. |
+| [[:punct:]]	| Any printable character that is not a space or alphanumeric. |
+| [[:digit:]]	| Any single digit from 0 to 9. |
+| [[:space:]]	| Any single white space character, which might include tabs, newlines, carriage returns, form feeds, or spaces. |
