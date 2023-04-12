@@ -26,6 +26,7 @@
 
 ### Search for man Pages by Keyword
 
+```-k``` option (equivalent to the ```apropos``` command) to search for a keyword in ```man``` pages' titles and descriptions.
 ```console
 [user@host ~]$ man -k passwd
 chgpasswd (8)        - update group passwords in batch mode
@@ -39,3 +40,19 @@ passwd (5)           - password file
 passwd2des (3)       - RFS password encryption
 ...
 ```
+```-K``` (uppercase) option searches for the keyword in the full-text page, not only in the titles and descriptions.
+```console
+[user@host ~]# man -K passwd
+--Man-- next: cut(1p) [ view (return) | skip (Ctrl-D) | quit (Ctrl-C) ]
+Ctrl-D
+--Man-- next: logname(1p) [ view (return) | skip (Ctrl-D) | quit (Ctrl-C) ]
+Ctrl-D
+--Man-- next: sort(1p) [ view (return) | skip (Ctrl-D) | quit (Ctrl-C) ]
+Ctrl-D
+--Man-- next: xargs(1) [ view (return) | skip (Ctrl-D) | quit (Ctrl-C) ]
+Ctrl-D
+--Man-- next: chage(1) [ view (return) | skip (Ctrl-D) | quit (Ctrl-C) ]
+Ctrl-C
+```
+
+
