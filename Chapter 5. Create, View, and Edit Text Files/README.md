@@ -23,8 +23,10 @@
 | --- | --- | --- |
 | ```> file``` | Redirect ```stdout``` to overwrite a file. | ![redirection-overview](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%205.%20Create%2C%20View%2C%20and%20Edit%20Text%20Files/redirection-overview.png) |
 | ```>> file``` | Redirect ```stdout``` to append to a file. | ![redirection-append](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%205.%20Create%2C%20View%2C%20and%20Edit%20Text%20Files/redirection-append.png) |
-| 
-
+| ```2> file``` | Redirect ```stderr``` to overwrite a file. |  |
+| ```2> /dev/null``` | Discard ```stderr``` error messages by redirecting them to ```/dev/null```. |  |
+| ```> file 2>&1``` == ```&> file``` | Redirect ```stdout``` and ```stder```r to overwrite the same file. |  |
+| ```>> file 2>&1``` == ```&>> file``` | Redirect ```stdout``` and ```stderr``` to append to the same file. |  |
 
 <a name="5.3"></a>
 ## 5.3 Edit Text Files from the Shell Prompt
