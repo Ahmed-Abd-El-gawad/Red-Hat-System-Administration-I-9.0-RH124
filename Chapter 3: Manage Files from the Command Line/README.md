@@ -398,7 +398,7 @@ cat: /tmp/newfile-symlink.txt: No such file or directory
 | Metacharacters | Matches |
 | --- | --- |
 | Pattern |	Matches |
-| *	| Any string of zero or more characters. |
+| [\*](#*)	| Any string of zero or more characters. |
 | ?	| Any single character. |
 | [abc…​]	| Any one character in the enclosed class (between the square brackets). |
 | [!abc…​]	| Any one character not in the enclosed class. |
@@ -410,3 +410,15 @@ cat: /tmp/newfile-symlink.txt: No such file or directory
 | [[:punct:]]	| Any printable character that is not a space or alphanumeric. |
 | [[:digit:]]	| Any single digit from 0 to 9. |
 | [[:space:]]	| Any single white space character, which might include tabs, newlines, carriage returns, form feeds, or spaces. |
+
+```console
+[user@host ~]$ mkdir glob; cd glob
+[user@host glob]$ touch alpha bravo charlie delta echo able baker cast dog easy
+[user@host glob]$ ls
+able  alpha  baker  bravo  cast  charlie  delta  dog  easy  echo
+```
+<a name="*"></a>
+```console
+[user@host glob]$ ls a*
+able  alpha
+```
