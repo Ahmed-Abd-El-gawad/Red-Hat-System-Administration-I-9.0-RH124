@@ -395,7 +395,7 @@ cat: /tmp/newfile-symlink.txt: No such file or directory
 | [Brace Expansion](#brace) |
 | [Variable Expansion](#variable) |
 | [Command Substitution](#command) |
-
+| [Protecting Arguments from Expansion](#protect) |
 
 <a name="pattern"></a>
 ### Pattern Matching
@@ -505,3 +505,26 @@ Today is Wednesday.
 The time is 26 minutes past 11AM.
 ```
 
+<a name="protect"></a>
+### Protecting Arguments from Expansion
+
+Use ```\```
+```console
+[user@host glob]$ echo The value of $HOME is your home directory.
+The value of /home/user is your home directory.
+[user@host glob]$ echo The value of \$HOME is your home directory.
+The value of $HOME is your home directory.
+```
+Single quotation marks stop all shell expansion. Double quotation marks stop most shell expansion.
+```console
+[user@host glob]$ myhost=$(hostname -s); echo $myhost
+host
+[user@host glob]$ echo "***** hostname is ${myhost} *****"
+***** hostname is host *****
+```
+```console
+[user@host glob]$ echo "Will variable $myhost evaluate to $(hostname -s)?"
+Will variable host evaluate to host?
+[user@host glob]$ echo 'Will variable $myhost evaluate to $(hostname -s)?'
+Will variable $myhost evaluate to $(hostname -s)?
+```
