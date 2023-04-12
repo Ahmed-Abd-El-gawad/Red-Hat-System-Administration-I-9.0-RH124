@@ -299,8 +299,9 @@ rmdir: failed to remove 'ProjectX': Directory not empty
 | [Hard Links](#hard) |
 | [Symbolic Links](#symbolic) |
 
-
 <a name="hard"></a>
+### Hard Links
+
 * The new hard link acts exactly like the original file name. After the link is created, you cannot tell the difference between the new hard link and the original name of the file.
 * You can determine whether a file has multiple hard links by using the ```ls -l```
 ```console
@@ -346,3 +347,7 @@ tmpfs                           180420       0    180420   0% /run/user/1000
 ```
 
 <a name="symbolic"></a>
+### Symbolic Links
+
+
+
