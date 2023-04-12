@@ -21,7 +21,7 @@
 ### Output Redirection Operators
 | Usage |	Explanation | Visual aid |
 | --- | --- | --- |
-| ```> file``` | Redirect ```stdout``` to overwrite a file. | ![combine-overwrite](https://user-images.githubusercontent.com/87609369/231502630-4aad8949-c5e4-453f-a526-ec2724bce6b2.svg) |
+| ```> file``` | Redirect ```stdout``` to overwrite a file. | ![combine-overwrite](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%205.%20Create%2C%20View%2C%20and%20Edit%20Text%20Files/combine-overwrite.svg) |
 
 
 <a name="5.3"></a>
