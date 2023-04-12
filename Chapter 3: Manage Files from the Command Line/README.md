@@ -392,6 +392,7 @@ cat: /tmp/newfile-symlink.txt: No such file or directory
 | --- | 
 | [Pattern Matching](#pattern) |
 | [Tilde Expansion ```~```](#tilde) |
+| [Brace Expansion](#brace) |
 
 <a name="pattern"></a>
 ### Pattern Matching
@@ -450,5 +451,26 @@ baker  bravo  delta
 /home/user/glob
 [user@host glob]$ echo ~nonexistinguser
 ~nonexistinguser
+```
+
+<a name="brace"></a>
+### Brace Expansion
+
+```console
+[user@host glob]$ echo {Sunday,Monday,Tuesday,Wednesday}.log
+Sunday.log Monday.log Tuesday.log Wednesday.log
+[user@host glob]$ echo file{1..3}.txt
+file1.txt file2.txt file3.txt
+[user@host glob]$ echo file{a..c}.txt
+filea.txt fileb.txt filec.txt
+[user@host glob]$ echo file{a,b}{1,2}.txt
+filea1.txt filea2.txt fileb1.txt fileb2.txt
+[user@host glob]$ echo file{a{1,2},b,c}.txt
+filea1.txt filea2.txt fileb.txt filec.txt
+```
+```console
+[user@host glob]$ mkdir ../RHEL{7,8,9}
+[user@host glob]$ ls ../RHEL*
+RHEL7 RHEL8 RHEL9
 ```
 
