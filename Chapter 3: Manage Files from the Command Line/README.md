@@ -296,4 +296,53 @@ rmdir: failed to remove 'ProjectX': Directory not empty
 
 | Commands |
 | --- | 
-| [](#) |
+| [Hard Links](#hard) |
+| [Symbolic Links](#symbolic) |
+
+
+<a name="hard"></a>
+* The new hard link acts exactly like the original file name. After the link is created, you cannot tell the difference between the new hard link and the original name of the file.
+* You can determine whether a file has multiple hard links by using the ```ls -l```
+```console
+[user@host ~]$ pwd
+/home/user
+[user@host ~]$ ls -l newfile.txt
+-rw-r--r--. 1 user user 0 Mar 11 19:19 newfile.txt
+```
+* ```ln``` command to create a hard link (another file name) that points to an existing file.
+```console
+[user@host ~]$ ln newfile.txt /tmp/newfile-hlink2.txt
+[user@host ~]$ ls -l newfile.txt /tmp/newfile-hlink2.txt
+-rw-rw-r--. 2 user user 12 Mar 11 19:19 newfile.txt
+-rw-rw-r--. 2 user user 12 Mar 11 19:19 /tmp/newfile-hlink2.txt
+```
+* To determine whether two files are hard linked, use the ```ls``` command ```-i``` option to list each file's inode number. If the files are on the same file system and their inode numbers are the same, then the files are hard links that point to the same data file content.
+```console
+[user@host ~]$ ls -il newfile.txt /tmp/newfile-hlink2.txt
+8924107 -rw-rw-r--. 2 user user 12 Mar 11 19:19 newfile.txt
+8924107 -rw-rw-r--. 2 user user 12 Mar 11 19:19 /tmp/newfile-hlink2.txt
+```
+* Even if the original file is deleted, you can still access the contents of the file provided that at least one other hard link exists. Data is deleted from storage only when the last hard link is deleted, making the file contents unreferenced by any hard link.
+```console
+[user@host ~]$ rm -f newfile.txt
+[user@host ~]$ ls -l /tmp/newfile-hlink2.txt
+-rw-rw-r--. 1 user user 12 Mar 11 19:19 /tmp/newfile-hlink2.txt
+[user@host ~]$ cat /tmp/newfile-hlink2.txt
+Hello World
+```
+* you can use hard links only with regular files. You cannot use the ```ln``` command to create a hard link to a directory or special file.
+* you can use hard links only if both files are on the same file system.
+* You can use the df command to list the directories that are on different file systems. For example, you might see the following output:
+```console
+[user@host ~]$ df
+Filesystem                   1K-blocks    Used Available Use% Mounted on
+devtmpfs                        886788       0    886788   0% /dev
+tmpfs                           902108       0    902108   0% /dev/shm
+tmpfs                           902108    8696    893412   1% /run
+tmpfs                           902108       0    902108   0% /sys/fs/cgroup
+/dev/mapper/rhel_rhel9--root  10258432 1630460   8627972  16% /
+/dev/sda1                      1038336  167128    871208  17% /boot
+tmpfs                           180420       0    180420   0% /run/user/1000
+```
+
+<a name="symbolic"></a>
