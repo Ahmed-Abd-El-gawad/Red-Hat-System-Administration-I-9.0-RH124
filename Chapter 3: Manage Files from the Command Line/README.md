@@ -382,5 +382,5 @@ cat: /tmp/newfile-symlink.txt: No such file or directory
 [user@host etc]$ pwd
 /etc
 ```
-
+* ```cd -P``` command is equivalent to ```cd -L```, which is used to force cd to not follow symbolic links and display the actual path of the directory.
 
