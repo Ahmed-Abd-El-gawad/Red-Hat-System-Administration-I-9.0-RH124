@@ -40,6 +40,47 @@
 ```
 * ```&> output.log``` instead of ```> output.log 2>&1```
 * ```&>> output.log``` instead of ```>> output.log 2>&1``` (in Bash 4 / RHEL 6 and later)
+* Save a time stamp in the ```/tmp/saved-timestamp``` file for later reference.
+```console
+[user@host ~]$ date > /tmp/saved-timestamp
+```
+* Copy the last 100 lines from the ```/var/log/dmesg``` file to the ```/tmp/last-100-boot-messages``` file.
+```console
+[user@host ~]$ tail -n 100 /var/log/dmesg > /tmp/last-100-boot-messages
+```
+* Concatenate all four step files files into one in the tmp directory.
+```console
+[user@host ~]$ cat step1.sh step2.log step3 step4 > /tmp/all-four-steps-in-one
+```
+* List the home directory's hidden and regular file names and save the output to the ```my-file-names``` file.
+```console
+[user@host ~]$ ls -a > my-file-names
+```
+* Append a line to the existing ```/tmp/many-lines-of-information``` file.
+```console
+[user@host ~]$ echo "new line of information" >> /tmp/many-lines-of-information
+```
+* The next few commands generate error messages because some system directories are inaccessible to normal users. Observe the error messages redirection.
+* Redirect errors from the find command to the ```/tmp/errors``` file while viewing normal command output on the terminal.
+```console
+[user@host ~]$ find /etc -name passwd 2> /tmp/errors
+```
+* Save process output to the ```/tmp/output``` file and error messages to the ```/tmp/errors``` file.
+```console
+[user@host ~]$ find /etc -name passwd > /tmp/output 2> /tmp/errors
+```
+* Save process output to the ```/tmp/output``` file and discard error messages.
+```console
+[user@host ~]$ find /etc -name passwd > /tmp/output 2> /dev/null
+```
+* Store output and generated errors together to the ```/tmp/all-message-output``` file.
+```console
+[user@host ~]$ find /etc -name passwd &> /tmp/all-message-output
+```
+* Append output and generated errors to the ```/tmp/all-message-output``` file.
+```console
+[user@host ~]$ find /etc -name passwd >> /tmp/all-message-output 2>&1
+```
 
 <a name="5.3"></a>
 ## 5.3 Edit Text Files from the Shell Prompt
