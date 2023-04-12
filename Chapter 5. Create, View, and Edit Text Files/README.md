@@ -22,6 +22,7 @@
 | Usage |	Explanation | Visual aid |
 | --- | --- | --- |
 | ```> file``` | Redirect ```stdout``` to overwrite a file. | ![combine-overwrite](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%205.%20Create%2C%20View%2C%20and%20Edit%20Text%20Files/combine-overwrite.svg) |
+| ```>> file``` | Redirect ```stdout``` to append to a file. | ![combine-append](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%205.%20Create%2C%20View%2C%20and%20Edit%20Text%20Files/combine-append.svg) |
 
 
 <a name="5.3"></a>
