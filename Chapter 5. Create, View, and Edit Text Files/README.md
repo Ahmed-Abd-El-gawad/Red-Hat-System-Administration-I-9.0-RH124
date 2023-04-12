@@ -106,7 +106,34 @@
 <a name="5.3"></a>
 ## 5.3 Edit Text Files from the Shell Prompt
 
+```console
+[user@host ~]$ vi filename
+```
+```console
+[user@host ~]$ vim filename
+```
+* An **i** keystroke enters insert mode, where all typed text becomes file content. Pressing Esc returns to command mode.
+* A **v** keystroke enters visual mode, where multiple characters might be selected for text manipulation. Use **Shift+V** for multiline and **Ctrl+V** for block selection. To exit the visual mode, use the **v**, **Shift+V**, or **Ctrl+V** keystrokes.
+* The **:** keystroke begins extended command mode for tasks such as writing the file (to save it) and quitting the Vim editor.
 
+* The **u** key undoes the most recent edit.
+* The **x** key deletes a single character.
+* The **:w** command writes (saves) the file and remains in command mode for more editing.
+* The **:wq** command writes (saves) the file and quits Vim.
+* The **:q!** command quits Vim, and discards all file changes since the last write.
+
+* In Vim, you can yank and put (copy and paste), by using the **y** and **p** command characters. Position the cursor on the first character to select, and then enter visual mode. Use the arrow keys to expand the visual selection. When ready, press **y** to yank the selection into memory. Position the cursor at the new location, and then press **p** to put the selection at the cursor.
+
+* Character mode : **v**
+* Line mode : **Shift+v**
+* Block mode : **Ctrl+v**
+
+* Vim Configuration Files
+```console
+[user@host ~]$ cat ~/.vimrc
+autocmd FileType yaml setlocal ts=2
+set number
+```
 
 <a name="5.5"></a>
 ## 5.5 Change the Shell Environment
