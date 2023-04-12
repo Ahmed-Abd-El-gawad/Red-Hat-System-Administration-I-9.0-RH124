@@ -9,7 +9,7 @@
 
 ### Navigate and Search man Pages
 | Command	| Result |
-| --- | --- |
+| :---: | --- |
 | Spacebar	| Scroll forward (down) one screen. |
 | PageDown	| Scroll forward (down) one screen. |
 | PageUp	| Scroll backward (up) one screen. |
