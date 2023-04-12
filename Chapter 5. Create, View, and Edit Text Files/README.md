@@ -10,6 +10,14 @@
 <a name="5.1"></a>
 ## 5.1 Redirect Output to a File or Program
 
+### Channels (File Descriptors)
+| Number | Channel name | Description	| Default connection | Usage |
+| --- | --- | --- | --- | --- |
+| 0 |	stdin	| Standard | input | Keyboard	| read only |
+| 1 |	stdout | Standard | output | Terminal	| write only |
+| 2 |	stderr | Standard | error	| Terminal | write only |
+| 3+ | filename	| Other | files	| none | read, write, or both |
+
 
 
 <a name="5.3"></a>
