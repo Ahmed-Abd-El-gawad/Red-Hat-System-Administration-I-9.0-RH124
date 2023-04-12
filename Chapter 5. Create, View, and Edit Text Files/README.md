@@ -82,6 +82,27 @@
 [user@host ~]$ find /etc -name passwd >> /tmp/all-message-output 2>&1
 ```
 
+### Construct Pipelines
+
+* Redirect the output of the ```ls``` command to the ```less``` command to display it on the terminal one screen at a time.
+```console
+[user@host ~]$ ls -l /usr/bin | less
+```
+* Redirect the output of the ```ls``` command to the ```wc -l``` command, which counts the number of received lines from ```ls``` and prints that value to the terminal.
+```console
+[user@host ~]$ ls | wc -l
+```
+* Redirect the output of the ```ls -t``` command to the ```head``` command to display the first 10 lines, with the final result redirected to the ```/tmp/first-ten-changed-files``` file.
+```console
+[user@host ~]$ ls -t | head -n 10 > /tmp/first-ten-changed-files
+```
+*  In a pipeline, ```tee``` copies its standard input to its standard output and also redirects its standard output to the files that are given as arguments to the command. If you imagine data as water that flows through a pipeline, then you can visualize ```tee``` as a "T" joint in the pipe that directs output in two directions.
+```console
+[user@host ~]$ ls -l | tee /tmp/saved-output | less
+[user@host ~]$ ls -t | head -n 10 | tee /tmp/ten-last-changed-files
+[user@host ~]$ ls -l | tee -a /tmp/append-files
+```
+
 <a name="5.3"></a>
 ## 5.3 Edit Text Files from the Shell Prompt
 
