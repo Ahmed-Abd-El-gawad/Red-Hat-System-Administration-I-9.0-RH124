@@ -399,7 +399,7 @@ cat: /tmp/newfile-symlink.txt: No such file or directory
 | --- | --- |
 | Pattern |	Matches |
 | [\*](#*)	| Any string of zero or more characters. |
-| ?	| Any single character. |
+| [?](#?)	| Any single character. |
 | [[abc…​]](#[abc…​])	| Any one character in the enclosed class (between the square brackets). |
 | [!abc…​]	| Any one character not in the enclosed class. |
 | [^abc…​]	| Any one character not in the enclosed class. |
@@ -428,4 +428,11 @@ able  alpha  baker  bravo  cast  charlie  delta  easy
 ```console
 [user@host glob]$ ls [ac]*
 able  alpha  cast  charlie
+```
+<a name="?"></a>
+```console
+[user@host glob]$ ls ????
+able  alpha  cast  easy  echo
+[user@host glob]$ ls ?????
+baker  bravo  delta
 ```
