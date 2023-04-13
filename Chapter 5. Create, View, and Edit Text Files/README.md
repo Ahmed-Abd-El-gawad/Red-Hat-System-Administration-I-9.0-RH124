@@ -138,4 +138,34 @@ set number
 <a name="5.5"></a>
 ## 5.5 Change the Shell Environment
 
+* You can use the ```set``` command to list all shell variables that are currently set. (It also lists all shell functions, which you can ignore.) To improve readability, you can pipe the output to the ```less``` command so that you can view it one page at a time.
+```console
+[user@host ~]$ set | less
+BASH=/usr/bin/bash
+BASHOPTS=checkwinsize:cmdhist:complete_fullquote:expand_aliases:extglob:extquote:force_fignore:histappend:interactive_comments:progcomp:promptvars:sourcepath
+BASHRCSOURCED=Y
+...output omitted...
+```
+* Retrieve Values with Variable Expansion
+```console
+[user@host ~]$ COUNT=40
+[user@host ~]$ echo COUNT
+COUNT
+[user@host ~]$ echo $COUNT
+40
+```
+```console
+[user@host ~]$ file1=/tmp/tmp.z9pXW0HqcC
+[user@host ~]$ ls -l $file1
+-rw-------. 1 student student 1452 Jan 22 14:39 /tmp/tmp.z9pXW0HqcC
+[user@host ~]$ rm $file1
+[user@host ~]$ ls -l $file1
+total 0
+```
+```console
+[user@host ~]$ echo Repeat $COUNTx
+Repeat
+[user@host ~]$ echo Repeat ${COUNT}x
+Repeat 40x
+```
 
