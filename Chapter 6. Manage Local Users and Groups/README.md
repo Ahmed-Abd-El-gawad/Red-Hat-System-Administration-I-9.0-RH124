@@ -117,6 +117,17 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
   Password: root_password
   [root@host ~]#
   ```
+* The command ```su``` starts a non-login shell, while the command ```su -``` (with the dash option) starts a login shell. The main distinction between the two commands is that ```su -``` sets up the shell environment as if it is a new login as that user, while su starts a shell as that user, but uses the original user's environment settings.
+  | | ```su``` | ```su -``` | ```sudo``` |
+  | --- | --- | --- | --- |
+  | Become new user| Yes | Yes | Per escalated command |
+  | Environment| Current user's | New user's | Current user's |
+  | Password required| New user's | New user's | Current user's |
+  | Privileges| Same as new user | Same as new user | Defined by configuration |
+  | Activity logged| ```su``` command only | ```su``` command only | Per escalated command |
+
+  
+* 
 
 <a name="6.5"></a>
 ## 6.5 Manage Local User Accounts
