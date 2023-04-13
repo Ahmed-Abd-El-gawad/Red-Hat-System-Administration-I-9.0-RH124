@@ -101,7 +101,21 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
 <a name="6.3"></a>
 ## 6.3 Gain Superuser Access
 
+| Commands |
+| --- |
+| [su -](#su -) |
 
+<a name="su -"></a>
+```console
+[user01@host ~]$ su - user02
+Password: user02_password
+[user02@host ~]$
+```
+```console
+[user01@host ~]$ su -
+Password: root_password
+[root@host ~]#
+```
 
 <a name="6.5"></a>
 ## 6.5 Manage Local User Accounts
