@@ -168,4 +168,11 @@ Repeat
 [user@host ~]$ echo Repeat ${COUNT}x
 Repeat 40x
 ```
-
+* For variables that program other than shell use
+```console
+[user@host ~]$ EDITOR=vim
+[user@host ~]$ export EDITOR
+```
+```console
+[user@host ~]$ export EDITOR=vim
+```
