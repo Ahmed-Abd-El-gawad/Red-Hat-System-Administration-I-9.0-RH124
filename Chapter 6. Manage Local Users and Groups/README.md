@@ -12,6 +12,21 @@
 <a name="6.1"></a>
 ## 6.1 Describe User and Group Concepts
 
+| Commands |
+| --- |
+| [id](#id) |
+
+<a name="id"></a>
+* Use the id command to show information about the currently logged-in user:
+```console
+[user01@host ~]$ id
+uid=1000(user01) gid=1000(user01) groups=1000(user01) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+```
+* To view basic information about another user, pass the username to the id command as an argument:
+```console
+[user01@host ~]$ id user02
+uid=1002(user02) gid=1001(user02) groups=1001(user02) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+```
 
 
 <a name="6.3"></a>
