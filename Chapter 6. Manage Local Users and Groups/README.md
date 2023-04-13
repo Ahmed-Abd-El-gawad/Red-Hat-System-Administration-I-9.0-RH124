@@ -17,6 +17,7 @@
 | [id](#id) |
 | [ls -l](#-l) |
 | [ls -ld](#-ld) |
+| [ps](#ps) |
 
 <a name="id"></a>
 * Use the ```id``` command to show information about the currently logged-in user:
@@ -40,6 +41,18 @@ uid=1002(user02) gid=1001(user02) groups=1001(user02) context=unconfined_u:uncon
 ```console
 [user01@host]$ ls -ld Documents
 drwxrwxr-x. 2 user01 user01 6 Feb  5 11:10 Documents
+```
+<a name="ps"></a>
+* Use the ```ps``` command to view process information. The default is to show only processes in the current shell. Use the ps command ```-a``` option to view all processes with a terminal. Use the ps command ```-u``` option to view the user that is associated with a process. In the following output, the first column shows the username.
+```console
+[user01@host ~]$ ps -au
+USER     PID %CPU %MEM    VSZ   RSS TTY    STAT START  TIME COMMAND
+root    1690  0.0  0.0 220984  1052 ttyS0  Ss+  22:43  0:00 /sbin/agetty -o -p -- \u --keep-baud 1
+user01  1769  0.0  0.1 377700  6844 tty2   Ssl+ 22:45  0:00 /usr/libexec/gdm-x-session --register-
+user01  1773  1.3  1.3 528948 78356 tty2   Sl+  22:45  0:03 /usr/libexec/Xorg vt2 -displayfd 3 -au
+user01  1800  0.0  0.3 521412 19824 tty2   Sl+  22:45  0:00 /usr/libexec/gnome-session-binary
+user01  3072  0.0  0.0 224152  5756 pts/1  Ss   22:48  0:00 -bash
+user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
 ```
 
 
