@@ -125,10 +125,24 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
   | Password required| New user's | New user's | Current user's |
   | Privileges| Same as new user | Same as new user | Defined by configuration |
   | Activity logged| ```su``` command only | ```su``` command only | Per escalated command |
-
+* Additionally, you can configure the ```sudo``` command to allow specific users to run any command as some other user, or only some commands as that user. For example, if you configure the ```sudo``` command to allow the ```user01``` user to run the ```usermod``` command as ```root```, then you can run the following command to lock or unlock a user account:
+  ```console
+  [user01@host ~]$ sudo usermod -L user02
+  [sudo] password for user01: user01_password
+  [user01@host ~]$ su - user02
+  Password: user02_password
+  su: Authentication failure
+  [user01@host ~]$
+  ```
+* If a user tries to run a command as another user, and the ```sudo``` configuration does not permit it, then bash blocks the command, logs the attempt, and sends by default an email to the ```root``` user.
+  ```console
+  [user02@host ~]$ sudo tail /var/log/secure
+  [sudo] password for user02: user02_password
+  user02 is not in the sudoers file.  This incident will be reported.
+  [user02@host ~]$
+  ```
   
-* 
-
+  
 <a name="6.5"></a>
 ## 6.5 Manage Local User Accounts
 
