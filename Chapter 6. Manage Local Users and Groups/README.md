@@ -18,6 +18,7 @@
 | [ls -l](#-l) |
 | [ls -ld](#-ld) |
 | [ps](#ps) |
+| [cat /etc/passwd](#/etc/passwd) |
 
 <a name="id"></a>
 * Use the ```id``` command to show information about the currently logged-in user:
@@ -54,6 +55,21 @@ user01  1800  0.0  0.3 521412 19824 tty2   Sl+  22:45  0:00 /usr/libexec/gnome-s
 user01  3072  0.0  0.0 224152  5756 pts/1  Ss   22:48  0:00 -bash
 user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
 ```
+<a name="/etc/passwd"></a>
+* Each line in the ```/etc/passwd``` file contains information about one user. The file is divided into seven colon-separated fields.
+  ```console
+  [user01@host ~]$ cat /etc/passwd
+  ...output omitted...
+  user01:x:1000:1000:User One:/home/user01:/bin/bash
+  ```
+  Consider each part of the code block, separated by a colon:
+  * ```user01``` : The username for this user.
+  * ```x``` : The user's encrypted password was historically stored here; this is now a placeholder.
+  * ```1000``` : The UID number for this user account.
+  * ```1000``` : The GID number for this user account's primary group. Groups are discussed later in this section.
+  * ```User One``` : A brief comment, description, or the real name for this user.
+  * ```/home/user01``` : The user's home directory, and the initial working directory when the login shell starts.
+  * ```/bin/bash``` : The default shell program for this user that runs at login. Some accounts use the ```/sbin/nologin``` shell to disallow interactive logins with that account.
 
 
 <a name="6.3"></a>
