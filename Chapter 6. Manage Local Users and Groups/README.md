@@ -104,6 +104,7 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
 | Commands |
 | --- |
 | [su -](#su) |
+| [sudo -i](#-i) |
 
 <a name="su"></a>
 * With the su command, users can switch to a different user account.
@@ -141,7 +142,15 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
   user02 is not in the sudoers file.  This incident will be reported.
   [user02@host ~]$
   ```
-  
+<a name="-i"></a>
+* To access the ```root``` account with ```sudo```, use the ```sudo -i``` command. This command switches to the root account and runs that user's default shell (usually bash) and associated interactive login scripts. To run the shell without the interactive scripts, use the ```sudo -s``` command.
+
+  For example, an administrator can get an interactive shell as ```root``` on an AWS Elastic Cloud Computing (EC2) instance by using SSH public-key authentication to log in as the ```ec2-user``` normal user, and then run the ```sudo -i``` command to access the ```root``` user's shell.
+  ```console
+  [ec2-user@host ~]$ sudo -i
+  [sudo] password for ec2-user: ec2-user_password
+  [root@host ~]#
+  ```
   
 <a name="6.5"></a>
 ## 6.5 Manage Local User Accounts
