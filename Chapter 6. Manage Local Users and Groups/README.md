@@ -105,6 +105,7 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
 | --- |
 | [su -](#su) |
 | [sudo -i](#-i) |
+| [/etc/sudoers](#/etc/sudoers) |
 
 <a name="su"></a>
 * With the su command, users can switch to a different user account.
@@ -154,6 +155,14 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
   * ```sudo -i``` is generally preferred over ```su -``` because it provides a more secure way to run commands with elevated privileges. When you use ```sudo -i```, you are still using your own user account but with root privileges, whereas ```su -``` switches to the root user account entirely. This means that with ```sudo -i```, any commands that you run will be logged to your account, making it easier to track what was done with root privileges.
   * ```su -``` is useful when you need to run multiple commands as the root user or when you need to switch to another user account with root privileges. With ```su -```, you can switch to any user account, not just the root user account.
   * ```sudo -i``` is also useful when you want to run a command with root privileges but need to preserve the environment variables of your current user account. This is because ```sudo -i``` starts a new login shell with root privileges, which loads the root user's environment variables.
+<a name="/etc/sudoers"></a>
+* The ```/etc/sudoers``` file is the main configuration file for the ```sudo``` command. To avoid problems if multiple administrators try to edit the file at the same time, you can edit it only with the special ```visudo``` command. The ```visudo``` editor also validates the file, to ensure no syntax errors.
+  ```bash
+  %wheel        ALL=(ALL:ALL)       ALL
+  ```
+  * The ```%wheel``` string is the user or group that the rule applies to. The ```%``` symbol before the word ```wheel``` specifies a group.
+  * The ```ALL=(ALL:ALL)``` command specifies that on any host with this file (the first ```ALL```), users in the ```wheel``` group can run commands as any other user (the second ```ALL```) and any other group (the third ```ALL```) on the system.
+  * The final ```ALL``` command specifies that users in the ```wheel``` group can run any command.
 
   
 <a name="6.5"></a>
