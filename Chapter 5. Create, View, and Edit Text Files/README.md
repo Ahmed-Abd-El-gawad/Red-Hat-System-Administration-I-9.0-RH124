@@ -176,3 +176,27 @@ Repeat 40x
 ```console
 [user@host ~]$ export EDITOR=vim
 ```
+* Bash Aliases
+```console
+[user@host ~]$ alias hello='echo "Hello, this is a long string."'
+[user@host ~]$ hello
+Hello, this is a long string.
+```
+* Unset and Unexport Variables and Aliases
+To unset and unexport a variable, use the unset command:
+```console
+[user@host ~]$ echo $file1
+/tmp/tmp.z9pXW0HqcC
+[user@host ~]$ unset file1
+[user@host ~]$ echo $file1
+
+[user@host ~]$
+```
+To unexport a variable without unsetting it, use the export -n command:
+```console
+[user@host ~]$ export -n PS1
+```
+To unset an alias, use the unalias command:
+```console
+[user@host ~]$ unalias hello
+```
