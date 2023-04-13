@@ -19,6 +19,7 @@
 | [ls -ld](#-ld) |
 | [ps](#ps) |
 | [cat /etc/passwd](#/etc/passwd) |
+| [cat /etc/group](#/etc/group) |
 
 <a name="id"></a>
 * Use the ```id``` command to show information about the currently logged-in user:
@@ -70,6 +71,18 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
   * ```User One``` : A brief comment, description, or the real name for this user.
   * ```/home/user01``` : The user's home directory, and the initial working directory when the login shell starts.
   * ```/bin/bash``` : The default shell program for this user that runs at login. Some accounts use the ```/sbin/nologin``` shell to disallow interactive logins with that account.
+<a name="/etc/group"></a>
+* Each line in the ```/etc/group``` file contains information about one group. Each group entry is divided into four colon-separated fields.
+  ```console
+  [user01@host ~]$ cat /etc/group
+  ...output omitted...
+  group01:x:10000:user01,user02,user03
+  ```
+  Consider each part of the code block, separated by a colon:
+  * ```group01``` : Name for this group.
+  * ```x``` : Obsolete group password field; this is now a placeholder.
+  * ```10000``` : The GID number for this group (```10000```).
+  * ```user01,user02,user03``` : A list of users that are members of this group as a secondary group.
 
 
 <a name="6.3"></a>
