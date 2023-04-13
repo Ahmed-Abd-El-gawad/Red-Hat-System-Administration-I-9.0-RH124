@@ -103,19 +103,20 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
 
 | Commands |
 | --- |
-| [su -](#su -) |
+| [su -](#su) |
 
-<a name="su -"></a>
-```console
-[user01@host ~]$ su - user02
-Password: user02_password
-[user02@host ~]$
-```
-```console
-[user01@host ~]$ su -
-Password: root_password
-[root@host ~]#
-```
+<a name="su"></a>
+* With the su command, users can switch to a different user account.
+  ```console
+  [user01@host ~]$ su - user02
+  Password: user02_password
+  [user02@host ~]$
+  ```
+  ```console
+  [user01@host ~]$ su -
+  Password: root_password
+  [root@host ~]#
+  ```
 
 <a name="6.5"></a>
 ## 6.5 Manage Local User Accounts
