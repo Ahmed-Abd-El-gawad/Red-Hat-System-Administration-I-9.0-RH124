@@ -233,6 +233,7 @@ passwd: all authentication tokens updated successfully.
 | Commands |
 | --- |
 | [groupadd](#groupadd) |
+| [groupmod](#groupmod) |
 
 <a name="groupadd"></a>
 * The ```groupadd``` command creates groups. Without options, the ```groupadd``` command uses the next available GID from the range specified by the GID_MIN and GID_MAX variables in the ```/etc/login.defs``` file.
@@ -243,7 +244,30 @@ passwd: all authentication tokens updated successfully.
   ...output omitted...
   group01:x:10000:
   ```
-* 
+* The ```groupadd``` command ```-r``` option creates system groups. As with normal groups, system groups use a GID from the range of listed valid system GIDs in the ```/etc/login.defs``` file. The SYS_GID_MIN and SYS_GID_MAX configuration items in the ```/etc/login.defs``` file define the range of system GIDs.
+  ```console
+  [root@host ~]# groupadd -r group02
+  [root@host ~]# tail /etc/group
+  ...output omitted...
+  group01:x:10000:
+  group02:x:988:
+  ```
+  
+<a name="groupmod"></a>
+* The ```groupmod``` command changes the properties of an existing group. The ```groupmod``` command ```-n``` option specifies a new name for the group.
+  ```console
+  [root@host ~]# groupmod -n group0022 group02
+  [root@host ~]# tail /etc/group
+  ...output omitted...
+  group0022:x:988:
+  ```
+* Notice that the group name updates to ```group0022``` from ```group02```. The ```groupmod``` command ```-g``` option specifies a new GID.
+  ```console
+  [root@host ~]# groupmod -g 20000 group0022
+  [root@host ~]# tail /etc/group
+  ...output omitted...
+  group0022:x:20000:
+  ```
 
 <a name="6.9"></a>
 ## 6.9 Manage User Passwords
