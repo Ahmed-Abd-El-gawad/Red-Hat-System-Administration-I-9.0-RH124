@@ -142,3 +142,17 @@
   drwxr-sr-x. 3 root systemd-journal 60 May 18 09:15 /run/log/journal
   ```
 
+* The sticky bit for a directory sets a special restriction on deletion of files. Only the owner of the file (and the root user) can delete files within the directory. An example is the ```/tmp``` directory:
+  ```console
+  [user@host ~]$ ls -ld /tmp
+  drwxrwxrwt. 39 root root 4096 Feb  8 20:52 /tmp
+  ```
+* In a long listing, you can identify the sticky permissions by a lowercase ```t``` character in the place where you would normally expect the ```x``` character (other execute permissions). If other does not have execute permissions, then this character is replaced by an uppercase ```T``` character.
+
+* |  | Symbolic | Octal |
+  | --- | --- | --- |
+  | setuid | u+s | 4 |
+  | setgid | g+s | 2 |
+  | sticky | o+t | 1 |
+  
+  
