@@ -230,7 +230,20 @@ passwd: all authentication tokens updated successfully.
 <a name="6.7"></a>
 ## 6.7 Manage Local Group Accounts
 
+| Commands |
+| --- |
+| [groupadd](#groupadd) |
 
+<a name="groupadd"></a>
+* The ```groupadd``` command creates groups. Without options, the ```groupadd``` command uses the next available GID from the range specified by the GID_MIN and GID_MAX variables in the ```/etc/login.defs``` file.
+* The groupadd command -g option specifies a particular GID for the group to use.
+  ```console
+  [root@host ~]# groupadd -g 10000 group01
+  [root@host ~]# tail /etc/group
+  ...output omitted...
+  group01:x:10000:
+  ```
+* 
 
 <a name="6.9"></a>
 ## 6.9 Manage User Passwords
