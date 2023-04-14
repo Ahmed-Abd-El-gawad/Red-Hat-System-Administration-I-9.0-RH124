@@ -234,6 +234,7 @@ passwd: all authentication tokens updated successfully.
 | --- |
 | [groupadd](#groupadd) |
 | [groupmod](#groupmod) |
+| [groupdel](#groupdel) |
 
 <a name="groupadd"></a>
 * The ```groupadd``` command creates groups. Without options, the ```groupadd``` command uses the next available GID from the range specified by the GID_MIN and GID_MAX variables in the ```/etc/login.defs``` file.
@@ -268,6 +269,27 @@ passwd: all authentication tokens updated successfully.
   ...output omitted...
   group0022:x:20000:
   ```
+  ```console
+  [root@host ~]# id user02
+  uid=1006(user02) gid=1008(user02) groups=1008(user02)
+  [root@host ~]# usermod -g group01 user02
+  [root@host ~]# id user02
+  uid=1006(user02) gid=10000(group01) groups=10000(group01)
+  ```
+* Use the ```usermod -aG``` command to add a user to a secondary group.
+  ```console
+  [root@host ~]# id user03
+  uid=1007(user03) gid=1009(user03) groups=1009(user03)
+  [root@host ~]# usermod -aG group01 user03
+  [root@host ~]# id user03
+  uid=1007(user03) gid=1009(user03) groups=1009(user03),10000(group01)
+  ```
+  
+<a name="groupdel"></a>
+* The ```groupdel``` command removes groups.
+```console
+[root@host ~]# groupdel group0022
+```
 
 <a name="6.9"></a>
 ## 6.9 Manage User Passwords
