@@ -294,4 +294,31 @@ passwd: all authentication tokens updated successfully.
 <a name="6.9"></a>
 ## 6.9 Manage User Passwords
 
+| Content |
+| --- |
+| [/etc/shadow](#/etc/shadow) |
+
+<a name="/etc/shadow"></a>
+* Each user has an entry with in the ```/etc/shadow``` file.
+  ```console
+  [root@host ~]# cat /etc/shadow
+  ...output omitted...
+  user03:$6$CSsXsd3rwghsdfarf:17933:0:99999:7:2:18113:
+  ```
+  Each field of this code block is separated by a colon:
+  * **user03** : Name of the user account.
+  * **$6$CSsXsd3rwghsdfarf** : The encrypted password of the user.
+  * **17933** : The days from the epoch when the password was last changed, where the epoch is 1970-01-01 in the UTC time zone.
+  * **0** : The minimum days since the last password change before the user can change it again.
+  * **99999** : The maximum days without a password change before the password expires. An empty field means that the password never expires.
+  * **7** : The number of days ahead to warn the user that their password will expire.
+  * **2** : The number of days without activity, starting with the day the password expired, before the account is automatically locked.
+  * **18113** : The day when the account expires in days since the epoch. An empty field means that the account never expires.
+  * The last field is typically empty and reserved for future use.
+
+* The encrypted password field stores three pieces of information: the hashing algorithm in use, the *salt*, and the encrypted hash. Each piece of information is delimited by the dollar (```$```) character.
+  ```$6$CSsXcYG1L/4ZfHr/$2W6evvJahUfzfHpc9X.45Jc6H30E```
+  * **6** : The hashing algorithm in use for this password. A 6 indicates a SHA-512 hash, the RHEL 9 default, a 1 indicates MD5, and a 5 indicates SHA-256.
+  * **CSsXcYG1L/4ZfHr/** : The salt in use to encrypt the password; originally chosen at random.
+  * **2W6evvJahUfzfHpc9X.45Jc6H30E** : The encrypted hash of the user's password; combining the salt and the unencrypted password and then encrypting to generate the password hash.
 
