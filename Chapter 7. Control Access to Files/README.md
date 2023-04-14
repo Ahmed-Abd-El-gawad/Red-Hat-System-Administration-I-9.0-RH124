@@ -129,4 +129,16 @@
   | ```g+s``` (sgid) | File executes as the group that owns the file. | Files that are created in the directory have a group owner to match the group owner of the directory. |
   | ```o+t``` (sticky) | No effect. | Users with write access to the directory can remove only files that they own; they cannot remove or force saves to files that other users own. |
 
+* The ```setuid``` permission on an executable file means that commands run as the user that owns that file, rather than as the user that ran the command. One example is the passwd command:
+  ```console
+  [user@host ~]$ ls -l /usr/bin/passwd
+  -rwsr-xr-x. 1 root root 35504 Jul 16  2010 /usr/bin/passwd
+  ```
+* In a long listing, you can identify the setuid permissions by a lowercase ```s``` character in the place where you would normally expect the ```x``` character (owner execute permissions). If the owner does not have execute permissions, then this character is replaced by an uppercase ```S``` character.
+
+* The ```setgid``` special permission on a directory means that created files in the directory inherit their group ownership from the directory, rather than inheriting group ownership from the creating user. This feature is commonly used on group collaborative directories to automatically change a file from the default private group to the shared group, or if a specific group should always own files in a directory. An example of this behavior is the ```/run/log/journal``` directory:
+  ```console
+  [user@host ~]$ ls -ld /run/log/journal
+  drwxr-sr-x. 3 root systemd-journal 60 May 18 09:15 /run/log/journal
+  ```
 
