@@ -297,6 +297,7 @@ passwd: all authentication tokens updated successfully.
 | Content |
 | --- |
 | [/etc/shadow](#/etc/shadow) |
+| [chage](#chage) |
 
 <a name="/etc/shadow"></a>
 * Each user has an entry with in the ```/etc/shadow``` file.
@@ -322,3 +323,18 @@ passwd: all authentication tokens updated successfully.
   * **CSsXcYG1L/4ZfHr/** : The salt in use to encrypt the password; originally chosen at random.
   * **2W6evvJahUfzfHpc9X.45Jc6H30E** : The encrypted hash of the user's password; combining the salt and the unencrypted password and then encrypting to generate the password hash.
 
+<a name="chage"></a>
+* The following example demonstrates the ```chage``` command to change the password policy of the sysadmin05 user. The command defines a minimum age (```-m```) of zero days, a maximum age (```-M```) of 90 days, a warning period (```-W```) of 7 days, and an inactivity period (```-I```) of 14 days.
+  ```console
+  [root@host ~]# chage -m 0 -M 90 -W 7 -I 14 sysadmin05
+  ```
+  ```console
+  [root@host ~]# date +%F
+  2022-03-10
+  [root@host ~]# date -d "+30 days" +%F
+  2022-04-09
+  [root@host ~]# chage -E $(date -d "+30 days" +%F) cloudadmin10
+  [root@host ~]# chage -l cloudadmin10 | grep "Account expires"
+  Account expires						: Apr 09, 2022
+  ```
+  
