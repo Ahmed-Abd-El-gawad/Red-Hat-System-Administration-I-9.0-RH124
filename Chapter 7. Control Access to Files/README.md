@@ -49,6 +49,7 @@
 | Commands |
 | --- |
 | [chmod](#chmod) |
+| [chown](#chown) |
 
 <a name="chmod"></a>
 * ```chmod Who/What/Which file|directory```
@@ -88,6 +89,29 @@
   ```
   ![user-perms](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%207.%20Control%20Access%20to%20Files/user-perms.svg)
   
+<a name="chown"></a>
+* Only the ```root``` user can change the user that owns a file.
+* grant ownership of the ```app.conf``` file to the student user, use the following command:
+  ```console
+  [root@host ~]# chown student app.conf
+  ```
+* The chown command ```-R``` option recursively changes the ownership of an entire directory tree.
+  ```console
+  [root@host ~]# chown -R student Pictures
+  ```
+* You can also use the ```chown``` command to change group ownership of a file by preceding the group name with a colon (```:```).
+  ```console
+  [root@host ~]# chown :admins Pictures
+  ```
+* You can use the ```chown``` command to change both owner and group at the same time by using the ```owner:group``` syntax.
+  ```console
+  [root@host ~]# chown visitor:guests Pictures
+  ```
+* Instead of using the ```chown``` command, some users change the group ownership by using the ```chgrp``` command. This command works similarly to ```chown```, except that you can use it only to change group ownership and the colon (```:```) before the group name is not required.
+* You might encounter alternative chown syntax that separates owner and group with a period character instead of a colon:
+  ```console
+  [root@host ~]# chown owner.group filename
+  ```
 
 <a name="7.5"></a>
 ## 7.5 Manage Default Permissions and File Access
