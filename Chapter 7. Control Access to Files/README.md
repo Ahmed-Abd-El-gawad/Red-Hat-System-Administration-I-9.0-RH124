@@ -116,6 +116,14 @@
 <a name="7.5"></a>
 ## 7.5 Manage Default Permissions and File Access
 
-| Commands |
+| Contents|
 | --- |
-| [](#) |
+| [Effects of Special Permissions on Files and Directories](#special_permissions) |
+
+<a name="special_permissions"></a>
+* Effects of Special Permissions on Files and Directories
+  | Permission|  Effect on files | Effect on directories |
+  | --- | --- | --- |
+  | ```u+s``` (suid) | File executes as the user that owns the file, not as the user that ran the file. | No effect. |
+  | ```g+s``` (sgid) | File executes as the group that owns the file. | Files that are created in the directory have a group owner to match the group owner of the directory. |
+  | ```o+t``` (sticky) | No effect. | Users with write access to the directory can remove only files that they own; they cannot remove or force saves to files that other users own. |
