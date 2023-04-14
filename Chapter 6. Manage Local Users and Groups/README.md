@@ -168,7 +168,29 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
 <a name="6.5"></a>
 ## 6.5 Manage Local User Accounts
 
+| Commands |
+| --- |
+| [useradd](#useradd) |
+| [usermod](#usermod) |
 
+<a name="useradd"></a>
+* The ```useradd username``` command creates a user called ```username```.
+* ```useradd``` command assigns new users the first free UID that is greater than or equal to 1000, unless you explicitly specify one by using the ```-u``` option.
+<a name="useradd"></a>
+* The ```useradd --help``` command displays the basic options to override the defaults. In most cases, you can use the same options with the ```usermod``` command to modify an existing user.
+  
+  | usermod options: | Usage |
+  | --- | --- |
+  | ```-a```, ```--append``` | Use it with the ```-G``` option to add the secondary groups to the user's current set of group memberships instead of replacing the set of secondary groups with a new set. |
+  | ```-c```, ```--comment``` COMMENT | Add the ```COMMENT``` text to the comment field. |
+  | ```-d```, ```--home``` HOME_DIR | Specify a home directory for the user account. |
+  | ```-g```, ```--gid``` GROUP | Specify the primary group for the user account. |
+  | ```-G```, ```--groups``` GROUPS | Specify a comma-separated list of secondary groups for the user account. |
+  | ```-L```, ```--lock``` | Lock the user account. |
+  | ```-m```, ```--move-home``` | Move the user's home directory to a new location. You must use it with the ```-d``` option. |
+  | ```-s```, ```--shell``` SHELL | Specify a particular login shell for the user account. |
+  | ```-U```, ```--unlock``` | Unlock the user account. |
+  
 
 <a name="6.7"></a>
 ## 6.7 Manage Local Group Accounts
