@@ -155,4 +155,12 @@
   | setgid | g+s | 2 |
   | sticky | o+t | 1 |
   
+  * Set the ```setgid``` bit and add read, write, and execute permissions for user and group, with no access for others, on the example directory by using the octal method:
+    ```cosole
+    [user@host ~]# chmod 2770 example
+    ```
+  * Remove the ```setgid``` bit and add read, write, and execute permissions for user and group, with no access for others, on the example directory by using the octal method. Note that you need to add an extra 0 at the beginning of the permissions value when removing special permissions by using the octal method:
+    ```console
+    [user@host ~]# chmod 00770 example
+    ```
   
