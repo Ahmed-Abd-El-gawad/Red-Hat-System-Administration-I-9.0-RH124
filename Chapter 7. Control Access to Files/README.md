@@ -54,23 +54,23 @@
 * ```chmod Who/What/Which file|directory```
   | Who | Set | Description |
   | --- | --- | --- |
-  | u | user | The file owner. |
-  | g | group | Member of the file's group. |
-  | o | other | Users who are not the file owner nor members of the file's group. |
-  | a | all | All the three previous groups. |
+  | ```u``` | user | The file owner. |
+  | ```g``` | group | Member of the file's group. |
+  | ```o``` | other | Users who are not the file owner nor members of the file's group. |
+  | ```a``` | all | All the three previous groups. |
 
   | What | Operation | Description |
   | --- | --- | --- |
-  | + | add | Adds the permissions to the file. |
-  | - | remove | Removes the permissions to the file. |
-  | = | set exactly | Set exactly the provided permissions to the file. |
+  | ```+``` | add | Adds the permissions to the file. |
+  | ```-``` | remove | Removes the permissions to the file. |
+  | ```=``` | set exactly | Set exactly the provided permissions to the file. |
 
   | Which | Mode | Description |
   | --- | --- | --- |
-  | r | read | Read access to the file. Listing access to the directory. |
-  | w | write | Write permissions to the file or directory. |
-  | x | execute | Execute permissions to the file. Allows to enter the directory, and access files and subdirectories inside the directory. |
-  | X | special execute | Execute permissions for a directory, or execute permissions to a file if it has at least one of the execute bits set. |
+  | ```r``` | read | Read access to the file. Listing access to the directory. |
+  | ```w``` | write | Write permissions to the file or directory. |
+  | ```x``` | execute | Execute permissions to the file. Allows to enter the directory, and access files and subdirectories inside the directory. |
+  | ```X``` | special execute | Execute permissions for a directory, or execute permissions to a file if it has at least one of the execute bits set. |
 
 
 <a name="7.5"></a>
