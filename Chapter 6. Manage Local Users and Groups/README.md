@@ -172,6 +172,8 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
 | --- |
 | [useradd](#useradd) |
 | [usermod](#usermod) |
+| [userdel](#userdel) |
+| [passwd](#passwd) |
 
 <a name="useradd"></a>
 * The ```useradd username``` command creates a user called ```username```.
@@ -191,6 +193,39 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
   | ```-s```, ```--shell``` SHELL | Specify a particular login shell for the user account. |
   | ```-U```, ```--unlock``` | Unlock the user account. |
   
+<a name="userdel"></a>
+* The ```userdel username``` command removes the ```username``` user from ```/etc/passwd```, but leaves the user's home directory intact. The ```userdel -r username``` command removes the user from ```/etc/passwd``` and deletes the user's home directory
+* The following example demonstrates how this can lead to information leakage:
+  ```console
+  [root@host ~]# useradd user01
+  [root@host ~]# ls -l /home
+  drwx------. 3 user01  user01    74 Mar  4 15:22 user01
+  [root@host ~]# userdel user01
+  [root@host ~]# ls -l /home
+  drwx------. 3    1000    1000   74 Mar  4 15:22 user01
+  [root@host ~]# useradd -u 1000 user02
+  [root@host ~]# ls -l /home
+  drwx------. 3 user02     user02       74 Mar  4 15:23 user02
+  drwx------. 3 user02     user02       74 Mar  4 15:22 user01
+  ```
+  Notice that ```user02``` now owns all files that ```user01``` previously owned. The ```root``` user can use the ```find / -nouser -o -nogroup``` command to find all unowned files and directories.
+
+<a name="passwd"></a>
+```console
+[root@host ~]# passwd user01
+Changing password for user user01.
+New password: redhat
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: redhat
+passwd: all authentication tokens updated successfully.
+[root@host ~]#
+```
+
+* UID Ranges
+  * **UID 0** : The superuser (```root```) account UID.
+  * **UID 1-200** : System account UIDs statically assigned to system processes.
+  * **UID 201-999** : UIDs assigned to system processes that do not own files on this system. Software that requires an unprivileged UID is dynamically assigned UID from this available pool.
+  * **UID 1000+** : The UID range to assign to regular, unprivileged users.
 
 <a name="6.7"></a>
 ## 6.7 Manage Local Group Accounts
