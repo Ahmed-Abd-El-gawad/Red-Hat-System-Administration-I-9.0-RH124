@@ -176,7 +176,7 @@ user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
 <a name="useradd"></a>
 * The ```useradd username``` command creates a user called ```username```.
 * ```useradd``` command assigns new users the first free UID that is greater than or equal to 1000, unless you explicitly specify one by using the ```-u``` option.
-<a name="useradd"></a>
+<a name="usermod"></a>
 * The ```useradd --help``` command displays the basic options to override the defaults. In most cases, you can use the same options with the ```usermod``` command to modify an existing user.
   
   | usermod options: | Usage |
