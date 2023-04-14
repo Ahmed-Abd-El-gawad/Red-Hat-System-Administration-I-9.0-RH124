@@ -39,6 +39,9 @@
         * The second set are for the file's group owner.
         * The last set applies to all other (world) users. 
         * If a set is an rwx string, then that set has all three permissions: read, write, and execute. If a letter is replaced by a ```-``` dash character, then that set does not have that permission.
+    * After the second column (the link count)
+      * The first name specifies the file owner
+      * The second name is the file's group owner.
 * 
 
 <a name="7.3"></a>
