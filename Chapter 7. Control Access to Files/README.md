@@ -16,7 +16,24 @@
   | ```r``` (read) | File contents can be read. | Contents of the directory (the file names) can be listed. |
   | ```w``` (write) | File contents can be changed. | Any file in the directory can be created or deleted. |
   | ```x``` (execute) | Files can be executed as commands. | The directory can become the current working directory. You can run the cd command to it, but it also requires read permission to list files there. |
-
+  * The ls command -l option shows detailed information about permissions and ownership:
+    ```console
+    [user@host ~]$ ls -l test
+    -rw-rw-r--. 1 student student 0 Mar  8 17:36 test
+    ```
+  * Use the ls command -d option to show detailed information about a directory itself, and not its contents.
+    ```console
+    [user@host ~]$ ls -ld /home
+    drwxr-xr-x. 5 root root 4096 Feb 31 22:00 /home
+    ```
+    The first character of the long listing is the file type, and is interpreted as follows:
+    * ```-``` is a regular file.
+    * ```d``` is a directory.
+    * ```l``` is a symbolic link.
+    * ```c``` is a character device file.
+    * ```b``` is a block device file.
+    * ```p``` is a named pipe file.
+    * ```s``` is a local socket file.
 * 
 
 <a name="7.3"></a>
