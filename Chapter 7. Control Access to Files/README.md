@@ -86,6 +86,7 @@
   ```bash
   chmod ### file|directory
   ```
+  ![user-perms](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%207.%20Control%20Access%20to%20Files/user-perms.svg)
   
 
 <a name="7.5"></a>
