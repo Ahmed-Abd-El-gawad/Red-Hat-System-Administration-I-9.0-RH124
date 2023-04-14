@@ -42,7 +42,6 @@
     * After the second column (the link count)
       * The first name specifies the file owner
       * The second name is the file's group owner.
-* 
 
 <a name="7.3"></a>
 ## 7.3 Manage File System Permissions from the Command Line
