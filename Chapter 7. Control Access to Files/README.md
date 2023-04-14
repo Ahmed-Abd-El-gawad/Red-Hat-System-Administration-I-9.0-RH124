@@ -26,14 +26,19 @@
     [user@host ~]$ ls -ld /home
     drwxr-xr-x. 5 root root 4096 Feb 31 22:00 /home
     ```
-    The first character of the long listing is the file type, and is interpreted as follows:
-    * ```-``` is a regular file.
-    * ```d``` is a directory.
-    * ```l``` is a symbolic link.
-    * ```c``` is a character device file.
-    * ```b``` is a block device file.
-    * ```p``` is a named pipe file.
-    * ```s``` is a local socket file.
+    * The first character of the long listing is the file type, and is interpreted as follows:
+      * ```-``` is a regular file.
+      * ```d``` is a directory.
+      * ```l``` is a symbolic link.
+      * ```c``` is a character device file.
+      * ```b``` is a block device file.
+      * ```p``` is a named pipe file.
+      * ```s``` is a local socket file.
+    * The next nine characters represent the file permissions. These characters are interpreted as three sets of three characters: 
+        * The first set are permissions that apply to the file owner. 
+        * The second set are for the file's group owner.
+        * The last set applies to all other (world) users. 
+        * If a set is an rwx string, then that set has all three permissions: read, write, and execute. If a letter is replaced by a ```-``` dash character, then that set does not have that permission.
 * 
 
 <a name="7.3"></a>
