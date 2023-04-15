@@ -43,6 +43,42 @@
   ...output omitted...
   ```
   
+* ```ps -aux``` command is not the same as the ```ps aux``` command.
+* ps command aux option displays all processes including processes without a controlling terminal. 
+  ```console
+  [user@host ~]$ ps aux
+  USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+  root           1  0.1  0.2 171820 16140 ?        Ss   16:47   0:01 /usr/lib/systemd/systemd ...
+  root           2  0.0  0.0      0     0 ?        S    16:47   0:00 [kthreadd]
+  root           3  0.0  0.0      0     0 ?        I<   16:47   0:00 [rcu_gp]
+  root           4  0.0  0.0      0     0 ?        I<   16:47   0:00 [rcu_par_gp]
+  root           6  0.0  0.0      0     0 ?        I<   16:47   0:00 [kworker/0:0H-events_highpri]
+  ...output omitted...
+  ```
+* A long listing (```lax``` options) provides more detail, and displays faster by avoiding username lookups.
+  ```console
+  [user@host ~]$ ps lax
+  F   UID     PID    PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY  TIME COMMAND
+  4     0       1       0  20   0 171820 16140 -      Ss   ?    0:01 /usr/lib/systemd/systemd ...
+  1     0       2       0  20   0      0     0 -      S    ?    0:00 [kthreadd]
+  1     0       3       2   0 -20      0     0 -      I<   ?    0:00 [rcu_gp]
+  1     0       4       2   0 -20      0     0 -      I<   ?    0:00 [rcu_par_gp]
+  1     0       6       2   0 -20      0     0 -      I<   ?    0:00 [kworker/0:0H-events_highpri]
+  ...output omitted...
+  ```
+* ```-ef``` options to display all processes.
+  ```console
+  [user@host ~]$ ps -ef
+  UID        PID  PPID  C STIME TTY          TIME CMD
+  root           1       0  0 16:47 ?        00:00:01 /usr/lib/systemd/systemd ...
+  root           2       0  0 16:47 ?        00:00:00 [kthreadd]
+  root           3       2  0 16:47 ?        00:00:00 [rcu_gp]
+  root           4       2  0 16:47 ?        00:00:00 [rcu_par_gp]
+  root           6       2  0 16:47 ?        00:00:00 [kworker/0:0H-events_highpri]
+  ...output omitted...
+  ```
+* You can use the ```ps``` command ```--forest``` option to display the processes in a tree format so you can view relationships between parent and child processes.
+  
 
 <a name="8.3"></a>
 ## 8.3 Control Jobs
