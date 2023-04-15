@@ -89,7 +89,43 @@
 <a name="8.5"></a>
 ## 8.5 Kill Processes
 
-* 
+* Run Jobs in the Background
+  ```console
+  [user@host ~]$ sleep 10000 &
+  [1] 5947
+  [user@host ~]$
+  ```
+* Use the ```jobs``` command to display the list of jobs for the shell's session.
+  ```console
+  [user@host ~]$ jobs
+  [1]+ Running    sleep 10000 &
+  [user@host ~]$
+  ```
+* Use the ```fg``` command to bring a background job to the foreground. Use the the (```%jobNumber```) format to specify the process to foreground.
+  ```console
+  [user@host ~]$ fg %1
+  sleep 10000
+  ```
+* To send a foreground process to the background, press the keyboard-generated suspend request (**Ctrl+z**) in the terminal. The job is placed in the background and suspended.
+  ```console
+  [user@host ~]$ sleep 10000
+  ^Z
+  [1]+  Stopped                 sleep 10000
+  [user@host ~]$
+  ```
+* The ```ps j``` command displays information about jobs. Use the ```ps j``` command to find process and session information.
+  * The **PID** is the unique process **ID** of the process.
+  * The **PPID** is the PID of the *parent process* of this process, the process that started (forked) it.
+  * The **PGID** is the PID of the *process group leader*, normally the first process in the job's pipeline.
+  * The **SID** is the PID of the *session leader*, which (for a job) is normally the interactive shell that is running on its controlling terminal.
+  In the next example, the ```sleep``` command is currently suspended and the process state is ```T```.
+  ```console
+  [user@host ~]$ ps j
+   PPID   PID  PGID   SID TTY      TPGID STAT   UID   TIME COMMAND
+   2764  2768  2768  2768 pts/0     6377 Ss    1000   0:00 /bin/bash
+   2768  5947  5947  2768 pts/0     6377 T     1000   0:00 sleep 10000
+   2768  6377  6377  2768 pts/0     6377 R+    1000   0:00 ps j
+   ```
 
 
 <a name="8.7"></a>
