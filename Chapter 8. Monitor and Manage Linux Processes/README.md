@@ -25,7 +25,24 @@
   | Zombie | Z | **EXIT_ZOMBIE**: A child process signals to its parent as it exits. All resources except for the process identity (PID) are released.
   |  | X | **EXIT_DEAD**: When the parent cleans up (reaps) the remaining child process structure, the process is now released completely. This state cannot be observed in process-listing utilities. |
   
-
+* When troubleshooting a system, it is important to understand how the kernel communicates with processes and how processes communicate with each other. The system assigns a state to every new process. The ```S``` column of the ```top``` command or the ```STAT``` column of the ```ps``` command shows the state of each process. On a single CPU system, only one process can run at a time. It is possible to see several processes with an R state. However, not all processes are running consecutively; some of them are in waiting status.
+  ```console
+  [user@host ~]$ top
+  PID USER  PR  NI    VIRT    RES    SHR S  %CPU  %MEM   TIME+    COMMAND
+  2259 root 20   0  270856  40316   8332 S   0.3   0.7   0:00.25  sssd_kcm
+     1 root 20   0  171820  16140  10356 S   0.0   0.3   0:01.62  systemd
+     2 root 20   0       0      0      0 S   0.0   0.0   0:00.00  kthreadd
+  ...output omitted...
+  ```
+  ```console
+  [user@host ~]$ ps aux
+  USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+  ...output omitted...
+  root         2  0.0  0.0      0     0 ?        S    11:57   0:00 [kthreadd]
+  student   3448  0.0  0.2 266904  3836 pts/0    R+   18:07   0:00 ps aux
+  ...output omitted...
+  ```
+  
 
 <a name="8.3"></a>
 ## 8.3 Control Jobs
