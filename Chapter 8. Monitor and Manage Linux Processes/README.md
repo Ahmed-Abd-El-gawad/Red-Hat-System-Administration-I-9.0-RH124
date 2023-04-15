@@ -83,12 +83,6 @@
 <a name="8.3"></a>
 ## 8.3 Control Jobs
 
-* 
-
-
-<a name="8.5"></a>
-## 8.5 Kill Processes
-
 * Run Jobs in the Background
   ```console
   [user@host ~]$ sleep 10000 &
@@ -131,6 +125,12 @@
   [user@host ~]$ bg %1
   [1]+ sleep 10000 &
   ```
+  
+
+<a name="8.5"></a>
+## 8.5 Kill Processes
+
+* 
 
 <a name="8.7"></a>
 ## 8.7 Monitor Process Activity
