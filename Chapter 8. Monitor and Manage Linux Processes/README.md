@@ -9,7 +9,7 @@
 
 
 <a name="8.1"></a>
-## 8.1 Interpret Linux File System Permissions
+## 8.1 Process States and Lifecycle
 
 * 
 
