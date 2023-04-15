@@ -126,7 +126,11 @@
    2768  5947  5947  2768 pts/0     6377 T     1000   0:00 sleep 10000
    2768  6377  6377  2768 pts/0     6377 R+    1000   0:00 ps j
    ```
-
+* Use the ```bg``` command with the job ID to start running the suspended process.
+  ```console
+  [user@host ~]$ bg %1
+  [1]+ sleep 10000 &
+  ```
 
 <a name="8.7"></a>
 ## 8.7 Monitor Process Activity
