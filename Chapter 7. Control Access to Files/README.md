@@ -119,6 +119,7 @@
 | Contents|
 | --- |
 | [Effects of Special Permissions on Files and Directories](#special_permissions) |
+| [umask](#umask) |
 
 <a name="special_permissions"></a>
 * Effects of Special Permissions on Files and Directories
@@ -163,4 +164,13 @@
     ```console
     [user@host ~]# chmod 00770 example
     ```
+  
+<a name="umask"></a>
+* The ```umask``` is an octal bitmask that clears the permissions of new files and directories that a process creates. If a bit is set in the ```umask```, then the corresponding permission is cleared on new files. For example, the ```umask``` ```0002``` clears the write bit for other users. The leading zeros indicate that the special, user, and group permissions are not cleared. A ```umask``` of``` 0077``` clears all the group and other permissions of newly created files.
+  ```console
+  [user@host ~]$ umask
+  0002
+  ```
+  ![]()
+  
   
