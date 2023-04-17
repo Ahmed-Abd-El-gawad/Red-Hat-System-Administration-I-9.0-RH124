@@ -302,5 +302,17 @@
   ...output omitted...
   ```
   
+  ```
+  # From lscpu, the system has four logical CPUs, so divide by 4:
+  #                               load average: 2.92, 4.48, 5.20
+  #           divide by number of logical CPUs:    4     4     4
+  #                                             ----  ----  ----
+  #                       per-CPU load average: 0.73  1.12  1.30
+  #
+  # This system's load average appears to be decreasing.
+  # With a load average of 2.92 on four CPUs, all CPUs were in use ~73% of the time.
+  # During the last 5 minutes, the system was overloaded by ~12%.
+  # During the last 15 minutes, the system was overloaded by ~30%.
+  ```
   
-  
+
