@@ -352,3 +352,19 @@
   | **f** | Manage the columns by enabling or disabling fields. You can also set the sort field for top. |
 
   * The s, k, and r keystrokes are not available when the top command is started in a secure mode.
+```console
+[student@servera ~]$ top
+top - 12:13:03 up 11 days, 58 min,  3 users,  load average: 0.00, 0.00, 0.00
+Tasks: 113 total,   2 running, 111 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.2 us,  0.0 sy,  0.0 ni, 99.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :   1829.4 total,   1377.3 free,    193.9 used,    258.2 buff/cache
+MiB Swap:   1024.0 total,   1024.0 free,      0.0 used.   1476.1 avail Mem
+
+PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+5861 root      20   0       0      0      0 I   0.3   0.0   0:00.71 kworker/1:3-events
+6068 student   20   0  273564   4300   3688 R   0.3   0.2   0:00.01 top
+   1 root      20   0  178680  13424   8924 S   0.0   0.7   0:04.03 systemd
+   2 root      20   0       0      0      0 S   0.0   0.0   0:00.03 kthreadd
+   3 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_gp
+...output omitted...
+```
