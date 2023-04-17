@@ -274,9 +274,33 @@
 
 | content |
 | --- |
-| [](#) |
+| [uptime](#uptime) |
+| [lscpu](#lscpu) |
 
 
-<a name=""></a>
+<a name="uptime"></a>
+* ```uptime``` command is one way to display the current load average. It prints the current time, how long the machine has been up, how many user sessions are running, and the current load average.
+  ```console
+  [user@host ~]$ uptime
+   15:29:03 up 14 min,  2 users,  load average: 2.92, 4.48, 5.20
+   ```
+  * The three values for the load average represent the load over the last ***1***, ***5***, and ***15*** minutes. It indicates whether the system load appears to be increasing or decreasing.
 
-
+<a name="lscpu"></a>
+* Use the ```lscpu``` command to determine the number of CPUs that are present on a system.
+  ```console
+  [user@host ~]$ lscpu
+  Architecture:        x86_64
+  CPU op-mode(s):      32-bit, 64-bit
+  Byte Order:          Little Endian
+  CPU(s):              4
+  On-line CPU(s) list: 0-3
+  Thread(s) per core:  2
+  Core(s) per socket:  2
+  Socket(s):           1
+  NUMA node(s):        1
+  ...output omitted...
+  ```
+  
+  
+  
