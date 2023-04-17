@@ -142,6 +142,52 @@
   | 19 | **STOP** | ```Stop```, ```unblockable``` : Suspends the process. It cannot be blocked or handled. |
   | 20 | **TSTP** | ```Keyboard stop``` : Unlike SIGSTOP, it can be blocked, ignored, or handled. Sent by pressing the suspend key sequence (**Ctrl+z**). |
 
+* The ```kill``` command uses a PID number to send a signal to a process. Despite its name, you can use the ```kill``` command to send any signal, not just those signals for terminating programs. You can use the ```kill``` command ```-l``` option to list the names and numbers of all available signals.
+  ```console
+  [user@host ~]$ kill -l
+   1) SIGHUP      2) SIGINT      3) SIGQUIT     4) SIGILL      5) SIGTRAP
+   6) SIGABRT     7) SIGBUS      8) SIGFPE      9) SIGKILL    10) SIGUSR1
+  11) SIGSEGV    12) SIGUSR2    13) SIGPIPE    14) SIGALRM    15) SIGTERM
+  16) SIGSTKFLT  17) SIGCHLD    18) SIGCONT    19) SIGSTOP    20) SIGTSTP
+  ...output omitted...
+  ```
+  ```console
+  [user@host ~]$ ps aux | grep job
+  5194 0.0 0.1 222448 2980 pts/1 S  16:39 0:00 /bin/bash /home/user/bin/control job1
+  5199 0.0 0.1 222448 3132 pts/1 S  16:39 0:00 /bin/bash /home/user/bin/control job2
+  5205 0.0 0.1 222448 3124 pts/1 S  16:39 0:00 /bin/bash /home/user/bin/control job3
+  5430 0.0 0.0 221860 1096 pts/1 S+ 16:41 0:00 grep --color=auto job
+  [user@host ~]$ kill 5194
+  [user@host ~]$ ps aux | grep job
+  user   5199  0.0  0.1 222448  3132 pts/1    S    16:39   0:00 /bin/bash /home/user/bin/control job2
+  user   5205  0.0  0.1 222448  3124 pts/1    S    16:39   0:00 /bin/bash /home/user/bin/control job3
+  user   5783  0.0  0.0 221860   964 pts/1    S+   16:43   0:00 grep --color=auto job
+  [1]   Terminated              control job1
+  [user@host ~]$ kill -9 5199
+  [user@host ~]$ ps aux | grep job
+  user   5205  0.0  0.1 222448  3124 pts/1    S    16:39   0:00 /bin/bash /home/user/bin/control job3
+  user   5930  0.0  0.0 221860  1048 pts/1    S+   16:44   0:00 grep --color=auto job
+  [2]-  Killed                  control job2
+  [user@host ~]$ kill -SIGTERM 5205
+  user   5986  0.0  0.0 221860  1048 pts/1  S+  16:45  0:00 grep --color=auto job
+  [3]+  Terminated              control job3
+  ```
+  
+* The ```killall``` command can signal multiple processes, based on their command name.
+  ```console
+  [user@host ~]$ ps aux | grep job
+  5194  0.0  0.1 222448  2980 pts/1    S    16:39   0:00 /bin/bash /home/user/bin/control job1
+  5199  0.0  0.1 222448  3132 pts/1    S    16:39   0:00 /bin/bash /home/user/bin/control job2
+  5205  0.0  0.1 222448  3124 pts/1    S    16:39   0:00 /bin/bash /home/user/bin/control job3
+  5430  0.0  0.0 221860  1096 pts/1    S+   16:41   0:00 grep --color=auto job
+  [user@host ~]$ killall control
+  [1]   Terminated              control job1
+  [2]-  Terminated              control job2
+  [3]+  Terminated              control job3
+  [user@host ~]$
+  ```
+  
+  
 
 <a name="8.7"></a>
 ## 8.7 Monitor Process Activity
