@@ -130,7 +130,20 @@
 <a name="8.5"></a>
 ## 8.5 Kill Processes
 
-* 
+| content |
+| --- |
+| [Fundamental process management signals](#8.5.1) |
+| [kill](#kill) |
+| [killall](#killall) |
+| [pkill](#pkill) |
+| [w](#w) |
+| [pgrep](#pgrep) |
+| [pstree](#pstree) |
+
+
+<a name="8.5.1"></a>
+* Fundamental process management signals
+  
   | Signal | Name | Definition |
   | --- | --- | --- |
   | 1 | **HUP** | ```Hangup``` : Reports termination of the controlling process of a terminal. Also requests process re-initialization (configuration reload) without termination. |
@@ -142,6 +155,7 @@
   | 19 | **STOP** | ```Stop```, ```unblockable``` : Suspends the process. It cannot be blocked or handled. |
   | 20 | **TSTP** | ```Keyboard stop``` : Unlike SIGSTOP, it can be blocked, ignored, or handled. Sent by pressing the suspend key sequence (**Ctrl+z**). |
 
+<a name="kill"></a>
 * The ```kill``` command uses a PID number to send a signal to a process. Despite its name, you can use the ```kill``` command to send any signal, not just those signals for terminating programs. You can use the ```kill``` command ```-l``` option to list the names and numbers of all available signals.
   ```console
   [user@host ~]$ kill -l
@@ -173,6 +187,7 @@
   [3]+  Terminated              control job3
   ```
   
+<a name="killall"></a>
 * The ```killall``` command can signal multiple processes, based on their command name.
   ```console
   [user@host ~]$ ps aux | grep job
@@ -187,6 +202,7 @@
   [user@host ~]$
   ```
   
+<a name="pkill"></a>
 * Use the ```pkill``` command to signal one or more processes that match selection criteria. Selection criteria can be a command name, a process owned by a specific user, or all system-wide processes. The ```pkill``` command includes advanced selection criteria:
   * **Command** : Processes with a pattern-matched command name.
   * **UID** : Processes owned by a Linux user account, effective or real.
@@ -214,7 +230,44 @@
   user   6870  0.0  0.0 221860  1048 pts/0    S+   17:07   0:00 grep --color=auto test
   ```
   
+<a name="w"></a>
+* Use the ```w``` command to list user logins and currently running processes. Note the ```TTY``` and ```FROM``` columns to determine the closing sessions.
+  ```console
+  [user@host ~]$ w
+   12:43:06 up 27 min,  5 users,  load average: 0.03, 0.17, 0.66
+  USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+  root     tty2                      12:26   14:58   0.04s  0.04s -bash
+  bob      tty3                      12:28   14:42   0.02s  0.02s -bash
+  user     pts/1    desktop.example.com 12:41    2.00s  0.03s  0.03s w
+  [user@host ~]$
+  ```
   
+<a name="pgrep"></a>
+* use the ```pgrep``` command to identify the PID numbers to kill. This command operates similarly to the ```pkill``` command, including the same options, except that the ```pgrep``` command lists processes rather than killing them.
+  ```console
+  [root@host ~]# pgrep -l -u bob
+  6964 bash
+  6998 sleep
+  6999 sleep
+  7000 sleep
+  [root@host ~]# pkill -SIGKILL -u bob
+  [root@host ~]# pgrep -l -u bob
+  ```
+  
+<a name="pstree"></a>
+* Use the ```pstree``` command to view a process tree for the system or a single user. Use the parent process's PID to kill all children that they created. The parent ```Bas```h login shell survives this time because the signal is directed only at its child processes.
+  ```console
+  [root@host ~]# pstree -p bob
+  bash(8391)─┬─sleep(8425)
+             ├─sleep(8426)
+             └─sleep(8427)
+  [root@host ~]# pkill -P 8391
+  [root@host ~]# pgrep -l -u bob
+  bash(8391)
+  [root@host ~]# pkill -SIGKILL -P 8391
+  [root@host ~]# pgrep -l -u bob
+  bash(8391)
+  ```
 
 <a name="8.7"></a>
 ## 8.7 Monitor Process Activity
