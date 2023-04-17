@@ -10,3 +10,4 @@ A learning guide to keep track of the command used.
 | [Chapter 6. Manage Local Users and Groups](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%206.%20Manage%20Local%20Users%20and%20Groups/README.md) |
 | [Chapter 7. Control Access to Files](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%207.%20Control%20Access%20to%20Files/README.md) |
 | [Chapter 8. Monitor and Manage Linux Processes](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%208.%20Monitor%20and%20Manage%20Linux%20Processes/README.md) |
+| [Chapter 9. Control Services and Daemons](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%209.%20Control%20Services%20and%20Daemons/README.md) |
