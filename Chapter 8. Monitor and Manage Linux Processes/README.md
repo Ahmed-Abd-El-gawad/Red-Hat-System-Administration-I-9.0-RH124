@@ -131,6 +131,17 @@
 ## 8.5 Kill Processes
 
 * 
+  | Signal | Name | Definition |
+  | --- | --- | --- |
+  | 1 | **HUP** | ```Hangup``` : Reports termination of the controlling process of a terminal. Also requests process re-initialization (configuration reload) without termination. |
+  | 2 | **INT** | ```Keyboard interrupt``` : Causes program termination. It can be blocked or handled. Sent by pressing the INTR (Interrupt) key sequence (**Ctrl+c**). |
+  | 3 | **QUIT** | ```Keyboard quit``` : Similar to SIGINT; adds a process dump at termination. Sent by pressing the QUIT key sequence (kbd:[Ctrl+\]). |
+  | 9 | **KILL** | ```Kill```, ```unblockable``` : Causes abrupt program termination. It cannot be blocked, ignored, or handled; consistently fatal. |
+  | 15 default | **TERM** | ```Terminate``` : Causes program termination. Unlike SIGKILL, it can be blocked, ignored, or handled. The "clean" way to ask a program to terminate; it allows the program to complete essential operations and self-cleanup before termination. |
+  | 18 | **CONT** | ```Continue``` : Sent to a process to resume if stopped. It cannot be blocked. Even if handled, it always resumes the process. |
+  | 19 | **STOP** | ```Stop```, ```unblockable``` : Suspends the process. It cannot be blocked or handled. |
+  | 20 | **TSTP** | ```Keyboard stop``` : Unlike SIGSTOP, it can be blocked, ignored, or handled. Sent by pressing the suspend key sequence (**Ctrl+z**). |
+
 
 <a name="8.7"></a>
 ## 8.7 Monitor Process Activity
