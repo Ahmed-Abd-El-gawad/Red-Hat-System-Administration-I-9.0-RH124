@@ -276,6 +276,7 @@
 | --- |
 | [uptime](#uptime) |
 | [lscpu](#lscpu) |
+| [top](#top) |
 
 
 <a name="uptime"></a>
@@ -315,4 +316,39 @@
   # During the last 15 minutes, the system was overloaded by ~30%.
   ```
   
+<a name="top"></a>
+* The default top output columns are as follows:
+  * The process ID (PID).
+  * The process owner user name (USER).
+  * Virtual memory (<sub>VIRT</sub>) is all the memory that the process uses, including the resident set, shared libraries, and any mapped or swapped memory pages. (labeled ```VSZ``` in the ```ps``` command.)
+  * Resident memory <sub>RES</sub> is the physical memory that the process uses, including any resident, shared objects. (labeled ```RSS``` in the ```ps``` command.)
+  * Process state (S) can be one of the following states:
+    * D = Uninterruptible Sleeping
+    * R = Running or Runnable
+    * S = Sleeping
+    * T = Stopped or Traced
+    * Z = Zombie
+  * CPU time (<sub>TIME</sub>) is the total processing time since the process started. It can be toggled to include a cumulative time of all previous children.
+  * The process command name (COMMAND).
 
+* Fundamental Keystrokes in top Command
+  
+  | Key | Purpose |
+  | --- | --- |
+  | ? or **h** | Help for interactive keystrokes. |
+  | **l**, **t**, **m** | Toggles for load, threads, and memory header lines. |
+  | **1** | Toggle for individual CPUs or a summary for all CPUs in the header. |
+  | **s** | Change the refresh (screen) rate, in decimal seconds (such as 0.5, 1, 5). |
+  | **b** | Toggle reverse highlighting for <sub>Running</sub> processes; default is bold only. |
+  | **Shift+b** | Enables bold use in display, in the header, and for Running processes. |
+  | **Shift+h** | Toggle threads; show process summary or individual threads. |
+  | **u**, **Shift+u** | Filter for any user name (effective, real). |
+  | Shift+m** | Sort process listing by memory usage, in descending order. |
+  | **Shift+p** | Sort process listing by processor utilization, in descending order. |
+  | **k** | Kill a process. When prompted, enter PID, and then <sub>signal</sub>. |
+  | **r** | Renice a process. When prompted, enter PID, and then <sub>nice_value.</sub> |
+  | **Shift+w** | Write (save) the current display configuration for use at the next top restart. |
+  | **q** | Quit. |
+  | **f** | Manage the columns by enabling or disabling fields. You can also set the sort field for top. |
+
+  * The s, k, and r keystrokes are not available when the top command is started in a secure mode.
