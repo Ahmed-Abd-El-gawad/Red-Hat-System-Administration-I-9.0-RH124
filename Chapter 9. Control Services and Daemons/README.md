@@ -12,6 +12,7 @@
 | systemctl |
 | --- |
 | [systemctl](#systemctl) |
+| [Service States](#states) |
 
 <a name="systemctl"></a>
 * lists and paginates all currently loaded service units.
@@ -88,6 +89,52 @@
   blk-availability.service          disabled    disabled
   ...output omitted...
   ```
+  
+<a name="states"></a>
+* View a unit's status with the ```systemctl status name.type``` command.
+  ```console
+  [root@host ~]# systemctl status sshd.service
+  ● sshd.service - OpenSSH server daemon
+       Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset: enabled)
+       Active: active (running) since Mon 2022-03-14 05:38:12 EDT; 25min ago
+         Docs: man:sshd(8)
+               man:sshd_config(5)
+     Main PID: 1114 (sshd)
+        Tasks: 1 (limit: 35578)
+       Memory: 5.2M
+          CPU: 64ms
+       CGroup: /system.slice/sshd.service
+               └─1114 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+  Mar 14 05:38:12 workstation systemd[1]: Starting OpenSSH server daemon...
+  Mar 14 05:38:12 workstation sshd[1114]: Server listening on 0.0.0.0 port 22.
+  Mar 14 05:38:12 workstation sshd[1114]: Server listening on :: port 22.
+  Mar 14 05:38:12 workstation systemd[1]: Started OpenSSH server daemon.
+  ...output omitted...
+  ```
+  * Service Unit Information
+    | Field | Description |
+    | --- | --- |
+    | ```Loaded``` | Whether the service unit is loaded into memory. |
+    | ```Active``` | Whether the service unit is running and if so, for how long. |
+    | ```Docs``` | Where to find more information about the service. |
+    | ```Main PID``` | The main process ID of the service, including the command name. |
+    | ```Status``` | More information about the service. |
+    | ```Process``` | More information about related processes. |
+    | ```CGroup``` | More information about related control groups. |
+    
+  * Service States in the Output of systemctl
+    | Keyword | Description |
+    | --- | --- |
+    | ```loaded``` | The unit configuration file is processed. |
+    | ```active (running)``` | The service is running with continuing processes. |
+    | ```active (exited)``` | The service successfully completed a one-time configuration. |
+    | ```active (waiting)``` | The service is running but waiting for an event. |
+    | ```inactive``` | The service is not running. |
+    | ```enable``` | 	The service starts at boot time. |
+    | ```disabled``` | The service is not set to start at boot time. |
+    | ```static``` | The service cannot be enabled, but an enabled unit might start it automatically. |
+
 
 <a name="9.3"></a>
 ## 9.3 Control System Services
