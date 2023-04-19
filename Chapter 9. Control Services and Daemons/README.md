@@ -134,7 +134,22 @@
     | ```enable``` | 	The service starts at boot time. |
     | ```disabled``` | The service is not set to start at boot time. |
     | ```static``` | The service cannot be enabled, but an enabled unit might start it automatically. |
-
+* ```console
+  [root@host ~]# systemctl is-active sshd.service
+  active
+  ```
+  The command returns the service unit state, which is usually active or inactive.
+* ```console
+  [root@host ~]# systemctl is-enabled sshd.service
+  enabled
+  ```
+  The command returns whether the service unit is enabled to start at boot time, and is usually enabled or disabled.
+* ```console
+  [root@host ~]# systemctl is-failed sshd.service
+  active
+  ```
+  The command returns active if the service is properly running, or failed if an error occurred during startup. If the unit was stopped, it returns unknown or inactive.
+* To list all the failed units, run the ```systemctl --failed --type=service``` command.
 
 <a name="9.3"></a>
 ## 9.3 Control System Services
