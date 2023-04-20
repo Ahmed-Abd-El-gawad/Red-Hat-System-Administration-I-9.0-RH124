@@ -128,6 +128,33 @@
     |++.     . +.     |
     +----[SHA256]-----+
     ```
+    * You can choose to provide a passphrase to ```ssh-keygen```, which is used to encrypt your private key. Using a passphrase is recommended, so that your private key cannot be used by someone who gains access to it. If you set a passphrase, then you must enter the passphrase each time you use the private key. The passphrase is used locally, to decrypt your private key before use, unlike your password, which must be sent in clear text across the network for use.
+      ```console
+      [user@host ~]$ ssh-keygen -f .ssh/key-with-pass
+      Generating public/private rsa key pair.
+      Enter passphrase (empty for no passphrase): your_passphrase
+      Enter same passphrase again: your_passphrase
+      Your identification has been saved in .ssh/key-with-pass.
+      Your public key has been saved in .ssh/key-with-pass.pub.
+      The key fingerprint is:
+      SHA256:w3GGB7EyHUry4aOcNPKmhNKS7dl1YsMVLvFZJ77VxAo user@host.lab.example.com
+      The key's randomart image is:
+      +---[RSA 2048]----+
+      |    . + =.o ...  |
+      |     = B XEo o.  |
+      |  . o O X =....  |
+      | = = = B = o.    |
+      |= + * * S .      |
+      |.+ = o + .       |
+      |  + .            |
+      |                 |
+      |                 |
+      +----[SHA256]-----+
+      ```
+      * The ```ssh-keygen``` command ```-f``` option specifies the files in which to save the keys. 
+    
+    * You can use the ```ssh-agent``` key manager locally, which caches your passphrase upon first use in a login session, and then provides the passphrase for all subsequent private key use in the same login session.
+    
   2. s
 
 <a name="10.5"></a>
