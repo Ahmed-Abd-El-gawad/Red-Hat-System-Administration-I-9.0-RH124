@@ -154,5 +154,34 @@
 <a name="9.3"></a>
 ## 9.3 Control System Services
 
-* 
+| content |
+| --- |
+| [status](#status) |
+| [start](#start) |
+| [stop](#stop) |
 
+<a name="status"></a>
+* Use the ```systemctl status``` command to verify the status of a service, if the service is running or stopped.
+  ```console
+  [root@host ~]# systemctl status sshd.service
+  ● sshd.service - OpenSSH server daemon
+       Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset: enabled)
+       Active: active (running) since Wed 2022-03-23 11:58:18 EDT; 2min 56s ago
+  ...output omitted...
+  ```
+
+<a name="start"></a>
+* Use the ```systemctl start``` command as the root user (with the sudo command if necessary) to start a sevice.
+  ```console
+  [root@host ~]# systemctl start sshd
+  ```
+  ```console
+  [root@host ~]# systemctl start sshd.service
+  ```
+<a name="stop"></a>
+* To stop a running service, use the ```systemctl``` command ```stop``` option.
+  ```console
+  [root@host ~]# systemctl stop sshd.service
+  ```
+  
+  
