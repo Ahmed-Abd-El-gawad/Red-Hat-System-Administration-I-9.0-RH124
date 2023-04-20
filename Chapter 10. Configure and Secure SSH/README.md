@@ -155,7 +155,31 @@
     
     * You can use the ```ssh-agent``` key manager locally, which caches your passphrase upon first use in a login session, and then provides the passphrase for all subsequent private key use in the same login session.
     
-  2. s
+  2. Share the Public Key
+    
+    To configure your remote account for access, copy your public key to the remote system. The ```ssh-copy-id``` command copies the public key of the SSH key pair to the remote system. You can specify a specific public key with the ```ssh-copy-id``` command, or use the default ```~/.ssh/id_rsa.pub``` file.
+    ```console
+    [user@host ~]$ ssh-copy-id -i .ssh/key-with-pass.pub user@remotehost
+    /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/user/.ssh/id_rsa.pub"
+    /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+    /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+    user@remotehost's password: redhat
+    Number of key(s) added: 1
+
+    Now try logging into the machine, with:   "ssh 'user@remotehost'"
+    and check to make sure that only the key(s) you wanted were added.
+    ```
+    * Test the remote access, after placing the public key, with the corresponding private key. If the configuration is correct, you will gain access to your account on the remote system without being asked for your account password. If you do not specify a private key file, then the ```ssh``` command uses the default ```~/.ssh/id_rsa``` file if it exists.
+    
+    * If you configured a passphrase to protect your private key, the passphrase will be requested by SSH at first use. However, if the key authentication succeeds, you will not be asked for your account password.
+    ```console
+    [user@host ~]$ ssh -i .ssh/key-with-pass user@remotehost
+    Enter passphrase for key '.ssh/key-with-pass': your_passphrase
+    ...output omitted...
+    [user@remotehost ~]$
+    ```
+    
+    
 
 <a name="10.5"></a>
 ## 10.5 Customize OpenSSH Service Configuration
