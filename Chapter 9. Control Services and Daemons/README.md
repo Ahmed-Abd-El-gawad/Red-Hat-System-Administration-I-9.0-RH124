@@ -159,6 +159,9 @@
 | [status](#status) |
 | [start](#start) |
 | [stop](#stop) |
+| [restart](#restart) |
+| [reload](#reload) |
+| [reload-or-restart](#reload-or-restart) |
 
 <a name="status"></a>
 * Use the ```systemctl status``` command to verify the status of a service, if the service is running or stopped.
@@ -184,4 +187,21 @@
   [root@host ~]# systemctl stop sshd.service
   ```
   
+<a name="restart"></a>
+* When you restart a running service, the service first stops and then starts again. On the service restart, the new process gets a new ID during the startup and thus the process ID changes.
+  ```console
+  [root@host ~]# systemctl restart sshd.service
+  ```
   
+<a name="reload"></a>
+* Some services can reload their configuration files without requiring a restart, which is called a service reload. Reloading a service does not change the process ID that is associated with various service processes.
+  ```console
+  [root@host ~]# systemctl reload sshd.service
+  ```
+
+<a name="reload-or-restart"></a>
+* If you are unsure whether the service has the function to reload the configuration file changes, use the systemctl command ```reload-or-restart``` option. The command reloads the configuration changes if the reloading function is available. Otherwise, the command restarts the service to implement the new configuration changes.
+  ```console
+  [root@host ~]# systemctl reload-or-restart sshd.service
+  ```
+
