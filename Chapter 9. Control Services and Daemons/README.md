@@ -163,6 +163,8 @@
 | [reload](#reload) |
 | [reload-or-restart](#reload-or-restart) |
 | [list-dependencies](#list-dependencies) |
+| [mask](#mask) |
+| [unmask](#unmask) |
 
 <a name="status"></a>
 * Use the ```systemctl status``` command to verify the status of a service, if the service is running or stopped.
@@ -218,5 +220,32 @@
   ● │ └─sshd-keygen@rsa.service
   ● └─sysinit.target
   ...output omitted...
+  ```
+
+<a name="mask"></a>
+* Masking a service prevents an administrator from accidentally starting a service that conflicts with others. Masking creates a link in the configuration directories to the ```/dev/null``` file which prevents the service from starting. To mask a service, use the ```systemctl``` command ```mask``` option.
+  ```console
+  [root@host ~]# systemctl mask sendmail.service
+  Created symlink /etc/systemd/system/sendmail.service → /dev/null.
+  ```
+  * Check the state of the service by using the ```systemctl list-unit-files``` command.
+    ```console
+    [root@host ~]# systemctl list-unit-files --type=service
+    UNIT FILE                                   STATE
+    ...output omitted...
+    sendmail.service                            masked
+    ...output omitted...
+    ```
+  * Attempting to start a masked service unit fails with the following output:
+    ```console
+    [root@host ~]# systemctl start sendmail.service
+    Failed to start sendmail.service: Unit sendmail.service is masked.
+    ```
+    
+<a name="unmask"></a>
+* Use the ```systemctl unmask``` command to unmask the service unit.
+  ```console
+  [root@host ~]# systemctl unmask sendmail
+  Removed /etc/systemd/system/sendmail.service.
   ```
 
