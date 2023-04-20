@@ -103,6 +103,7 @@
 * To prepare your account, generate a cryptographically-related pair of key files. One key is private and held only by you, while the second is your related public key that is not secret. The private key acts as your authentication credential and it must be stored securely. The public key is copied to your account on servers that you will remotely access, and verifies your use of your private key.
   
   1. SSH Keys Generation
+    
     Use the ```ssh-keygen``` command to create a key pair. By default, the ```ssh-keygen``` command saves your private and public keys in the ```~/.ssh/id_rsa``` and ```~/.ssh/id_rsa.pub``` files, but you can specify a different name.
     ```console
     [user@host ~]$ ssh-keygen
