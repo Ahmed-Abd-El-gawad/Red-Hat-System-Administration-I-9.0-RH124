@@ -97,8 +97,38 @@
 
 | Content |
 | --- |
+| [passwordless](#passwordless) |
 
-* 
+<a name="passwordless"></a>
+* To prepare your account, generate a cryptographically-related pair of key files. One key is private and held only by you, while the second is your related public key that is not secret. The private key acts as your authentication credential and it must be stored securely. The public key is copied to your account on servers that you will remotely access, and verifies your use of your private key.
+  
+  1. SSH Keys Generation
+    Use the ```ssh-keygen``` command to create a key pair. By default, the ```ssh-keygen``` command saves your private and public keys in the ```~/.ssh/id_rsa``` and ```~/.ssh/id_rsa.pub``` files, but you can specify a different name.
+    ```console
+    [user@host ~]$ ssh-keygen
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/home/user/.ssh/id_rsa): Enter
+    Created directory '/home/user/.ssh'.
+    Enter passphrase (empty for no passphrase): Enter
+    Enter same passphrase again: Enter
+    Your identification has been saved in /home/user/.ssh/id_rsa.
+    Your public key has been saved in /home/user/.ssh/id_rsa.pub.
+    The key fingerprint is:
+    SHA256:vxutUNPio3QDCyvkYm1 user@host.lab.example.com
+    The key's randomart image is:
+    +---[RSA 2048]----+
+    |                 |
+    |   .     .       |
+    |  o o     o      |
+    | . = o   o .     |
+    |  o + = S E .    |
+    | ..O o + * +     |
+    |.+% O . + B .    |
+    |=*oO . . + *     |
+    |++.     . +.     |
+    +----[SHA256]-----+
+    ```
+  2. s
 
 <a name="10.5"></a>
 ## 10.5 Customize OpenSSH Service Configuration
