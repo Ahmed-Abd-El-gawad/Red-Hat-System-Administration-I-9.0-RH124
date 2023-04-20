@@ -162,6 +162,7 @@
 | [restart](#restart) |
 | [reload](#reload) |
 | [reload-or-restart](#reload-or-restart) |
+| [list-dependencies](#list-dependencies) |
 
 <a name="status"></a>
 * Use the ```systemctl status``` command to verify the status of a service, if the service is running or stopped.
@@ -203,5 +204,19 @@
 * If you are unsure whether the service has the function to reload the configuration file changes, use the systemctl command ```reload-or-restart``` option. The command reloads the configuration changes if the reloading function is available. Otherwise, the command restarts the service to implement the new configuration changes.
   ```console
   [root@host ~]# systemctl reload-or-restart sshd.service
+  ```
+
+<a name="list-dependencies"></a>
+* The ```systemctl list-dependencies UNIT``` command displays a hierarchy mapping of dependencies to start the service unit. To list reverse dependencies (units that depend on the specified unit), use the ```--reverse``` option with the command.
+  ```console
+  [root@host ~]# systemctl list-dependencies sshd.service
+  sshd.service
+  ● ├─system.slice
+  ● ├─sshd-keygen.target
+  ● │ ├─sshd-keygen@ecdsa.service
+  ● │ ├─sshd-keygen@ed25519.service
+  ● │ └─sshd-keygen@rsa.service
+  ● └─sysinit.target
+  ...output omitted...
   ```
 
