@@ -199,6 +199,15 @@
   Identity added: .ssh/key-with-pass (user@host.lab.example.com)
   ```
 
+* The following ```ssh``` command uses the ```~/.ssh/key-with-pass``` private key access your account on the remote server. The private key in this example was previously decrypted and added to the ```ssh-agent``` key manager, therefore the ```ssh``` command does not prompt you for the passphrase to decrypt the private key.
+  ```console
+  [user@host ~]$ ssh -i .ssh/key-with-pass user@remotehost
+  Last login: Mon Mar 14 06:58:43 2022 from host.example.com
+  [user@remotehost ~]$
+  ```
+  * When you log out of a session that used an ```ssh-agent``` key manager, all cached passphrases are cleared from memory.
+
+
 
 <a name="10.5"></a>
 ## 10.5 Customize OpenSSH Service Configuration
