@@ -98,6 +98,7 @@
 | Content |
 | --- |
 | [passwordless](#passwordless) |
+| [ssh-agent](#ssh-agent) |
 
 <a name="passwordless"></a>
 * To prepare your account, generate a cryptographically-related pair of key files. One key is private and held only by you, while the second is your related public key that is not secret. The private key acts as your authentication credential and it must be stored securely. The public key is copied to your account on servers that you will remotely access, and verifies your use of your private key.
@@ -180,7 +181,24 @@
     [user@remotehost ~]$
     ```
     
-    
+<a name="ssh-agent"></a>
+* If you encrypt your private key with a passphrase, then you must enter the passphrase each time you use the private key for authentication. However, you can configure the ```ssh-agent``` key manager to cache passphrases. Then, each time you use SSH, the ```ssh-agent key``` manager provides the passphrase for you. Using a key manager convenient and can improve security by providing fewer opportunities for other people to observe your passphrase.
+
+  The ```ssh-agent``` key manager can be configured to start automatically when you log in. The GNOME graphical desktop environment can automatically start and configure the ```ssh-agent``` key manager. If you log in to a text environment, you must start the ```ssh-agent``` program manually for each session. Start the ```ssh-agent``` program with the following command.
+  ```console
+  [user@host ~]$ eval $(ssh-agent)
+  Agent pid 10155
+  ```
+
+* ```ssh-add``` commands add the private keys from the default ```~/.ssh/id_rsa``` file and then from a ```~/.ssh/key-with-pass``` file.
+  ```console
+  [user@host ~]$ ssh-add
+  Identity added: /home/user/.ssh/id_rsa (user@host.lab.example.com)
+  [user@host ~]$ ssh-add .ssh/key-with-pass
+  Enter passphrase for .ssh/key-with-pass: your_passphrase
+  Identity added: .ssh/key-with-pass (user@host.lab.example.com)
+  ```
+
 
 <a name="10.5"></a>
 ## 10.5 Customize OpenSSH Service Configuration
