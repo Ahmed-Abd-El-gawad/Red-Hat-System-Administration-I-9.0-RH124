@@ -165,6 +165,8 @@
 | [list-dependencies](#list-dependencies) |
 | [mask](#mask) |
 | [unmask](#unmask) |
+| [enable and disable](#enable_disable) |
+| [Summary](#summary) |
 
 <a name="status"></a>
 * Use the ```systemctl status``` command to verify the status of a service, if the service is running or stopped.
@@ -248,4 +250,41 @@
   [root@host ~]# systemctl unmask sendmail
   Removed /etc/systemd/system/sendmail.service.
   ```
+
+<a name="enable_disable"></a>
+* Creating links in the ```systemd``` configuration directories enables the service to start at boot. You can create or remove these links by using the ```systemctl``` command with the ```enable``` or ```disable``` option.
+  ```console
+  [root@root ~]# systemctl enable sshd.service
+  Created symlink /etc/systemd/system/multi-user.target.wants/sshd.service → /usr/lib/systemd/system/sshd.service.
+  ```
+
+* To start the service and enable it to start automatically during boot, you can execute both the ```systemctl start``` and ```systemctl enable``` commands, or use the equivalent ```systemctl enable --now``` command.
+  ```conso;e
+  [root@root ~]# systemctl enable --now sshd.service
+  Created symlink /etc/systemd/system/multi-user.target.wants/sshd.service → /usr/lib/systemd/system/sshd.service.
+  ```
+  ```console
+  [root@host ~]# systemctl disable --now sshd.service
+  Removed /etc/systemd/system/multi-user.target.wants/sshd.service.
+  ```
+
+* To verify whether the service is enabled or disabled, use the ```systemctl is-enabled``` command.
+  ```console
+  [root@host ~]# systemctl is-enabled sshd.service
+  enabled
+  ```
+  
+<a name="summary"></a>
+* Summary
+  | Command | Task |
+  | --- | --- |
+  | ```systemctl status UNIT``` | View detailed information about a unit's state. |
+  | ```systemctl stop UNIT``` | Stop a service on a running system. |
+  | ```systemctl start UNIT``` | Start a service on a running system. |
+  | ```systemctl restart UNIT``` | Restart a service on a running system. |
+  | ```systemctl reload UNIT``` | Reload the configuration file of a running service. |
+  | ```systemctl mask UNIT``` | Disable a service from being started, both manually and at boot. |
+  | ```systemctl unmask UNIT``` | Make a masked service available. |
+  | ```systemctl enable UNIT``` | Configure a service to start at boot time. Use the ```--now``` option to also start the service. |
+  | ```systemctl disable UNIT``` | Disable a service from starting at boot time. Use the ```--now``` option to also stop the service. |
 
