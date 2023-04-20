@@ -13,6 +13,7 @@
 | Content |
 | --- |
 | [Ways to ```ssh```](#ways) |
+| [Identifying Remote Users ```w```](#w) |
 
 <a name="ways"></a>
 * The following ```ssh``` command logs you in on the hosta remote server using the same user name as the current local user.
@@ -44,6 +45,17 @@
   [developer1@host ~]$
   ```
 
+<a name="w"></a>
+* ```console
+  [developer1@host ~]$ ssh developer1@hosta
+  developer1@hosta's password: redhat
+  [developer1@hosta ~]$ w
+   16:13:38 up 36 min,  1 user,  load average: 0.00, 0.00, 0.00
+  USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+  developer2   pts/0    172.25.250.10    16:13    7:30   0.01s  0.01s -bash
+  developer1   pts/1    172.25.250.10    16:24    3.00s  0.01s  0.00s w
+  [developer2@hosta ~]$
+  ```
 
 
 <a name="10.3"></a>
