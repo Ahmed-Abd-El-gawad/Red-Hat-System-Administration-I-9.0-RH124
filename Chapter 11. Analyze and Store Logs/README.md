@@ -58,13 +58,3 @@
 <a name=""></a>
 *
 
-
-<a name="9.1"></a>
-## 11.1 Describe System Log Architecture
-
-| Content |
-| --- |
-
-<a name=""></a>
-*
-
