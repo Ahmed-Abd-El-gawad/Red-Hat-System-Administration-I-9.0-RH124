@@ -45,6 +45,7 @@
 | [Syslog Priorities](#priorities) |
 | [Log File Rotation ```logrotate```](#logrotate) |
 | [Analyze a Syslog Entry](#analyze) |
+| [Send Syslog Messages Manually](#manually) |
 
 * Many programs use the syslog protocol to log events to the system. Each log message is categorized by ***facility*** (which subsystem produces the message) and ***priority*** (the message's severity).
   <a name="facilities"></a>
@@ -111,7 +112,7 @@
     # Save boot messages also to boot.log
     local7.*                                                /var/log/boot.log
     ```
-
+   
 <a name="logrotate"></a>
 * The ```logrotate``` command rotates log files to prevent them from taking too much space in the ```/var/log``` directory. When a log file is rotated, it is renamed with an extension that indicates the rotation date. For example, the old ```/var/log/messages``` file is renamed to the ```/var/log/messages-20220320``` file when it is rotated on 2022-03-20. After the old log file rotates, it creates a log file and notifies the service that wrote the log file.
 * After rotations during typically four weeks, the oldest log file is discarded to free disk space. A scheduled job runs the ```logrotate``` command daily to see the rotation requirement of any log files. Most log files rotate weekly; the ```logrotate``` command rotates some log files faster, or more slowly, or when they reach a specific size.
@@ -126,6 +127,13 @@
   * ```sshd[1433```] : The program or process name and PID number that sent the log message.
   * ```Failed password for …```: The message that was sent.
 
+<a name="manually"></a>
+* The ```logger``` command sends messages to the ```rsyslog``` service. By default, it sends the message to the user type with the ```notice``` priority (```user.notice```) unless specified otherwise with the ```-p``` option. It is helpful to test any change to the ```rsyslog``` service configuration.
+
+	To send a message to the rsyslog service to be recorded in the ```/var/log/boot.log``` log file, execute the following ```logger``` command:
+  ```console
+  [root@host ~]# logger -p local7.notice "Log entry created on host"
+  ```
 
 
 <a name="11.5"></a>
