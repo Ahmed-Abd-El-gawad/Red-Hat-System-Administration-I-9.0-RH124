@@ -14,9 +14,26 @@
 
 | Content |
 | --- |
+| [systemd-journald](#systemd-journald) |
+| [rsyslog](#rsyslog) |
 
-<a name=""></a>
-*
+<a name="systemd-journald"></a>
+* The ```systemd-journald``` service is at the heart of the operating system event logging architecture. The ```systemd-journald``` service collects event messages from many sources:
+  * System kernel
+  * Output from the early stages of the boot process
+  * Standard output and standard error from daemons
+  * Syslog events
+
+<a name="rsyslog"></a>
+* The ```rsyslog``` service reads syslog messages that the ```systemd-journald``` service receives from the journal as they arrive. The ```rsyslog``` service then processes the syslog events, and records them to its log files or forwards them to other services according to its own configuration.
+* The ```rsyslog``` service sorts and writes syslog messages to the log files that do persist across reboots in the ```/var/log``` directory.
+  | Log file | Type of stored messages |
+  | --- | --- |
+  | ```/var/log/messages``` | Most syslog messages are logged here. Exceptions include messages about authentication and email processing, scheduled job execution, and purely debugging-related messages. |
+  | ```/var/log/secure``` | Syslog messages about security and authentication events. |
+  | ```/var/log/maillog``` | Syslog messages about the mail server. |
+  | ```/var/log/cron``` | Syslog messages about scheduled job execution. |
+  | ```/var/log/boot.log``` | Non-syslog console messages about system startup. |
 
 
 <a name="11.3"></a>
