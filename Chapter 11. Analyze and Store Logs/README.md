@@ -144,6 +144,7 @@
 | [journalctl](#journalctl) |
 | [-n](#-n) |
 | [-f](#-f) |
+| [-p](#-p) |
 
 * The ```systemd-journald``` service stores logging data in a structured, indexed binary file called ```journal```.
 <a name="journalctl"></a>
@@ -197,6 +198,18 @@
   [root@host ~]#
   ```
 
+<a name="-p"></a>
+* To help to troubleshoot problems, you might want to filter the output of the journal by the priority of the journal entries. The ```journalctl``` command ```-p``` option shows the journal entries at a specified priority level (by name or by number) or higher. The journalctl command processes the ```debug```, ```info```, ```notice```, ```warning```, ```err```, ```crit```, ```alert```, and ```emerg``` priority levels, in ascending priority order.
+  
+  As an example, run the following journalctl command to list journal entries at the err priority <ins>***or higher***</ins>:
+  ```console
+  [root@host ~]# journalctl -p err
+  Mar 15 04:22:00 host.lab.example.com pipewire-pulse[1640]: pw.conf: execvp error 'pactl': No such file or direct
+  Mar 15 04:22:17 host.lab.example.com kernel: Detected CPU family 6 model 13 stepping 3
+  Mar 15 04:22:17 host.lab.example.com kernel: Warning: Intel Processor - this hardware has not undergone testing by Red Hat and might not be certif>
+  Mar 15 04:22:20 host.lab.example.com smartd[669]: DEVICESCAN failed: glob(3) aborted matching pattern /dev/discs/disc*
+  Mar 15 04:22:20 host.lab.example.com smartd[669]: In the system's table of devices NO devices found to scan
+  ```
 
 *
 
