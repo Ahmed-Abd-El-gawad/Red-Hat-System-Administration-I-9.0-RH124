@@ -9,7 +9,7 @@
 <a name="9.1"></a>
 ## 9.1 Identify Automatically Started System Processes
 
-| systemctl |
+| Content |
 | --- |
 | [systemctl](#systemctl) |
 | [Service States](#states) |
