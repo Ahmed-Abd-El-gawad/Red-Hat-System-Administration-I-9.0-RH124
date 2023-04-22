@@ -43,72 +43,77 @@
 | --- |
 | [Syslog Facilities](#facilities) |
 | [Syslog Priorities](#priorities) |
+| [Log File Rotation ```logrotate```](#logrotate) |
 
 * Many programs use the syslog protocol to log events to the system. Each log message is categorized by ***facility*** (which subsystem produces the message) and ***priority*** (the message's severity).
- <a name="facilities"></a>
- * Overview of Syslog Facilities
-  
-    | Code | Facility | Facility description |
-    | --- | --- | --- |
-    | 0 | kern | Kernel messages |
-    | 1 | user | User-level messages |
-    | 2 | mail | Mail system messages |
-    | 3 | daemon | System daemons messages |
-    | 4 | auth | Authentication and security messages |
-    | 5 | syslog | Internal syslog messages |
-    | 6 | lpr | Printer messages |
-    | 7 | news | Network news messages |
-    | 8 | uucp | UUCP protocol messages |
-    | 9 | cron | Clock daemon messages |
-    | 10 | authpriv | Non-system authorization messages |
-    | 11 | ftp | FTP protocol messages |
-    | 16-23 | local0 | to local7	Custom local messages |
-  
- <a name="priorities"></a>
- * Overview of Syslog Priorities
-  
-    | Code | Priority | Priority description |
-    | --- | --- | --- |
-    | 0 | emerg | System is unusable |
-    | 1 | alert | Action must be taken immediately |
-    | 2 | crit | Critical condition |
-    | 3 | err | Non-critical error condition |
-    | 4 | warning | Warning condition |
-    | 5 | notice | Normal but significant event |
-    | 6 | info | Informational event |
-    | 7 | debug | Debugging-level message |
+  <a name="facilities"></a>
+  * Overview of Syslog Facilities
 
- * Sample Rules of the ```rsyslog``` Service
-   ```bash
-   #### RULES ####
+     | Code | Facility | Facility description |
+     | --- | --- | --- |
+     | 0 | kern | Kernel messages |
+     | 1 | user | User-level messages |
+     | 2 | mail | Mail system messages |
+     | 3 | daemon | System daemons messages |
+     | 4 | auth | Authentication and security messages |
+     | 5 | syslog | Internal syslog messages |
+     | 6 | lpr | Printer messages |
+     | 7 | news | Network news messages |
+     | 8 | uucp | UUCP protocol messages |
+     | 9 | cron | Clock daemon messages |
+     | 10 | authpriv | Non-system authorization messages |
+     | 11 | ftp | FTP protocol messages |
+     | 16-23 | local0 | to local7	Custom local messages |
 
-   # Log all kernel messages to the console.
-   # Logging much else clutters up the screen.
-   #kern.*                                                 /dev/console
+  <a name="priorities"></a>
+  * Overview of Syslog Priorities
 
-   # Log anything (except mail) of level info or higher.
-   # Don't log private authentication messages!
-   *.info;mail.none;authpriv.none;cron.none                /var/log/messages
+     | Code | Priority | Priority description |
+     | --- | --- | --- |
+     | 0 | emerg | System is unusable |
+     | 1 | alert | Action must be taken immediately |
+     | 2 | crit | Critical condition |
+     | 3 | err | Non-critical error condition |
+     | 4 | warning | Warning condition |
+     | 5 | notice | Normal but significant event |
+     | 6 | info | Informational event |
+     | 7 | debug | Debugging-level message |
 
-   # The authpriv file has restricted access.
-   authpriv.*                                              /var/log/secure
+  * Sample Rules of the ```rsyslog``` Service
+    ```bash
+    #### RULES ####
 
-   # Log all the mail messages in one place.
-   mail.*                                                  -/var/log/maillog
+    # Log all kernel messages to the console.
+    # Logging much else clutters up the screen.
+    #kern.*                                                 /dev/console
+
+    # Log anything (except mail) of level info or higher.
+    # Don't log private authentication messages!
+    *.info;mail.none;authpriv.none;cron.none                /var/log/messages
+
+    # The authpriv file has restricted access.
+    authpriv.*                                              /var/log/secure
+
+    # Log all the mail messages in one place.
+    mail.*                                                  -/var/log/maillog
 
 
-   # Log cron stuff
-   cron.*                                                  /var/log/cron
+    # Log cron stuff
+    cron.*                                                  /var/log/cron
 
-   # Everybody gets emergency messages
-   .emerg                                                 :omusrmsg:
+    # Everybody gets emergency messages
+    .emerg                                                 :omusrmsg:
 
-   # Save news errors of level crit and higher in a special file.
-   uucp,news.crit                                          /var/log/spooler
+    # Save news errors of level crit and higher in a special file.
+    uucp,news.crit                                          /var/log/spooler
 
-   # Save boot messages also to boot.log
-   local7.*                                                /var/log/boot.log
-   ```
+    # Save boot messages also to boot.log
+    local7.*                                                /var/log/boot.log
+    ```
+
+<a name="logrotate"></a>
+* The ```logrotate``` command rotates log files to prevent them from taking too much space in the ```/var/log``` directory. When a log file is rotated, it is renamed with an extension that indicates the rotation date. For example, the old ```/var/log/messages``` file is renamed to the ```/var/log/messages-20220320``` file when it is rotated on 2022-03-20. After the old log file rotates, it creates a log file and notifies the service that wrote the log file.
+* After rotations during typically four weeks, the oldest log file is discarded to free disk space. A scheduled job runs the ```logrotate``` command daily to see the rotation requirement of any log files. Most log files rotate weekly; the ```logrotate``` command rotates some log files faster, or more slowly, or when they reach a specific size.
 
 <a name=""></a>
 * 
