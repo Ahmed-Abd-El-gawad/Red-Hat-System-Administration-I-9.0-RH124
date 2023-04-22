@@ -44,6 +44,7 @@
 | [Syslog Facilities](#facilities) |
 | [Syslog Priorities](#priorities) |
 | [Log File Rotation ```logrotate```](#logrotate) |
+| [Analyze a Syslog Entry](#analyze) |
 
 * Many programs use the syslog protocol to log events to the system. Each log message is categorized by ***facility*** (which subsystem produces the message) and ***priority*** (the message's severity).
   <a name="facilities"></a>
@@ -115,8 +116,16 @@
 * The ```logrotate``` command rotates log files to prevent them from taking too much space in the ```/var/log``` directory. When a log file is rotated, it is renamed with an extension that indicates the rotation date. For example, the old ```/var/log/messages``` file is renamed to the ```/var/log/messages-20220320``` file when it is rotated on 2022-03-20. After the old log file rotates, it creates a log file and notifies the service that wrote the log file.
 * After rotations during typically four weeks, the oldest log file is discarded to free disk space. A scheduled job runs the ```logrotate``` command daily to see the rotation requirement of any log files. Most log files rotate weekly; the ```logrotate``` command rotates some log files faster, or more slowly, or when they reach a specific size.
 
-<a name=""></a>
-* 
+<a name="analyze"></a>
+* Log messages start with the oldest message at the start and the newest message at the end of the log file. The ```rsyslog``` service uses a standard format for recording entries in log files. The following example explains the anatomy of a log message in the ```/var/log/secure``` log file.
+  ```bash
+  Mar 20 20:11:48 localhost sshd[1433]: Failed password for student from 172.25.0.10 port 59344 ssh2
+  ```
+  * ```Mar 20 20:11:48``` : Records the time stamp of the log entry.
+  * ```localhost``` : The host that sends the log message.
+  * ```sshd[1433```] : The program or process name and PID number that sent the log message.
+  * ```Failed password for …```: The message that was sent.
+
 
 
 <a name="11.5"></a>
