@@ -12,3 +12,4 @@ A learning guide to keep track of the content discussed or commands used.
 | [Chapter 8. Monitor and Manage Linux Processes](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%208.%20Monitor%20and%20Manage%20Linux%20Processes/README.md) |
 | [Chapter 9. Control Services and Daemons](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%209.%20Control%20Services%20and%20Daemons/README.md) |
 | [Chapter 10. Configure and Secure SSH](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2010.%20Configure%20and%20Secure%20SSH/README.md) |
+| [Chapter 11. Analyze and Store Logs](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2011.%20Analyze%20and%20Store%20Logs/README.md) |
