@@ -141,9 +141,30 @@
 
 | Content |
 | --- |
+| [journalctl](#journalctl) |
 
-<a name=""></a>
-*
+* The ```systemd-journald``` service stores logging data in a structured, indexed binary file called ```journal```.
+<a name="journalctl"></a>
+* You can use the ```journalctl``` command to view all messages in the journal, or to search for specific events based on a wide range of options and criteria. If you run the command as ```root```, then you have full access to the journal. Regular users can also use the ```journalctl``` command, but the system restricts them from seeing certain messages.
+	```console
+	[root@host ~]# journalctl
+	...output omitted...
+	Mar 15 04:42:16 host.lab.example.com systemd[2127]: Listening on PipeWire Multimedia System Socket.
+	Mar 15 04:42:16 host.lab.example.com systemd[2127]: Starting Create User's Volatile Files and Directories...
+	Mar 15 04:42:16 host.lab.example.com systemd[2127]: Listening on D-Bus User Message Bus Socket.
+	Mar 15 04:42:16 host.lab.example.com systemd[2127]: Reached target Sockets.
+	Mar 15 04:42:16 host.lab.example.com systemd[2127]: Finished Create User's Volatile Files and Directories.
+	Mar 15 04:42:16 host.lab.example.com systemd[2127]: Reached target Basic System.
+	Mar 15 04:42:16 host.lab.example.com systemd[1]: Started User Manager for UID 0.
+	Mar 15 04:42:16 host.lab.example.com systemd[2127]: Reached target Main User Target.
+	Mar 15 04:42:16 host.lab.example.com systemd[2127]: Startup finished in 90ms.
+	Mar 15 04:42:16 host.lab.example.com systemd[1]: Started Session 6 of User root.
+	Mar 15 04:42:16 host.lab.example.com sshd[2110]: pam_unix(sshd:session): session opened for user root(uid=0) by (uid=0)
+	Mar 15 04:42:17 host.lab.example.com systemd[1]: Starting Hostname Service...
+	Mar 15 04:42:17 host.lab.example.com systemd[1]: Started Hostname Service.
+	lines 1951-2000/2000 (END) q
+	```
+
 
 
 <a name="11.7"></a>
