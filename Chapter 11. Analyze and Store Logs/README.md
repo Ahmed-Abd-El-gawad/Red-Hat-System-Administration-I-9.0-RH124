@@ -143,6 +143,7 @@
 | --- |
 | [journalctl](#journalctl) |
 | [-n](#-n) |
+| [-f](#-f) |
 
 * The ```systemd-journald``` service stores logging data in a structured, indexed binary file called ```journal```.
 <a name="journalctl"></a>
@@ -178,9 +179,26 @@
   Mar 15 04:47:33 host.lab.example.com systemd[2127]: Finished Cleanup of User's Temporary Files and Directories.
   ```
 
+<a name="-f"></a>
+* Similar to the ```tail``` command, the ```journalctl``` command ```-f``` option outputs the last 10 lines of the system journal and continues to output new journal entries as the journal appends them. To exit the ```journalctl``` command ```-f``` option, use the **Ctrl+C** key combination.
+  ```console
+  [root@host ~]# journalctl -f
+  Mar 15 04:47:33 host.lab.example.com systemd[2127]: Finished Cleanup of User's Temporary Files and Directories.
+  Mar 15 05:01:01 host.lab.example.com CROND[2197]: (root) CMD (run-parts /etc/cron.hourly)
+  Mar 15 05:01:01 host.lab.example.com run-parts[2200]: (/etc/cron.hourly) starting 0anacron
+  Mar 15 05:01:01 host.lab.example.com anacron[2208]: Anacron started on 2022-03-15
+  Mar 15 05:01:01 host.lab.example.com anacron[2208]: Will run job `cron.daily' in 29 min.
+  Mar 15 05:01:01 host.lab.example.com anacron[2208]: Will run job `cron.weekly' in 49 min.
+  Mar 15 05:01:01 host.lab.example.com anacron[2208]: Will run job `cron.monthly' in 69 min.
+  Mar 15 05:01:01 host.lab.example.com anacron[2208]: Jobs will be executed sequentially
+  Mar 15 05:01:01 host.lab.example.com run-parts[2210]: (/etc/cron.hourly) finished 0anacron
+  Mar 15 05:01:01 host.lab.example.com CROND[2196]: (root) CMDEND (run-parts /etc/cron.hourly)
+  ^C
+  [root@host ~]#
+  ```
 
-* 
 
+*
 
 <a name="11.7"></a>
 ## 11.7 Preserve the System Journal
