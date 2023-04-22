@@ -273,6 +273,21 @@
 
 | Content |
 | --- |
+| [Prohibit the Superuser from Logging In](#prohibit_superuser) |
+| [Prohibit Password-based Authentication for SSH](#prohibit_password_authentication) |
 
-* 
+<a name="prohibit_superuser"></a>
+* The OpenSSH server uses the ```PermitRootLogin``` configuration setting in the ```/etc/ssh/sshd_config``` file to allow or prohibit users to log in to the system as root.
+  ```bash
+  PermitRootLogin yes
+  ```
+  ```console
+  [root@host ~]# systemctl reload sshd
+  ```
+
+<a name="prohibit_password_authentication"></a>
+* The OpenSSH server uses the ```PasswordAuthentication``` parameter in the ```/etc/ssh/sshd_config``` file to control whether users can use password-based authentication to log in to the system.
+  ```bash
+  PasswordAuthentication yes
+  ```
 
