@@ -164,7 +164,8 @@
 	Mar 15 04:42:17 host.lab.example.com systemd[1]: Started Hostname Service.
 	lines 1951-2000/2000 (END) q
 	```
-
+* The ```journalctl``` command highlights important log messages; messages at ```notice``` or ```warning``` priority are in bold text, while messages at the ```error``` priority or higher are in red text.
+* 
 
 
 <a name="11.7"></a>
