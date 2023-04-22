@@ -100,6 +100,7 @@
 | [passwordless](#passwordless) |
 | [ssh-agent](#ssh-agent) |
 | [Basic SSH Connection Troubleshooting](#troubleshooting) |
+| [SSH Client Configuration](#client_config) |
 
 <a name="passwordless"></a>
 * To prepare your account, generate a cryptographically-related pair of key files. One key is private and held only by you, while the second is your related public key that is not secret. The private key acts as your authentication credential and it must be stored securely. The public key is copied to your account on servers that you will remotely access, and verifies your use of your private key.
@@ -241,6 +242,30 @@
   7. Using the ```/home/user/.ssh/id_rsa``` key file to authenticate.
   8. The remote hosts accepts the SSH key.
 
+<a name="client_config"></a>
+* You can create the ```~/.ssh/config``` file to preconfigure SSH connections. Within the configuration file, you can specify connection parameters such as users, keys, and ports for specific hosts. This file eliminates the need to manually specify command parameters each time that you connect to a host.
+  ```console
+  [user@host ~]$ cat ~/.ssh/config
+  host servera
+       HostName                      servera.example.com
+       User                          usera
+       IdentityFile                  ~/.ssh/id_rsa_servera
+
+  host serverb
+       HostName                      serverb.example.com
+       User                          userb
+       IdentityFile                  ~/.ssh/id_rsa_serverb
+  ```
+* The ```~/.ssh/config``` file is also useful for configuring SSH jump hosts. An SSH jump host is a server that acts as a proxy for SSH connections to other, usually internal, hosts. Consider a scenario where a host called ```external``` is accessible via the internet, but a host called ```internal``` is only internally accessible. Use the ```ProxyHost``` parameter within the ```~/.ssh/config``` file to connect to the internal host via the ```external``` host:
+  ```console
+  [user@host ~]$ cat ~/.ssh/config
+  host internal
+       HostName                      internal.example.com
+       ProxyHost                     external
+
+  host external
+       HostName                      external.example.com
+  ```
 
 
 <a name="10.5"></a>
