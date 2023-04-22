@@ -99,6 +99,7 @@
 | --- |
 | [passwordless](#passwordless) |
 | [ssh-agent](#ssh-agent) |
+| [Basic SSH Connection Troubleshooting](#troubleshooting) |
 
 <a name="passwordless"></a>
 * To prepare your account, generate a cryptographically-related pair of key files. One key is private and held only by you, while the second is your related public key that is not secret. The private key acts as your authentication credential and it must be stored securely. The public key is copied to your account on servers that you will remotely access, and verifies your use of your private key.
@@ -206,6 +207,39 @@
   [user@remotehost ~]$
   ```
   * When you log out of a session that used an ```ssh-agent``` key manager, all cached passphrases are cleared from memory.
+
+<a name="troubleshooting"></a>
+* SSH can appear complex when remote access using key pair authentication is not succeeding. The ```ssh``` command provides three verbosity levels with the ```-v```, ```-vv```, and ```-vvv``` options, that provide increasingly greater amounts of debugging information during ssh command use.
+  ```console
+  [user@host ~]$ ssh -v user@remotehost
+  OpenSSH_8.7p1, OpenSSL 3.0.1 14 Dec 2021 i
+  debug1: Reading configuration data /etc/ssh/ssh_config ii
+  debug1: Reading configuration data /etc/ssh/ssh_config.d/01-training.conf
+  debug1: /etc/ssh/ssh_config.d/01-training.conf line 1: Applying options for *
+  debug1: Reading configuration data /etc/ssh/ssh_config.d/50-redhat.conf
+  ...output omitted...
+  debug1: Connecting to remotehost [192.168.1.10] port 22. iii
+  debug1: Connection established.
+  ...output omitted...
+  debug1: Authenticating to remotehost:22 as 'user' iv
+  ...output omitted...
+  debug1: Authentications that can continue: publickey,gssapi-keyex,gssapi-with-mic,password v
+  ...output omitted...
+  debug1: Next authentication method: publickey vi
+  debug1: Offering public key: /home/user/.ssh/id_rsa RSA SHA256:hDVJjD7xrUjXGZVRJQixxFV6NF/ssMjS6AuQ1+VqUc4 vii
+  debug1: Server accepts key: /home/user/.ssh/id_rsa RSA SHA256:hDVJjD7xrUjXGZVRJQixxFV6NF/ssMjS6AuQ1+VqUc4 viii
+  Authenticated to remotehost ([192.168.1.10]:22) using "publickey".
+  ...output omitted...
+  [user@remotehost ~]$
+  ```
+  1. OpenSSH and OpenSSL versions.
+  2. OpenSSH configuration files.
+  3. Connection to the remote host.
+  4. Authentication methods that the remote host allows.
+  5. Trying to authenticate the user on the remote host.
+  6. Trying to authenticate the user by using the SSH key.
+  7. Using the ```/home/user/.ssh/id_rsa``` key file to authenticate.
+  8. The remote hosts accepts the SSH key.
 
 
 
