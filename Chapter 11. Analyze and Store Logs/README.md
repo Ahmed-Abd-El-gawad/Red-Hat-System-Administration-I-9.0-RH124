@@ -41,6 +41,42 @@
 
 | Content |
 | --- |
+| [Syslog Facilities](#facilities) |
+| [Syslog Priorities](#priorities) |
+
+* Many programs use the syslog protocol to log events to the system. Each log message is categorized by ***facility*** (which subsystem produces the message) and ***priority*** (the message's severity).
+ <a name="facilities"></a>
+ * Overview of Syslog Facilities
+  
+    | Code | Facility | Facility description |
+    | --- | --- | --- |
+    | 0 | kern | Kernel messages |
+    | 1 | user | User-level messages |
+    | 2 | mail | Mail system messages |
+    | 3 | daemon | System daemons messages |
+    | 4 | auth | Authentication and security messages |
+    | 5 | syslog | Internal syslog messages |
+    | 6 | lpr | Printer messages |
+    | 7 | news | Network news messages |
+    | 8 | uucp | UUCP protocol messages |
+    | 9 | cron | Clock daemon messages |
+    | 10 | authpriv | Non-system authorization messages |
+    | 11 | ftp | FTP protocol messages |
+    | 16-23 | local0 | to local7	Custom local messages |
+  
+ <a name="priorities"></a>
+ * Overview of Syslog Priorities
+  
+    | Code | Priority | Priority description |
+    | --- | --- | --- |
+    | 0 | emerg | System is unusable |
+    | 1 | alert | Action must be taken immediately |
+    | 2 | crit | Critical condition |
+    | 3 | err | Non-critical error condition |
+    | 4 | warning | Warning condition |
+    | 5 | notice | Normal but significant event |
+    | 6 | info | Informational event |
+    | 7 | debug | Debugging-level message |
 
 <a name=""></a>
 *
