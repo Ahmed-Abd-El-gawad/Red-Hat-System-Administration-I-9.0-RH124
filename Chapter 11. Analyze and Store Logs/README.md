@@ -310,8 +310,16 @@
 | Content |
 | --- |
 
+* By default, Red Hat Enterprise Linux 9 stores the system journal in the ```/run/log``` directory, and the system clears the system journal after a reboot. You can change the configuration settings of the ```systemd-journald``` service in the ```/etc/systemd/journald.conf``` file so that the journals persist across a reboot.
+
+* The ```Storage``` parameter in the ```/etc/systemd/journald.conf``` file defines whether to store system journals in a volatile manner or persistently across a reboot. Set this parameter to ```persistent```, ```volatile```, ```auto```, or ```none``` as follows:
+  * ```persistent```: Stores journals in the ```/var/log/journal``` directory, which persists across reboots. If the ```/var/log/journal``` directory does not exist, then the ```systemd-journald``` service creates it.
+  * ```volatile```: Stores journals in the volatile ```/run/log/journal``` directory. As the ```/run``` file system is temporary and exists only in the runtime memory, the data in it, including system journals, does not persist across a reboot.
+  * ```auto```: If the ```/var/log/journal``` directory exists, then the ```systemd-journald``` service uses persistent storage; otherwise it uses volatile storage. This action is the default if you do not set the ```Storage``` parameter.
+  * ```none```: Do not use any storage. The system drops all logs, but you can still forward the logs.
+
 <a name=""></a>
-*
+* 
 
 
 <a name="11.9"></a>
