@@ -147,6 +147,7 @@
 | [```-p```](#-p) |
 | [```-u```](#-u) |
 | [```--since``` and ```--until```](#--since_--until) |
+| [```verbose```](#verbose) |
 
 * The ```systemd-journald``` service stores logging data in a structured, indexed binary file called ```journal```.
 <a name="journalctl"></a>
@@ -251,6 +252,57 @@
   [root@host ~]# journalctl --since "-1 hour"
   ...output omitted...
   ```
+
+<a name="verbose"></a>
+* you can view additional log entries if you turn on the ```verbose``` output.
+  ```console
+  [root@host ~]# journalctl -o verbose
+  Tue 2022-03-15 05:10:32.625470 EDT [s=e7623387430b4c14b2c71917db58e0ee;i...]
+      _BOOT_ID=beaadd6e5c5448e393ce716cd76229d4
+      _MACHINE_ID=4ec03abd2f7b40118b1b357f479b3112
+      PRIORITY=6
+      SYSLOG_FACILITY=3
+      SYSLOG_IDENTIFIER=systemd
+      _UID=0
+      _GID=0
+      _TRANSPORT=journal
+      _CAP_EFFECTIVE=1ffffffffff
+      TID=1
+      CODE_FILE=src/core/job.c
+      CODE_LINE=744
+      CODE_FUNC=job_emit_done_message
+      JOB_RESULT=done
+      _PID=1
+      _COMM=systemd
+      _EXE=/usr/lib/systemd/systemd
+      _SYSTEMD_CGROUP=/init.scope
+      _SYSTEMD_UNIT=init.scope
+      _SYSTEMD_SLICE=-.slice
+      JOB_TYPE=stop
+      MESSAGE_ID=9d1aaa27d60140bd96365438aad20286
+      _HOSTNAME=host.lab.example.com
+      _CMDLINE=/usr/lib/systemd/systemd --switched-root --system --deserialize 31
+      _SELINUX_CONTEXT=system_u:system_r:init_t:s0
+      UNIT=user-1000.slice
+      MESSAGE=Removed slice User Slice of UID 1000.
+      INVOCATION_ID=0e5efc1b4a6d41198f0cf02116ca8aa8
+      JOB_ID=3220
+      _SOURCE_REALTIME_TIMESTAMP=1647335432625470
+  lines 46560-46607/46607 (END) q
+  ```
+
+* The following list shows the common fields of the system journal that you can use to search for relevant lines to a particular process or event:
+  * ```_COMM``` is the command name.
+  * ```_EXE``` is the path to the executable file for the process.
+  * ```_PID``` is the PID of the process.
+  * ```_UID``` is the UID of the user that runs the process.
+  * ```_SYSTEMD_UNIT``` is the ```systemd``` unit that started the process.
+  ```console
+  [root@host ~]# journalctl _SYSTEMD_UNIT=sshd.service _PID=2110
+  Mar 15 04:42:16 host.lab.example.com sshd[2110]: Accepted publickey for root from 172.25.250.254 port 46224 ssh2: RSA SHA256:1UGybTe52L2jzEJa1HLVKn9QUCKrTv3ZzxnMJol1Fro
+  Mar 15 04:42:16 host.lab.example.com sshd[2110]: pam_unix(sshd:session): session opened for user root(uid=0) by (uid=0)
+  ```
+
 
 <a name="11.7"></a>
 ## 11.7 Preserve the System Journal
