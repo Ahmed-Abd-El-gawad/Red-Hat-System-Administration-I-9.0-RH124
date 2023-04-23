@@ -145,6 +145,7 @@
 | [-n](#-n) |
 | [-f](#-f) |
 | [-p](#-p) |
+| [-u](#-u) |
 
 * The ```systemd-journald``` service stores logging data in a structured, indexed binary file called ```journal```.
 <a name="journalctl"></a>
@@ -211,7 +212,23 @@
   Mar 15 04:22:20 host.lab.example.com smartd[669]: In the system's table of devices NO devices found to scan
   ```
 
-*
+<a name="-u"></a>
+* You can show messages for a specified systemd unit by using the ```journalctl``` command ```-u``` option and the unit name.
+  ```console
+  [root@host ~]# journalctl -u sshd.service
+  May 15 04:30:18 host.lab.example.com systemd[1]: Starting OpenSSH server daemon...
+  May 15 04:30:18 host.lab.example.com sshd[1142]: Server listening on 0.0.0.0 port 22.
+  May 15 04:30:18 host.lab.example.com sshd[1142]: Server listening on :: port 22.
+  May 15 04:30:18 host.lab.example.com systemd[1]: Started OpenSSH server daemon.
+  May 15 04:32:03 host.lab.example.com sshd[1796]: Accepted publickey for user1 from 172.25.250.254 port 43876 ssh2: RSA SHA256:1UGy...>
+  May 15 04:32:03 host.lab.example.com sshd[1796]: pam_unix(sshd:session): session opened for user user1(uid=1000) by (uid=0)
+  May 15 04:32:26 host.lab.example.com sshd[1866]: Accepted publickey for user2 from ::1 port 36088 ssh2: RSA SHA256:M8ik...
+  May 15 04:32:26 host.lab.example.com sshd[1866]: pam_unix(sshd:session): session opened for user user2(uid=1001) by (uid=0)
+  lines 1-8/8 (END) q
+  ```
+
+
+* 
 
 <a name="11.7"></a>
 ## 11.7 Preserve the System Journal
