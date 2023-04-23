@@ -384,6 +384,7 @@
 | --- |
 | [timedatectl](#timedatectl) |
 | [tzselect](#tzselect) |
+| [Configure and Monitor the chronyd Service](#chronyd) |
 
 <a name="timedatectl"></a>
 * The ```timedatectl``` command shows an overview of the current time-related system settings, including the current time, time zone, and NTP synchronization settings of the system.
@@ -446,5 +447,43 @@
 <a name="tzselect"></a>
 * Use the ```tzselect``` command to identify the correct time zone name. This command interactively prompts the user with questions about the system's location, and outputs the name of the correct time zone. It does not change the time zone setting of the system.
 
-<a name=""></a>
-* 
+<a name="chronyd"></a>
+* The ```chronyd``` service keeps on track the usually inaccurate local Real-Time Clock (RTC) by synchronizing it to the configured NTP servers. If no network connectivity is available, then the chronyd service calculates the RTC clock drift, and records it in the file that the ```driftfile``` value specifies in the ```/etc/chrony.conf``` configuration file.
+* By default, the ```chronyd``` service uses servers from the NTP Pool Project to synchronize time and requires no additional configuration. You might need to change the NTP servers for a machine that runs on an isolated network.
+
+* The ***stratum*** of the NTP time source determines its quality. The stratum determines the number of hops the machine is away from a high-performance reference clock. The reference clock is a ```stratum 0``` time source. An NTP server that is directly attached to the reference clock is a ```stratum 1``` time source, while a machine that synchronizes time from the NTP server is a ```stratum 2``` time source.
+
+* The server and peer are the two categories of time sources that you can declare in the ```/etc/chrony.conf``` configuration file. The server is one stratum above the local NTP server, and the peer is at the same stratum level. You can define multiple servers and peers in the ```chronyd``` configuration file, one per line.
+
+* The first argument of the ```server``` line is the IP address or DNS name of the NTP server. Following the server IP address or name, you can list a series of options for the server. Red Hat recommends to use the ```iburst``` option, because then the ```chronyd``` service takes four measurements in a short time period for a more accurate initial clock synchronization after the service starts. Use the ```man 5 chrony.conf``` command for more information about the ```chronyd``` configuration file options.
+
+  * As an example, with the following ```server classroom.example.com iburst``` line in the ```/etc/chrony.conf``` configuration file, the ```chronyd``` service uses the ```classroom.example.com``` server as the NTP time source.
+    ```bash
+    # Use public servers from the pool.ntp.org project.
+    ...output omitted...
+    server classroom.example.com iburst
+    ...output omitted...
+    ```
+  * Restart the service after pointing the ```chronyd``` service to the ```classroom.example.com``` local time source.
+    ```console
+    [root@host ~]# systemctl restart chronyd
+    ```
+
+* The ```chronyc``` command acts as a client to the ```chronyd``` service. After setting up NTP synchronization, verify that the local system is seamlessly using the NTP server to synchronize the system clock by using the ```chronyc sources``` command. For more verbose output with additional explanations about the output, use the ```chronyc sources -v``` command.
+  ```console
+  [root@host ~]# chronyc sources -v
+
+    .-- Source mode  '^' = server, '=' = peer, '#' = local clock.
+   / .- Source state '*' = current best, '+' = combined, '-' = not combined,
+  | /             'x' = may be in error, '~' = too variable, '?' = unusable.
+  ||                                                 .- xxxx [ yyyy ] +/- zzzz
+  ||      Reachability register (octal) -.           |  xxxx = adjusted offset,
+  ||      Log2(Polling interval) --.      |          |  yyyy = measured offset,
+  ||                                \     |          |  zzzz = estimated error.
+  ||                                 |    |           \
+  MS Name/IP address         Stratum Poll Reach LastRx Last sample
+  ===============================================================================
+  ^* 172.25.254.254                3   6    17    26  +2957ns[+2244ns] +/-   25ms
+  ```
+  * The asterisk character (*) in the ```S``` (Source state) field indicates that the ```chronyd``` service uses the ```classroom.example.com``` server as a time source and is the NTP server that the machine is currently synchronized to.
+
