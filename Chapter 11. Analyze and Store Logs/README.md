@@ -309,7 +309,10 @@
 
 | Content |
 | --- |
+| [System Journal Storage](#explain) |
+| [Configure Persistent System Journals](#configure_persistent) |
 
+<a name="explain"></a>
 * By default, Red Hat Enterprise Linux 9 stores the system journal in the ```/run/log``` directory, and the system clears the system journal after a reboot. You can change the configuration settings of the ```systemd-journald``` service in the ```/etc/systemd/journald.conf``` file so that the journals persist across a reboot.
 
 * The ```Storage``` parameter in the ```/etc/systemd/journald.conf``` file defines whether to store system journals in a volatile manner or persistently across a reboot. Set this parameter to ```persistent```, ```volatile```, ```auto```, or ```none``` as follows:
@@ -318,8 +321,60 @@
   * ```auto```: If the ```/var/log/journal``` directory exists, then the ```systemd-journald``` service uses persistent storage; otherwise it uses volatile storage. This action is the default if you do not set the ```Storage``` parameter.
   * ```none```: Do not use any storage. The system drops all logs, but you can still forward the logs.
 
-<a name=""></a>
-* 
+* The advantage of persistent system journals is that the historical data is available immediately at boot. However, even with a persistent journal, the system does not keep all data forever. The journal has a built-in log rotation mechanism that triggers monthly. In addition, the system does not allow the journals to get larger than 10% of the file system that they are on, or to leave less than 15% of the file system free. You can modify these values for both the runtime and persistent journals in the ```/etc/systemd/journald.conf``` configuration file.
+  * The following command output shows the journal entries that reflect the current size limits:
+    ```console
+    [user@host ~]$ journalctl | grep -E 'Runtime Journal|System Journal'
+    Mar 15 04:21:14 localhost systemd-journald[226]: Runtime Journal (/run/log/journal/4ec03abd2f7b40118b1b357f479b3112) is 8.0M, max 113.3M, 105.3M free.
+    Mar 15 04:21:19 host.lab.example.com systemd-journald[719]: Runtime Journal (/run/log/journal/4ec03abd2f7b40118b1b357f479b3112) is 8.0M, max 113.3M, 105.3M free.
+    Mar 15 04:21:19 host.lab.example.com systemd-journald[719]: System Journal (/run/log/journal/4ec03abd2f7b40118b1b357f479b3112) is 8.0M, max 4.0G, 4.0G free.
+    ```
+
+<a name="configure_persistent"></a>
+* set the ```Storage``` parameter to the ```persistent``` value in the ```/etc/systemd/journald.conf``` file. 
+  ```bash
+  [Journal]
+  Storage=persistent
+  ...output omitted...
+  ```
+* Restart the ```systemd-journald``` service to apply the configuration changes.
+  ```console
+  [root@host ~]# systemctl restart systemd-journald```
+  ```
+
+* If the ```systemd-journald``` service successfully restarts, then the service creates the ```/var/log/journal``` directory and it contains one or more subdirectories. These subdirectories have hexadecimal characters in their long names and contain files with the ```.journal``` extension. The ```.journal``` binary files store the structured and indexed journal entries.
+  ```console
+  [root@host ~]# ls /var/log/journal
+  4ec03abd2f7b40118b1b357f479b3112
+  [root@host ~]# ls /var/log/journal/4ec03abd2f7b40118b1b357f479b3112
+  system.journal  user-1000.journal
+  ```
+* While the system journals persist after a reboot, the ```journalctl``` command output includes entries from the current system boot as well as the previous system boots. To limit the output to a specific system boot, use the ```journalctl``` command ```-b``` option. The following ```journalctl``` command retrieves the entries from the first system boot only:
+  ```console
+  [root@host ~]# journalctl -b 1
+  ...output omitted...
+  ```
+* The following ```journalctl``` command retrieves the entries from the second system boot only. The argument is meaningful only if the system was rebooted at least twice:
+  ```console
+  [root@host ~]# journalctl -b 2
+  ...output omitted...
+  ```
+* You can list the system boot events that the ```journalctl``` command recognizes by using the ```--list-boots``` option.
+  ```console
+  [root@host ~]# journalctl --list-boots
+    -6 27de... Wed 2022-04-13 20:04:32 EDT—Wed 2022-04-13 21:09:36 EDT
+    -5 6a18... Tue 2022-04-26 08:32:22 EDT—Thu 2022-04-28 16:02:33 EDT
+    -4 e2d7... Thu 2022-04-28 16:02:46 EDT—Fri 2022-05-06 20:59:29 EDT
+    -3 45c3... Sat 2022-05-07 11:19:47 EDT—Sat 2022-05-07 11:53:32 EDT
+    -2 dfae... Sat 2022-05-07 13:11:13 EDT—Sat 2022-05-07 13:27:26 EDT
+    -1 e754... Sat 2022-05-07 13:58:08 EDT—Sat 2022-05-07 14:10:53 EDT
+     0 ee2c... Mon 2022-05-09 09:56:45 EDT—Mon 2022-05-09 12:57:21 EDT
+  ```
+* The following ```journalctl``` command retrieves the entries from the current system boot only:
+  ```console
+  [root@host ~]# journalctl -b
+  ...output omitted...
+  ```
 
 
 <a name="11.9"></a>
