@@ -141,11 +141,12 @@
 
 | Content |
 | --- |
-| [journalctl](#journalctl) |
-| [-n](#-n) |
-| [-f](#-f) |
-| [-p](#-p) |
-| [-u](#-u) |
+| [```journalctl```](#journalctl) |
+| [```-n```](#-n) |
+| [```-f```](#-f) |
+| [```-p```](#-p) |
+| [```-u```](#-u) |
+| [```--since``` and ```--until```](#--since_--until) |
 
 * The ```systemd-journald``` service stores logging data in a structured, indexed binary file called ```journal```.
 <a name="journalctl"></a>
@@ -227,8 +228,29 @@
   lines 1-8/8 (END) q
   ```
 
-
-* 
+<a name="--since_--until"></a>
+* When looking for specific events, you can limit the output to a specific time frame. The ```journalctl``` command has two options to limit the output to a specific time range, the ```--since``` and ```--until``` options. Both options take a time argument in the "***YYYY-MM-DD hh:mm:ss***" format (the double quotation marks are required to preserve the space in the option).
+* The ```journalctl``` command assumes that the day starts at **00:00:00** when you omit the time argument. The command also assumes the current day when you omit the day argument. Both options take ```yesterday```, ```today```, and ```tomorrow``` as valid arguments in addition to the date and time field.
+  ```console
+  [root@host ~]# journalctl --since today
+  ...output omitted...
+  Mar 15 05:04:20 host.lab.example.com systemd[1]: Started Session 8 of User student.
+  Mar 15 05:04:20 host.lab.example.com sshd[2255]: pam_unix(sshd:session): session opened for user student(uid=1000) by (uid=0)
+  Mar 15 05:04:20 host.lab.example.com systemd[1]: Starting Hostname Service...
+  Mar 15 05:04:20 host.lab.example.com systemd[1]: Started Hostname Service.
+  Mar 15 05:04:50 host.lab.example.com systemd[1]: systemd-hostnamed.service: Deactivated successfully.
+  Mar 15 05:06:33 host.lab.example.com systemd[2261]: Starting Mark boot as successful...
+  Mar 15 05:06:33 host.lab.example.com systemd[2261]: Finished Mark boot as successful.
+  lines 1996-2043/2043 (END) q
+  ```
+  ```console
+  [root@host ~]# journalctl --since "2022-03-11 20:30" --until "2022-03-14 10:00"
+  ...output omitted...
+  ```
+  ```console
+  [root@host ~]# journalctl --since "-1 hour"
+  ...output omitted...
+  ```
 
 <a name="11.7"></a>
 ## 11.7 Preserve the System Journal
