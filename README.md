@@ -13,3 +13,4 @@ A learning guide to keep track of the content discussed or commands used.
 | [Chapter 9. Control Services and Daemons](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%209.%20Control%20Services%20and%20Daemons/README.md) |
 | [Chapter 10. Configure and Secure SSH](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2010.%20Configure%20and%20Secure%20SSH/README.md) |
 | [Chapter 11. Analyze and Store Logs](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2011.%20Analyze%20and%20Store%20Logs/README.md) |
+| [Chapter 12. Manage Networking](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2012.%20Manage%20Networking/README.md) |
