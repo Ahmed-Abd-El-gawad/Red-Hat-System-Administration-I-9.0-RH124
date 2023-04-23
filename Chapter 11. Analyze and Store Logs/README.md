@@ -382,7 +382,69 @@
 
 | Content |
 | --- |
+| [timedatectl](#timedatectl) |
+| [tzselect](#tzselect) |
+
+<a name="timedatectl"></a>
+* The ```timedatectl``` command shows an overview of the current time-related system settings, including the current time, time zone, and NTP synchronization settings of the system.
+  ```console
+  [user@host ~]$ timedatectl
+                 Local time: Wed 2022-03-16 05:53:05 EDT
+             Universal time: Wed 2022-03-16 09:53:05 UTC
+                   RTC time: Wed 2022-03-16 09:53:05
+                  Time zone: America/New_York (EDT, -0400)
+  System clock synchronized: yes
+                NTP service: active
+            RTC in local TZ: no
+  ```
+
+* You can list a database of time zones with the ```timedatectl``` command ```list-timezones``` option.
+  ```console
+  [user@host ~]$ timedatectl list-timezones
+  Africa/Abidjan
+  Africa/Accra
+  Africa/Addis_Ababa
+  Africa/Algiers
+  Africa/Asmara
+  Africa/Bamako
+  ...output omitted...
+  ```
+  * The Internet Assigned Numbers Authority (IANA) provides a public time zone database, and the ```timedatectl``` command bases the time zone names on that database. IANA names time zones based on the continent or ocean, and then typically (not always) the largest city within the time zone region. For example, most of the US Mountain time zone is ```America/Denver```.
+  * Some localities inside the time zone have different daylight saving time rules. For example, in the US, much of the state of Arizona (US Mountain time) does not have a daylight saving time adjustment at all and is in the time zone ```America/Phoenix```.
+
+* The ```root``` user can change the system setting to update the current time zone with the ```timedatectl``` command ```set-timezone``` option. For example, the following ```timedatectl``` command updates the current time zone to ```America/Phoenix```.
+  ```console
+  [root@host ~]# timedatectl set-timezone America/Phoenix
+  [root@host ~]# timedatectl
+                 Local time: Wed 2022-03-16 03:05:55 MST
+             Universal time: Wed 2022-03-16 10:05:55 UTC
+                   RTC time: Wed 2022-03-16 10:05:55
+                  Time zone: America/Phoenix (MST, -0700)
+  System clock synchronized: yes
+                NTP service: active
+            RTC in local TZ: no
+  ```
+
+* Use the ```timedatectl``` command ```set-tim```e option to change the system's current time. You might specify the time in the "***YYYY-MM-DD hh:mm:ss***" format, where you can omit either the date or time. For example, the following ```timedatectl``` command changes the time to ```09:00:00```.
+  ```console
+  [root@host ~]# timedatectl set-time 9:00:00
+  [root@host ~]# timedatectl
+                 Local time: Fri 2019-04-05 09:00:27 MST
+             Universal time: Fri 2019-04-05 16:00:27 UTC
+                   RTC time: Fri 2019-04-05 16:00:27
+                  Time zone: America/Phoenix (MST, -0700)
+  System clock synchronized: yes
+                NTP service: active
+            RTC in local TZ: no
+  ```
+
+* The ```timedatectl``` command ```set-ntp``` option enables or disables NTP synchronization for automatic time adjustment. The option requires either a ```true``` or ```false``` argument to turn it on or off. For example, the following ```timedatectl``` command turns off NTP synchronization.
+```console
+[root@host ~]# timedatectl set-ntp false
+```
+
+<a name="tzselect"></a>
+* Use the ```tzselect``` command to identify the correct time zone name. This command interactively prompts the user with questions about the system's location, and outputs the name of the correct time zone. It does not change the time zone setting of the system.
 
 <a name=""></a>
-*
-
+* 
