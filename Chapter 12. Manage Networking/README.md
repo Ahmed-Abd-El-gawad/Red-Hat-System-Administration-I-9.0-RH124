@@ -12,10 +12,8 @@
 <a name="12.1"></a>
 ## 12.1 Describe Networking Concepts
 
-| Content |
-| --- |
-
-<a name=""></a>
+Content you should know:
+* TCP/IP Network Model
 * 
 
 
