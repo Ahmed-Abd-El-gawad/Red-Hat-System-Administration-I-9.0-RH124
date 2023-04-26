@@ -159,16 +159,6 @@ Content you should know:
   ```
 
 <a name="ss"></a>
-* 
-
-
-<a name="12.5"></a>
-## 12.5 Configure Networking from the Command Line
-
-| Content |
-| --- |
-
-<a name=""></a>
 * The ```ss``` command is used to display socket statistics. The ```ss``` command replaces the older ```netstat``` tool, from the ```net-tools``` package, which might be more familiar to some system administrators but is not always installed.
   ```console
   [user@host ~]$ ss -ta
@@ -192,6 +182,16 @@ Content you should know:
   | ```-a``` | Show all (listening and established) sockets. |
   | ```-p``` | Show the process that uses the sockets. |
   | ```-A``` | inet	Display active connections (but not listening sockets) for the ```inet``` address family. That is, ignore local UNIX domain sockets. For the ```ss``` command, both IPv4 and IPv6 connections are displayed. For the ```netstat``` command, only IPv4 connections are displayed. (The ```netstat -A inet6``` command displays IPv6 connections, and the ```netstat -46``` command displays IPv4 and IPv6 at the same time.) |
+
+
+<a name="12.5"></a>
+## 12.5 Configure Networking from the Command Line
+
+| Content |
+| --- |
+
+<a name=""></a>
+* 
 
 
 <a name="12.7"></a>
