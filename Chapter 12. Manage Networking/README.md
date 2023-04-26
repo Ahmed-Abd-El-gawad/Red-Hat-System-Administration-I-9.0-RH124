@@ -39,6 +39,7 @@ Content you should know:
 | [ping6](#ping6) |
 | [route](#route) |
 | [tracepath](#tracepath) |
+| [ss](#ss) |
 
 <a name="ip_link"></a>
 * The ```ip link``` command lists all available network interfaces on your system.
@@ -157,7 +158,7 @@ Content you should know:
        Resume: pmtu 1500 hops 3 back 3
   ```
 
-<a name=""></a>
+<a name="ss"></a>
 * 
 
 
@@ -168,7 +169,29 @@ Content you should know:
 | --- |
 
 <a name=""></a>
-* 
+* The ```ss``` command is used to display socket statistics. The ```ss``` command replaces the older ```netstat``` tool, from the ```net-tools``` package, which might be more familiar to some system administrators but is not always installed.
+  ```console
+  [user@host ~]$ ss -ta
+  State      Recv-Q Send-Q      Local Address:Port          Peer Address:Port
+  LISTEN     0      128                     *:sunrpc                   *:*
+  LISTEN     0      128                     *:ssh                      *:*
+  LISTEN     0      100             127.0.0.1:smtp                      :
+  LISTEN     0      128                     *:36889                    *:*
+  ESTAB      0      0           172.25.250.10:ssh         172.25.254.254:59392
+  LISTEN     0      128                    :::sunrpc                  :::*
+  LISTEN     0      128                    :::ssh                     :::*
+  LISTEN     0      100                   ::1:smtp                    :::*
+  LISTEN     0      128                    :::34946                   :::*
+  ```
+  | Option | Description |
+  | --- | --- |
+  | ```-n``` | Show numbers instead of names for interfaces and ports. |
+  | ```-t``` | Show TCP sockets. |
+  | ```-u``` | Show UDP sockets. |
+  | ```-l``` | Show only listening sockets. |
+  | ```-a``` | Show all (listening and established) sockets. |
+  | ```-p``` | Show the process that uses the sockets. |
+  | ```-A``` | inet	Display active connections (but not listening sockets) for the ```inet``` address family. That is, ignore local UNIX domain sockets. For the ```ss``` command, both IPv4 and IPv6 connections are displayed. For the ```netstat``` command, only IPv4 connections are displayed. (The ```netstat -A inet6``` command displays IPv6 connections, and the ```netstat -46``` command displays IPv4 and IPv6 at the same time.) |
 
 
 <a name="12.7"></a>
