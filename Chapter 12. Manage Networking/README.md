@@ -36,6 +36,9 @@ Content you should know:
 | [ip -s](#-s) |
 | [ping](#ping) |
 | [ping6](#ping6) |
+| [ping6](#ping6) |
+| [route](#route) |
+| [tracepath](#tracepath) |
 
 <a name="ip_link"></a>
 * The ```ip link``` command lists all available network interfaces on your system.
@@ -104,6 +107,58 @@ Content you should know:
   [user@host ~]$
   ```
 
+<a name="route"></a>
+* Use the ```ip``` command ```route``` option to show routing information.
+  ```console
+  [user@host ~]$ ip route
+  default via 192.0.2.254 dev ens3 proto static metric 1024
+  192.0.2.0/24 dev ens3 proto kernel scope link src 192.0.2.2
+  10.0.0.0/8 dev ens4 proto kernel scope link src 10.0.0.11
+  ```
+* Use the ```ip``` command ```-6``` option to show the IPv6 routing table.
+  ```console
+  [user@host ~]$ ip -6 route
+  unreachable ::/96 dev lo  metric 1024  error -101
+  unreachable ::ffff:0.0.0.0/96 dev lo  metric 1024  error -101
+  2001:db8:0:1::/64 dev ens3  proto kernel  metric 256
+  unreachable 2002:a00::/24 dev lo  metric 1024  error -101
+  unreachable 2002:7f00::/24 dev lo  metric 1024  error -101
+  unreachable 2002:a9fe::/32 dev lo  metric 1024  error -101
+  unreachable 2002:ac10::/28 dev lo  metric 1024  error -101
+  unreachable 2002:c0a8::/32 dev lo  metric 1024  error -101
+  unreachable 2002:e000::/19 dev lo  metric 1024  error -101
+  unreachable 3ffe:ffff::/32 dev lo  metric 1024  error -101
+  fe80::/64 dev ens3  proto kernel  metric 256
+  default via 2001:db8:0:1::ffff dev ens3  proto static  metric 1024
+  ```
+
+<a name="tracepath"></a>
+* To trace the network traffic path to reach a remote host through multiple routers, use either the ```traceroute``` or ```tracepath``` command. These commands can identify issues with one of your routers or an intermediate router. 
+* Both commands use ***UDP*** packets to trace a path by default; however, many networks block UDP and ICMP traffic. The traceroute command has options to trace the path with ***UDP*** (default), ***ICMP*** (```-I```), or ***TCP*** (```-T```) packets.
+  ```console
+  [user@host ~]$ tracepath access.redhat.com
+  ...output omitted...
+   4:  71-32-28-145.rcmt.qwest.net                          48.853ms asymm  5
+   5:  dcp-brdr-04.inet.qwest.net                          100.732ms asymm  7
+   6:  206.111.0.153.ptr.us.xo.net                          96.245ms asymm  7
+   7:  207.88.14.162.ptr.us.xo.net                          85.270ms asymm  8
+   8:  ae1d0.cir1.atlanta6-ga.us.xo.net                     64.160ms asymm  7
+   9:  216.156.108.98.ptr.us.xo.net                        108.652ms
+  10:  bu-ether13.atlngamq46w-bcr00.tbone.rr.com           107.286ms asymm 12
+  ...output omitted...
+  ```
+* The ```tracepath6``` and ```traceroute``` ```-6``` commands are the equivalent IPv6 commands to the tracepath and traceroute commands.
+  ```console
+  [user@host ~]$ tracepath6 2001:db8:0:2::451
+   1?: [LOCALHOST]                        0.091ms pmtu 1500
+   1:  2001:db8:0:1::ba                   0.214ms
+   2:  2001:db8:0:1::1                    0.512ms
+   3:  2001:db8:0:2::451                  0.559ms reached
+       Resume: pmtu 1500 hops 3 back 3
+  ```
+
+<a name=""></a>
+* 
 
 
 <a name="12.5"></a>
