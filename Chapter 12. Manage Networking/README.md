@@ -190,6 +190,7 @@ Content you should know:
 | Content |
 | --- |
 | [View Network Information](#view) |
+| [Add a Network Connection](#add) |
 
 <a name="view"></a>
 * The ```nmcli device status``` command displays the status of all network devices:
@@ -212,6 +213,23 @@ Content you should know:
   NAME         UUID                                  TYPE            DEVICE
   static-ens3  72ca57a2-f780-40da-b146-99f71c431e2b  802-3-ethernet  ens3
   eno1         87b53c56-1f5d-4a29-a869-8a7bdaf56dfa  802-3-ethernet  eno1
+  ```
+
+<a name="add"></a>
+* Use the ```nmcli connection add``` command to add network connections.
+  ```console
+  [root@host ~]# nmcli con add con-name eno2 \
+  type ethernet ifname eno2
+  Connection 'eno2' (8159b66b-3c36-402f-aa4c-2ea933c7a5ce) successfully added
+  ```
+  ```console
+  [root@host ~]# nmcli con add con-name eno3 type ethernet ifname eno3 \
+  ipv4.addresses 192.168.0.5/24 ipv4.gateway 192.168.0.254
+  ```
+  ```console
+  [root@host ~]# nmcli con add con-name eno4 type ethernet ifname eno4 \
+  ipv6.addresses 2001:db8:0:1::c000:207/64 ipv6.gateway 2001:db8:0:1::1 \
+  ipv4.addresses 192.0.2.7/24 ipv4.gateway 192.0.2.1
   ```
 
 
