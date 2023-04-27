@@ -189,9 +189,19 @@ Content you should know:
 
 | Content |
 | --- |
+| [View Network Information](#view) |
 
-<a name=""></a>
-* 
+<a name="view"></a>
+* The ```nmcli device status``` command displays the status of all network devices:
+  ```console
+  [user@host ~]$ nmcli dev status
+  DEVICE  TYPE      STATE         CONNECTION
+  eno1    ethernet  connected     eno1
+  ens3    ethernet  connected     static-ens3
+  eno2    ethernet  disconnected  --
+  lo      loopback  unmanaged     --
+  ```
+
 
 
 <a name="12.7"></a>
