@@ -201,6 +201,18 @@ Content you should know:
   eno2    ethernet  disconnected  --
   lo      loopback  unmanaged     --
   ```
+* The ```nmcli connection show``` command displays a list of all connections. Use the ```--active``` option to list only active connections.
+  ```console
+  [user@host ~]$ nmcli con show
+  NAME         UUID                                  TYPE            DEVICE
+  eno2         ff9f7d69-db83-4fed-9f32-939f8b5f81cd  802-3-ethernet  --
+  static-ens3  72ca57a2-f780-40da-b146-99f71c431e2b  802-3-ethernet  ens3
+  eno1         87b53c56-1f5d-4a29-a869-8a7bdaf56dfa  802-3-ethernet  eno1
+  [user@host ~]$ nmcli con show --active
+  NAME         UUID                                  TYPE            DEVICE
+  static-ens3  72ca57a2-f780-40da-b146-99f71c431e2b  802-3-ethernet  ens3
+  eno1         87b53c56-1f5d-4a29-a869-8a7bdaf56dfa  802-3-ethernet  eno1
+  ```
 
 
 
