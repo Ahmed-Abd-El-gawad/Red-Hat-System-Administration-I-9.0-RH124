@@ -247,8 +247,12 @@ Content you should know:
   ```console
   [root@host ~]# nmcli dev disconnect ens3
   ```
+* Use ```nmcli device disconnect``` to stop traffic on a network interface and deactivate the connection.
 
+  Because most connections enable the <sub>autoconnect</sub> parameter, the ```nmcli connection down``` command is ineffective for stopping traffic. Although the connection deactivates, autoconnect immediately reactivates the connection if the device is up and available. Autoconnect is a desired behavior because it maintains connections through temporary network outages.
 
+  By disconnecting the device under the connection, the connection is forced to be down until the device is connected again.
+* 
 
 
 <a name="12.7"></a>
