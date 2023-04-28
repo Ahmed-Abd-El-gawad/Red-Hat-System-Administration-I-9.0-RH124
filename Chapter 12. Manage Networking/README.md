@@ -192,6 +192,7 @@ Content you should know:
 | [View Network Information](#view) |
 | [Add a Network Connection](#add) |
 | [Manage Network Connections](#manage) |
+| [Update Network Connection Settings](#update) |
 
 <a name="view"></a>
 * The ```nmcli device status``` command displays the status of all network devices:
@@ -252,7 +253,86 @@ Content you should know:
   Because most connections enable the <sub>autoconnect</sub> parameter, the ```nmcli connection down``` command is ineffective for stopping traffic. Although the connection deactivates, autoconnect immediately reactivates the connection if the device is up and available. Autoconnect is a desired behavior because it maintains connections through temporary network outages.
 
   By disconnecting the device under the connection, the connection is forced to be down until the device is connected again.
-* 
+
+<a name="update"></a>
+* ***NetworkManager*** service connections have two kinds of settings. Static connection properties are configured by the administrator and stored in the ```/etc/NetworkManager/system-connections/*.nmconnection``` configuration files. Dynamic connection properties are requested from a DHCP server and are not stored persistently.
+* To list the current settings for a connection, use the ```nmcli connection show``` command. Settings in lowercase are static properties that the administrator can change. Settings in uppercase are active settings in temporary use for this connection instance.
+  ```console
+  [root@host ~]# nmcli con show static-ens3
+  connection.id:                          static-ens3
+  connection.uuid:                        87b53c56-1f5d-4a29-a869-8a7bdaf56dfa
+  connection.interface-name:              --
+  connection.type:                        802-3-ethernet
+  connection.autoconnect:                 yes
+  connection.timestamp:                   1401803453
+  connection.read-only:                   no
+  connection.permissions:
+  connection.zone:                        --
+  connection.master:                      --
+  connection.slave-type:                  --
+  connection.secondaries:
+  connection.gateway-ping-timeout:        0
+  802-3-ethernet.port:                    --
+  802-3-ethernet.speed:                   0
+  802-3-ethernet.duplex:                  --
+  802-3-ethernet.auto-negotiate:          yes
+  802-3-ethernet.mac-address:             CA:9D:E9:2A:CE:F0
+  802-3-ethernet.cloned-mac-address:      --
+  802-3-ethernet.mac-address-blacklist:
+  802-3-ethernet.mtu:                     auto
+  802-3-ethernet.s390-subchannels:
+  802-3-ethernet.s390-nettype:            --
+  802-3-ethernet.s390-options:
+  ipv4.method:                            manual
+  ipv4.dns:                               192.168.0.254
+  ipv4.dns-search:                        example.com
+  ipv4.addresses:                         { ip = 192.168.0.2/24,
+                                            gw = 192.168.0.254 }
+  ipv4.routes:
+  ipv4.ignore-auto-routes:                no
+  ipv4.ignore-auto-dns:                   no
+  ipv4.dhcp-client-id:                    --
+  ipv4.dhcp-send-hostname:                yes
+  ipv4.dhcp-hostname:                     --
+  ipv4.never-default:                     no
+  ipv4.may-fail:                          yes
+  ipv6.method:                            manual
+  ipv6.dns:                               2001:4860:4860::8888
+  ipv6.dns-search:                        example.com
+  ipv6.addresses:                         { ip = 2001:db8:0:1::7/64,
+                                            gw = 2001:db8:0:1::1 }
+  ipv6.routes:
+  ipv6.ignore-auto-routes:                no
+  ipv6.ignore-auto-dns:                   no
+  ipv6.never-default:                     no
+  ipv6.may-fail:                          yes
+  ipv6.ip6-privacy:                       -1 (unknown)
+  ipv6.dhcp-hostname:                     --
+  ...output omitted...
+  ```
+* Use the ```nmcli connection modify``` command to update connection settings. These changes are saved in the ```/etc/NetworkManager/system-connections/name.nmconnection``` file.
+  ```console
+  [root@host ~]# nmcli con mod static-ens3 ipv4.addresses 192.0.2.2/24 \
+  ipv4.gateway 192.0.2.254 connection.autoconnect yes
+  ```
+  ```console
+  [root@host ~]# nmcli con mod static-ens3 ipv6.addresses 2001:db8:0:1::a00:1/64 \
+  ipv6.gateway 2001:db8:0:1::1
+  ```
+* Some settings can have multiple values. A specific value can be added to the list or deleted from the connection settings by adding a plus (```+```) or minus (```-```) symbol to the start of the setting name. If a plus or minus is not included, then the specified value replaces the setting's current list.
+  ```console
+  [root@host ~]# nmcli con mod static-ens3 +ipv4.dns 2.2.2.2
+  ```
+* You can also modify network profiles by editing the connection's configuration file in ```/etc/NetworkManager/system-connections/```. While ```nmcli``` commands communicate directly with ***NetworkManager*** to implement modifications immediately, connection file edits are not implemented until NetworkManager is asked to reload the configuration file. With manual editing, you can create complex configurations in steps, and then load the final configuration when ready. 
+  
+  The following example loads all connection profiles.
+  ```console
+  [root@host ~]# nmcli con reload
+  ```
+  The next example loads only the ```eno2``` connection profile at ```/etc/NetworkManager/system-connections/eno2.nmconnection```.
+  ```console
+  [root@host ~]# nmcli con reload eno2
+  ```
 
 
 <a name="12.7"></a>
