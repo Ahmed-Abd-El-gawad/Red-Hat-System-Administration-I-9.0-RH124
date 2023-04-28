@@ -191,6 +191,7 @@ Content you should know:
 | --- |
 | [View Network Information](#view) |
 | [Add a Network Connection](#add) |
+| [Manage Network Connections](#manage) |
 
 <a name="view"></a>
 * The ```nmcli device status``` command displays the status of all network devices:
@@ -231,6 +232,22 @@ Content you should know:
   ipv6.addresses 2001:db8:0:1::c000:207/64 ipv6.gateway 2001:db8:0:1::1 \
   ipv4.addresses 192.0.2.7/24 ipv4.gateway 192.0.2.1
   ```
+
+<a name="manage"></a>
+* The ```nmcli connection up``` command activates a network connection on the device that it is bound to. Activating a network connection requires the connection name, not the device name.
+  ```console
+  [user@host ~]$ nmcli con show
+  NAME         UUID                                  TYPE            DEVICE
+  static-ens3  72ca57a2-f780-40da-b146-99f71c431e2b  802-3-ethernet  --
+  static-ens5  87b53c56-1f5d-4a29-a869-8a7bdaf56dfa  802-3-ethernet  --
+  [root@host ~]# nmcli con up static-ens3
+  Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/2)
+  ```
+* The ```nmcli device disconnect``` command disconnects the network device and brings down the connection.
+  ```console
+  [root@host ~]# nmcli dev disconnect ens3
+  ```
+
 
 
 
