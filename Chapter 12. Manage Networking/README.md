@@ -193,6 +193,9 @@ Content you should know:
 | [Add a Network Connection](#add) |
 | [Manage Network Connections](#manage) |
 | [Update Network Connection Settings](#update) |
+| [Delete a Network Connection](#delete) |
+| [Permissions to Modify NetworkManager Settings](#permissions) |
+| [Summary](#summary) |
 
 <a name="view"></a>
 * The ```nmcli device status``` command displays the status of all network devices:
@@ -333,6 +336,74 @@ Content you should know:
   ```console
   [root@host ~]# nmcli con reload eno2
   ```
+
+<a name="delete"></a>
+* The ```nmcli connection delete``` command deletes a connection from the system. This command disconnects the device and removes the connection configuration file.
+  ```console
+  [root@host ~]# nmcli con del static-ens3
+  ```
+
+<a name="permissions"></a>
+* The root user can use the nmcli command to change the network configuration.
+* Non-privileged users that are logged in on the physical or virtual console can also make most network configuration changes. If a person is on the system's console, then the system is likely being used as a workstation or laptop where the user needs to configure, activate, and deactivate connections. Non-privileged users that log in with ```ssh``` must switch to the root user to change network settings.
+* Use the ```nmcli general permissions``` command to view your current permissions.
+  ```console
+  [root@host ~]# nmcli gen permissions
+  PERMISSION                                                        VALUE
+  org.freedesktop.NetworkManager.checkpoint-rollback                yes
+  org.freedesktop.NetworkManager.enable-disable-connectivity-check  yes
+  org.freedesktop.NetworkManager.enable-disable-network             yes
+  org.freedesktop.NetworkManager.enable-disable-statistics          yes
+  org.freedesktop.NetworkManager.enable-disable-wifi                yes
+  org.freedesktop.NetworkManager.enable-disable-wimax               yes
+  org.freedesktop.NetworkManager.enable-disable-wwan                yes
+  org.freedesktop.NetworkManager.network-control                    yes
+  org.freedesktop.NetworkManager.reload                             yes
+  org.freedesktop.NetworkManager.settings.modify.global-dns         yes
+  org.freedesktop.NetworkManager.settings.modify.hostname           yes
+  org.freedesktop.NetworkManager.settings.modify.own                yes
+  org.freedesktop.NetworkManager.settings.modify.system             yes
+  org.freedesktop.NetworkManager.sleep-wake                         yes
+  org.freedesktop.NetworkManager.wifi.scan                          yes
+  org.freedesktop.NetworkManager.wifi.share.open                    yes
+  org.freedesktop.NetworkManager.wifi.share.protected               yes
+  ```
+  ```console
+  [user@host ~]$ nmcli gen permissions
+  PERMISSION                                                        VALUE
+  org.freedesktop.NetworkManager.checkpoint-rollback                auth
+  org.freedesktop.NetworkManager.enable-disable-connectivity-check  no
+  org.freedesktop.NetworkManager.enable-disable-network             no
+  org.freedesktop.NetworkManager.enable-disable-statistics          no
+  org.freedesktop.NetworkManager.enable-disable-wifi                no
+  org.freedesktop.NetworkManager.enable-disable-wimax               no
+  org.freedesktop.NetworkManager.enable-disable-wwan                no
+  org.freedesktop.NetworkManager.network-control                    auth
+  org.freedesktop.NetworkManager.reload                             auth
+  org.freedesktop.NetworkManager.settings.modify.global-dns         auth
+  org.freedesktop.NetworkManager.settings.modify.hostname           auth
+  org.freedesktop.NetworkManager.settings.modify.own                auth
+  org.freedesktop.NetworkManager.settings.modify.system             auth
+  org.freedesktop.NetworkManager.sleep-wake                         no
+  org.freedesktop.NetworkManager.wifi.scan                          auth
+  org.freedesktop.NetworkManager.wifi.share.open                    no
+  org.freedesktop.NetworkManager.wifi.share.protected               no
+  ```
+
+<a name="summary"></a>
+* Useful NetworkManager Commands
+
+| Command | Purpose |
+| --- | --- |
+| ```nmcli dev status``` | Show the NetworkManager status of all network interfaces. |
+| ```nmcli con show``` | List all connections. |
+| ```nmcli con show name``` | List the current settings for the connection name. |
+| ```nmcli con add con-name name``` | Add and name a new connection profile. |
+| ```nmcli con mod name``` | Modify the connection name. |
+| ```nmcli con reload``` | Reload the configuration files, after manual file editing. |
+| ```nmcli con up name``` | Activate the connection name. |
+| ```nmcli dev dis dev``` | Disconnect the interface, which also deactivates the current connection. |
+| ```nmcli con del name``` | Delete the specified connection and its configuration file. |
 
 
 <a name="12.7"></a>
