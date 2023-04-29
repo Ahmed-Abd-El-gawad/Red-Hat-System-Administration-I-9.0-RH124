@@ -413,6 +413,7 @@ Content you should know:
 | --- |
 | [Connection Configuration Files](#files) |
 | [Key File Format](#key) |
+| [Modify Network Configuration](#modify) |
 
 <a name="files"></a>
 * Starting with Red Hat Enterprise Linux 8, network configurations are stored in the ```/etc/NetworkManager/system-connections/``` directory.
@@ -447,7 +448,8 @@ Content you should know:
 | connection.interface-name ens3 | [connection] interface-name=ens3 | The connection is bound to the network interface with this name. |
 | 802-3-ethernet.mac-address … | [802-3-ethernet] mac-address= | The connection is bound to the network interface with this MAC address. |
 
-
+<a name="modify"></a>
+* 
 
 <a name="12.9"></a>
 ## 12.9 Configure Hostnames and Name Resolution
