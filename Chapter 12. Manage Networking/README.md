@@ -411,9 +411,14 @@ Content you should know:
 
 | Content |
 | --- |
+| [Connection Configuration Files](#files) |
 
-<a name=""></a>
-* 
+<a name="files"></a>
+* Starting with Red Hat Enterprise Linux 8, network configurations are stored in the ```/etc/NetworkManager/system-connections/``` directory.
+* This new configuration location uses the ***key*** file format instead of the ```ifcfg``` format. 
+* The previously stored configurations at ```/etc/sysconfig/network-scripts/``` continue to work. The ```/etc/NetworkManager/system-connections/``` directory stores any changes with the nmcli con mod name command.
+
+
 
 
 <a name="12.9"></a>
