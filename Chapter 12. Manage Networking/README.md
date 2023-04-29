@@ -449,7 +449,21 @@ Content you should know:
 | 802-3-ethernet.mac-address … | [802-3-ethernet] mac-address= | The connection is bound to the network interface with this MAC address. |
 
 <a name="modify"></a>
-* 
+* You can also configure the network by directly editing the connection configuration files. Connection configuration files control the software interfaces for individual network devices. These files are usually called ```/etc/sysconfig/network-scripts/name.nmconnection```, where name refers to the device's name or connection that the configuration file controls.
+* The ```/etc/NetworkManager/system-connections/``` directory stores persistent profiles that the user created and edited. NetworkManager copies them automatically to the ```/etc/NetworkManager/system-connections/``` directory.
+* The ```/run/NetworkManager/system-connections/``` directory stores temporary profiles, which are automatically removed when you reboot the system.
+* The ```/usr/lib/NetworkManager/system-connections/``` directory stores predeployed immutable profiles. When you edit such a profile with the NetworkManager API, NetworkManager copies this profile to either the persistent or the temporary storage.
+* After modifying the configuration files, set permissions on the configuration file for the root user to read and modify the configuration file.
+  ```console
+  [root@host ~]# chown root:root /etc/NetworkManager/system-connections/"Main eth0.nmconnection"
+  [root@host ~]# chmod 600 /etc/NetworkManager/system-connections/"Main eth0.nmconnection"
+  ```
+  Run the nmcli con reload command for NetworkManager to read the configuration changes. When the autoconnect variable in the profile uses the false value, then activate the connection.
+  ```console
+  [root@host ~]# nmcli con reload
+  [root@host ~]# nmcli con up "static-ens3"
+  ```
+
 
 <a name="12.9"></a>
 ## 12.9 Configure Hostnames and Name Resolution
