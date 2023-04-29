@@ -412,12 +412,40 @@ Content you should know:
 | Content |
 | --- |
 | [Connection Configuration Files](#files) |
+| [Key File Format](#key) |
 
 <a name="files"></a>
 * Starting with Red Hat Enterprise Linux 8, network configurations are stored in the ```/etc/NetworkManager/system-connections/``` directory.
 * This new configuration location uses the ***key*** file format instead of the ```ifcfg``` format. 
 * The previously stored configurations at ```/etc/sysconfig/network-scripts/``` continue to work. The ```/etc/NetworkManager/system-connections/``` directory stores any changes with the nmcli con mod name command.
 
+<a name="key"></a>
+* The NetworkManager uses the INI-style key format for storing network connection profiles. The key-value pairs store configurations as sections (groups). Each configuration key/value pair in the section is one of the listed properties in the settings specification. This configuration file stores most of the settings in the same format as the INI-style format. For example, writing IP addresses as 192.168.0.1/24 is easier to read than as integer arrays.
+
+  Although the recommended way to manage profiles is with the nmcli command, users might still manually create or modify the configuration files. After editing the configuration file, run the nmcli con reload command to inform NetworkManager about these changes.
+
+
+| ```nmcli con mod``` | ```*.nmconnection``` file | Effect |
+| --- | --- | --- |
+| ipv4.method manual | [ipv4] method=manual | Configure IPv4 addresses statically. |
+| ipv4.method auto | [ipv4] method=auto | Look for configuration settings from a DHCPv4 server. It does not bring up any static addresses until it has information from DHCPv4. |
+| ipv4.addresses 192.0.2.1/24 | [ipv4] address1=192.0.2.1/24 | Set a static IPv4 address and network prefix. For more than one connection address, the ```address2``` key defines the second address, and the ```address3``` key defines the third address. |
+| ipv4.gateway 192.0.2.254 | [ipv4] gateway=192.0.2.254 | Set the default gateway. |
+| ipv4.dns 8.8.8.8 | [ipv4] dns=8.8.8.8 | Modify ```/etc/resolv.conf``` to use this name server. |
+| ipv4.dns-search example.com | [ipv4] dns-search=example.com | Modify ```/etc/resolv.conf``` to use this domain in the search directive. |
+| ipv4.ignore-auto-dns true | [ipv4] ignore-auto-dns=true | Ignore DNS server information from the DHCP server. |
+| ipv6.method manual | [ipv6] method=manual | Configure IPv6 addresses statically. |
+| ipv6.method auto | [ivp6] method=auto | Configure network settings with SLAAC from router advertisements. |
+| ipv6.method dhcp | [ipv6] method=dhcp | Configure network settings by using DHCPv6, but not SLAAC. |
+| ipv6.addresses 2001:db8::a/64 | [ipv6] address1=2001:db8::a/64 | Set static IPv6 address and network prefix. When using more than one address for a connection, the ```address2``` key defines the second address, and the ```address3``` key defines the third address. |
+| ipv6.gateway 2001:db8::1 | [ipv6] gateway=2001:db8::1 | Set the default gateway. |
+| ipv6.dns fde2:6494:1e09:2::d | [ipv6] dns=fde2:6494:1e09:2::d | Modify ```/etc/resolv.conf``` to use this name server. The same as IPv4. |
+| ipv6.dns-search example.com | [ipv6] dns-search=example.com | Modify ```/etc/resolv.conf``` to use this domain in the search directive. |
+| ipv6.ignore-auto-dns true | [ipv6] ignore-auto-dns=true | Ignore DNS server information from the DHCP server. |
+| connection.autoconnect yes | [connection] autoconnect=true | Automatically activate this connection at boot. |
+| connection.id ens3 | [connection] id=Main eth0 | The name of this connection. |
+| connection.interface-name ens3 | [connection] interface-name=ens3 | The connection is bound to the network interface with this name. |
+| 802-3-ethernet.mac-address … | [802-3-ethernet] mac-address= | The connection is bound to the network interface with this MAC address. |
 
 
 
