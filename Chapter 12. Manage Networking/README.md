@@ -458,7 +458,7 @@ Content you should know:
   [root@host ~]# chown root:root /etc/NetworkManager/system-connections/"Main eth0.nmconnection"
   [root@host ~]# chmod 600 /etc/NetworkManager/system-connections/"Main eth0.nmconnection"
   ```
-  Run the nmcli con reload command for NetworkManager to read the configuration changes. When the autoconnect variable in the profile uses the false value, then activate the connection.
+  Run the ```nmcli con reload``` command for NetworkManager to read the configuration changes. When the autoconnect variable in the profile uses the false value, then activate the connection.
   ```console
   [root@host ~]# nmcli con reload
   [root@host ~]# nmcli con up "static-ens3"
