@@ -227,5 +227,24 @@
     * ```-A``` to preserve Access Control Lists (ACLs)
     * ```-X``` to preserve SELinux file contexts
 
+* For example, to synchronize the contents of the ```/var/log``` directory to the ```/tmp``` directory:
+  ```console
+  [user@host ~]$ su -
+  Password: password
+  [root@host ~]# rsync -av /var/log /tmp
+  receiving incremental file list
+  log/
+  log/README
+  log/boot.log
+  ...output omitted...
+  log/tuned/tuned.log
+
+  sent 11,592,423 bytes  received 779 bytes  23,186,404.00 bytes/sec
+  total size is 11,586,755  speedup is 1.00
+  [user@host ~]$ ls /tmp
+  log  ssh-RLjDdarkKiW1
+  [user@host ~]$
+  ```
+
 
 
