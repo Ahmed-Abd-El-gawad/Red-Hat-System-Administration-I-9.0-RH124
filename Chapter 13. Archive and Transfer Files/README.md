@@ -13,6 +13,7 @@
 | Content |
 | --- |
 | [Common Options of the tar Utility](#options) |
+| [Create an Archive](#-c) |
 
 <a name="options"></a>
 * One of the following ```tar``` command actions is required to perform a ```tar``` operation:
@@ -40,6 +41,19 @@
   | ```-j``` or ```--bzip2``` | Use the ```bzip2``` compression algorithm, resulting in a ```.tar.bz2``` suffix. |
   | ```-J``` or ```--xz``` | Use the ```xz``` compression algorithm, resulting in a ```.tar.xz``` suffix. |
   | ```-Z``` or ```--compress``` | Uses an ```LZ-variant``` algorithm, resulting in a ```.tar.Z``` suffix. |
+
+<a name="-c"></a>
+* To create an archive with the ```tar``` command, use the create and file options with the archive file name as the first argument, then followed by a list of files and directories to include in the archive.
+  ```console
+  [user@host ~]$ tar -cf mybackup.tar myapp1.log myapp2.log myapp3.log
+  [user@host ~]$ ls mybackup.tar
+  archive.tar
+  ```
+* The ```tar``` command recognizes absolute and relative file name syntax.
+  * By default, ```tar``` removes the leading forward slash (```\```) character from absolute file names, so that files are stored internally with relative path names.
+  * This technique is safer, because extracting absolute path names always overwrites existing files. With files archived with relative path names, files can be extracted to a new directory without overwriting existing files.
+
+
 
 
 <a name="13.3"></a>
