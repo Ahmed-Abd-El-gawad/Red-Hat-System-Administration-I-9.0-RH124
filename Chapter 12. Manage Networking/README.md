@@ -470,8 +470,34 @@ Content you should know:
 
 | Content |
 | --- |
+| [Update the System Hostname](#hostname) |
+
+<a name="hostname"></a>
+* The ```hostname``` command displays or temporarily modifies the system's fully qualified hostname.
+  ```
+  [root@host ~]# hostname
+  host.example.com
+  ```
+* Specify a static hostname in the ```/etc/hostname``` file. Use the ```hostnamectl``` command to modify this file and view the system's fully qualified hostname. If this file does not exist, then the hostname is set by a reverse DNS query when an IP address is assigned to the interface.
+  ```
+  [root@host ~]# hostnamectl set-hostname host.example.com
+  [root@host ~]# hostnamectl status
+   Static hostname: host.example.com
+         Icon name: computer-vm
+           Chassis: vm 🖴
+        Machine ID: 663e281edea34ffea297bd479a8f12b5
+           Boot ID: 74bf3a0a48d540998a74055a0fe38821
+    Virtualization: kvm
+  Operating System: Red Hat Enterprise Linux 9.0 (Plow)
+       CPE OS Name: cpe:/o:redhat:enterprise_linux:9::baseos
+            Kernel: Linux 5.14.0-70.el9.x86_64
+      Architecture: x86-64
+   Hardware Vendor: Red Hat
+    Hardware Model: OpenStack Compute
+  [root@host ~]# cat /etc/hostname
+  host.example.com
+  ```
 
 <a name=""></a>
 * 
-
 
