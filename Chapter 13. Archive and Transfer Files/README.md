@@ -222,7 +222,10 @@
   | ```-g```, ```--group``` | Preserve group ownership |
   | ```-o```, ```--owner``` | Preserve the owner of the files |
   | ```-D```, ```--devices``` | Preserve device files |
-
+  * Archive mode does not preserve hard links because it might add significant time to the synchronization. Use the ```rsync``` command ```-H``` option to preserve hard links too.
+  * To include extended attributes when syncing files, add these options to the rsync command:
+    * ```-A``` to preserve Access Control Lists (ACLs)
+    * ```-X``` to preserve SELinux file contexts
 
 
 
