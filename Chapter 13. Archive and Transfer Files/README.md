@@ -16,6 +16,7 @@
 | [Create an Archive](#-c) |
 | [List Archive Contents](#-t) |
 | [Extract Archive Contents](#-x) |
+| [Create a Compressed Archive](#compression) |
 
 <a name="options"></a>
 * One of the following ```tar``` command actions is required to perform a ```tar``` operation:
@@ -89,6 +90,27 @@
   [user@host scripts]# tar -xpf /home/user/myscripts.tar
   ...output omitted...
   ```
+
+<a name="compression"></a>
+* The ```tar``` command supports these compression methods, and others:
+  * ```gzip``` compression is the legacy, fastest method, and is widely available across platforms.
+  * ```bzip2``` compression creates smaller archives but is less widely available than ```gzip```.
+  * ```xz``` compression is newer, and offers the best compression ratio of the available methods.
+  * **compress** is a legacy LZ algorithm variation, and is widely available across platforms.
+  ```console
+  [root@host ~]# tar -czf /root/etcbackup.tar.gz /etc
+  tar: Removing leading `/' from member names
+  ```
+  ```console
+  [root@host ~]$ tar -cjf /root/logbackup.tar.bz2 /var/log
+  tar: Removing leading `/' from member names
+  ```
+  ```console
+  [root@host ~]$ tar -cJf /root/sshconfig.tar.xz /etc/ssh
+  tar: Removing leading `/' from member names
+  ```
+
+
 
 
 
