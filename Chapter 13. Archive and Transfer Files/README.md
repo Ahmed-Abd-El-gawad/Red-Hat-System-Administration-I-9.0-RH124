@@ -212,7 +212,17 @@
 
 * Use the ```rsync``` command ```-n``` option for a ***dry run***. A dry run simulates what happens when the command is executed. The dry run shows the changes that the ```rsync``` command would perform when executing the command. Perform a dry run before the actual ```rsync``` command operation to ensure that no critical files are overwritten or deleted.
 
-* 
+* The ```rsync``` command ```-a``` or ```--archive``` option enables "archive mode". This option enables recursive copying and turns on many valuable options to preserve most characteristics of the files. Archive mode is the same as specifying the following options:
+  | Option | Description |
+  | --- | --- |
+  | ```-r```, ```--recursive``` | Synchronize the whole directory tree recursively |
+  | ```-l```, ```--links``` | Synchronize symbolic links |
+  | ```-p```, ```--perms``` | Preserve permissions |
+  | ```-t```, ```--times``` | Preserve time stamps |
+  | ```-g```, ```--group``` | Preserve group ownership |
+  | ```-o```, ```--owner``` | Preserve the owner of the files |
+  | ```-D```, ```--devices``` | Preserve device files |
+
 
 
 
