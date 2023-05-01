@@ -128,8 +128,10 @@
 
 | Content |
 | --- |
+| [sftp](#sftp) |
+| [scp](#scp) |
 
-<a name=""></a>
+<a name="sftp"></a>
 * The <sub>OpenSSH</sub> suite is useful for securely running shell commands on remote systems. Use the ***Secure File Transfer Program (SFTP)*** to interactively upload to or download files from an SSH server. This program is part of the <sub>OpenSSH</sub> suite. A session with the ```sftp``` command uses the secure authentication mechanism and encrypted data transfer to and from the SSH server.
   ```console
   [user@host ~]$ sftp remoteuser@remotehost
@@ -189,6 +191,10 @@
   Fetching /home/remoteuser/remotefile to remotefile
   remotefile                                                       100%    7    15.7KB/s   00:00
   ```
+
+<a name="scp"></a>
+* The scp command, which system administrators widely use to copy files to and from remote systems, is based on a historical rcp protocol that was not designed with security considerations in mind. 
+* The scp command has a known code injection issue that could grant an attacker the ability to execute arbitrary commands on the remote server.
 
 
 <a name="13.5"></a>
