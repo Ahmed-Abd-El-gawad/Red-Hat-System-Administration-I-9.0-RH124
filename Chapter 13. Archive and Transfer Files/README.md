@@ -52,7 +52,11 @@
 * The ```tar``` command recognizes absolute and relative file name syntax.
   * By default, ```tar``` removes the leading forward slash (```\```) character from absolute file names, so that files are stored internally with relative path names.
   * This technique is safer, because extracting absolute path names always overwrites existing files. With files archived with relative path names, files can be extracted to a new directory without overwriting existing files.
-
+* A user must have read permissions on the target files being archived. For example, ```root``` privileges are required archive the ```/etc``` directory and its contents, because only privileged users can read all ```/etc``` files An unprivileged user can create an archive of the ```/etc``` directory, but the archive would not contain files the user cannot read, and directories for which the user lacks the read and execute permissions.
+  ```console
+  [root@host ~]# tar -cf /root/etc-backup.tar /etc
+  tar: Removing leading `/' from member names
+  ```
 
 
 
