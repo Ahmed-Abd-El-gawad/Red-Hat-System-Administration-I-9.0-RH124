@@ -72,7 +72,23 @@
   ```
 
 <a name="-x"></a>
-* 
+* Extract a ```tar``` archive into an empty directory to avoid overwriting existing files. When the ```root``` user extracts an archive, the extracted files preserve the original user and group ownership. If a regular user extracts files, then the user becomes the owner of the extracted files.
+  ```console
+  [root@host ~]# mkdir /root/etcbackup
+  [root@host ~]# cd /root/etcbackup
+  [root@host etcbackup]# tar -tf /root/etc.tar
+  etc/
+  etc/fstab
+  etc/crypttab
+  etc/mtab
+  ...output omitted...
+  [root@host etcbackup]# tar -xf /root/etc.tar
+  ```
+* When you extract files from an archive, the current ```umask``` is used to modify each extracted file's permissions. Instead, use the ```tar``` command ```p``` option to preserve the original archived permissions for extracted files. The ```--preserve-permissions``` option is enabled by default for a superuser.
+  ```console
+  [user@host scripts]# tar -xpf /home/user/myscripts.tar
+  ...output omitted...
+  ```
 
 
 
