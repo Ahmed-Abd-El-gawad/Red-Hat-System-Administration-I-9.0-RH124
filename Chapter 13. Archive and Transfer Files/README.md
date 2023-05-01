@@ -202,8 +202,16 @@
 
 | Content |
 | --- |
+| [rsync](#rsync) |
 
-<a name=""></a>
+<a name="rsync"></a>
+* The ```rsync``` command is another way to copy files from one system to another system securely.
+* The tool uses an algorithm that minimizes the amount of copied data by synchronizing only the changed portions of files. 
+  * If two files or directories are similar between two servers, then the rsync command copies only the differences between the file systems.
+* An advantage of the ```rsync``` command is that it copies files between a local system and a remote system securely and efficiently.
+
+* Use the ```rsync``` command ```-n``` option for a ***dry run***. A dry run simulates what happens when the command is executed. The dry run shows the changes that the ```rsync``` command would perform when executing the command. Perform a dry run before the actual ```rsync``` command operation to ensure that no critical files are overwritten or deleted.
+
 * 
 
 
