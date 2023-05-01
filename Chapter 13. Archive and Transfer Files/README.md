@@ -109,9 +109,18 @@
   [root@host ~]$ tar -cJf /root/sshconfig.tar.xz /etc/ssh
   tar: Removing leading `/' from member names
   ```
+* The ```tar``` command can automatically determine which compression was used, so it is not necessary to specify the compression option. If you do include an incorrect compression type, ```tar``` reports that the specified compression type does not match the file's type.
+* The ```gzip```, ```bzip2```, ```xz```, and ```compress``` algorithms are also implemented as standalone commands for compressing individual files without creating an archive. These commands do not allow you to create a single compressed file of multiple files, such as a directory. As previously discussed, to create a compressed archive of multiple files, use the ```tar``` command with your preferred compression option. To uncompress a single compressed file or a compressed archive file without extracting its contents, use the ```gunzip```, ```bunzip2```, ```unxz```, and ```uncompress``` standalone commands.
 
-
-
+  The ```gzip``` and ```xz``` commands provide an ```-l``` option to view the uncompressed size of a compressed single or archive file. Use this option to verify sufficient space is available before uncompressing or extracting a file.
+  ```console
+  [user@host ~]$ gzip -l file.tar.gz
+           compressed        uncompressed  ratio uncompressed_name
+            221603125           303841280  27.1% file.tar
+  [user@host ~]$ xz -l file.xz
+  Strms  Blocks   Compressed Uncompressed  Ratio  Check   Filename
+      1       1    195.7 MiB    289.8 MiB  0.675  CRC64   file.xz
+  ```
 
 
 <a name="13.3"></a>
