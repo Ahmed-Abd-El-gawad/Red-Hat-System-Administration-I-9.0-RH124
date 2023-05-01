@@ -14,6 +14,8 @@
 | --- |
 | [Common Options of the tar Utility](#options) |
 | [Create an Archive](#-c) |
+| [List Archive Contents](#-t) |
+| [Extract Archive Contents](#-x) |
 
 <a name="options"></a>
 * One of the following ```tar``` command actions is required to perform a ```tar``` operation:
@@ -57,6 +59,20 @@
   [root@host ~]# tar -cf /root/etc-backup.tar /etc
   tar: Removing leading `/' from member names
   ```
+
+<a name="-t"></a>
+* Use the ```tar``` command ```t``` option to list the file names from within the archive specified with the ```f``` option. The files list with relative name syntax, because the leading forward slash (```/```) was removed during archive creation.
+  ```console
+  [root@host ~]# tar -tf /root/etc.tar
+  etc/
+  etc/fstab
+  etc/crypttab
+  etc/mtab
+  ...output omitted...
+  ```
+
+<a name="-x"></a>
+* 
 
 
 
