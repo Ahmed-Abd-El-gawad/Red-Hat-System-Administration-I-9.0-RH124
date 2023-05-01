@@ -130,7 +130,65 @@
 | --- |
 
 <a name=""></a>
-* 
+* The <sub>OpenSSH</sub> suite is useful for securely running shell commands on remote systems. Use the ***Secure File Transfer Program (SFTP)*** to interactively upload to or download files from an SSH server. This program is part of the <sub>OpenSSH</sub> suite. A session with the ```sftp``` command uses the secure authentication mechanism and encrypted data transfer to and from the SSH server.
+  ```console
+  [user@host ~]$ sftp remoteuser@remotehost
+  remoteuser@remotehost's password: password
+  Connected to remotehost.
+  sftp>
+  ```
+* The interactive ```sftp``` session accepts various commands that work the same way on the remote file system as in the local file system, such as the ```ls```, ```cd```, ```mkdir```, ```rmdir```, and ```pwd``` commands. 
+  ```console
+  sftp> help
+  Available commands:
+  bye                                Quit sftp
+  cd path                            Change remote directory to 'path'
+  chgrp [-h] grp path                Change group of file 'path' to 'grp'
+  chmod [-h] mode path               Change permissions of file 'path' to 'mode'
+  chown [-h] own path                Change owner of file 'path' to 'own'
+  ...output omitted...
+  ```
+* In an ```sftp``` session, you might want to run some commands on your local host. For most available commands, add the ```l``` character before the command. For example, the ```pwd``` command prints the current working directory on the remote host. To print the current working directory on your local host, use the ```lpwd``` command.
+  ```
+  sftp> pwd
+  Remote working directory: /home/remoteuser
+  sftp> lpwd
+  Local working directory: /home/user
+  ```
+* The ```put``` command uploads a file to the remote system. 
+  ```console
+  sftp> mkdir hostbackup
+  sftp> cd hostbackup
+  sftp> put /etc/hosts
+  Uploading /etc/hosts to /home/remoteuser/hostbackup/hosts
+  /etc/hosts                                 100%  227     0.2KB/s   00:00
+  ```
+* The ```get``` command downloads a file from the remote system. 
+  ```console
+  sftp> get /etc/yum.conf
+  Fetching /etc/yum.conf to yum.conf
+  /etc/yum.conf                              100%  813     0.8KB/s   00:00
+  sftp> exit
+  [user@host ~]$
+  ```
+* The ```exit``` command exits the sftp session.
+* To copy a whole directory tree recursively, use the ```sftp``` command ```-r``` option. The following example recursively copies the ```/home/user/director```y local directory to the remotehost machine.
+  ```console
+  sftp> put -r directory
+  Uploading directory/ to /home/remoteuser/directory
+  Entering directory/
+  file1                                      100%    0     0.0KB/s   00:00
+  file2                                      100%    0     0.0KB/s   00:00
+  sftp> ls -l
+  drwxr-xr-x    2 student  student        32 Mar 21 07:51 directory
+  ```
+* To get a remote file with the ```sftp``` command on a single command line, without opening an interactive session, use the following syntax. You cannot use single command line syntax to put files on a remote host.
+  ```console
+  [user@host ~]$ sftp remoteuser@remotehost:/home/remoteuser/remotefile
+  Connected to remotehost.
+  Fetching /home/remoteuser/remotefile to remotefile
+  remotefile                                                       100%    7    15.7KB/s   00:00
+  ```
 
 
 <a name="13.5"></a>
