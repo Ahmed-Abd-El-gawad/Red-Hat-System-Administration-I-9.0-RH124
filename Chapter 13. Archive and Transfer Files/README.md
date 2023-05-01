@@ -245,6 +245,22 @@
   log  ssh-RLjDdarkKiW1
   [user@host ~]$
   ```
+* In this example, the content of the ```/var/log/``` directory is synchronized into the ```/tmp``` directory instead of creating the log directory in the ```/tmp``` directory.
+  ```console
+  [root@host ~]# rsync -av /var/log/ /tmp
+  sending incremental file list
+  ./
+  README
+  boot.log
+  ...output omitted...
+  tuned/tuned.log
 
-
+  sent 11,592,389 bytes  received 778 bytes  23,186,334.00 bytes/sec
+  total size is 11,586,755  speedup is 1.00
+  [root@host ~]# ls /tmp
+  anaconda                  dnf.rpm.log-20190318  private
+  audit                     dnf.rpm.log-20190324  qemu-ga
+  boot.log                  dnf.rpm.log-20190331  README
+  ...output omitted...
+  ```
 
