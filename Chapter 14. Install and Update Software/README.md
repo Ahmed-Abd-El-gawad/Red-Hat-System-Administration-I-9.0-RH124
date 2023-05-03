@@ -194,6 +194,7 @@
 | --- |
 | [Manage Software Packages with DNF](#manage) |
 | [Find Software with DNF](#find) |
+| [Install and Remove Software with DNF](#remove) |
 
 <a name="manage"></a>
 * DNF (Dandified YUM) replaced YUM as the package manager in Red Hat Enterprise Linux 9. DNF commands are functionally the same as YUM commands. For compatibility, YUM commands still exist as symbolic links to DNF:
