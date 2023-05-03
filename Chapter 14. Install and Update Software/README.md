@@ -82,8 +82,12 @@
 
 | Content |
 | --- |
+| [Software Packages and RPM](#format) |
 
-<a name=""></a>
+<a name="format"></a>
+* ![rpm_name_structure](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2014.%20Install%20and%20Update%20Software/rpm_name_structure.svg)
+
+
 * 
 
 
