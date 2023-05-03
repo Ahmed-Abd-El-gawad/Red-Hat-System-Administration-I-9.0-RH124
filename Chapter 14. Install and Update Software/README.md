@@ -192,9 +192,23 @@
 
 | Content |
 | --- |
+| [Manage Software Packages with DNF](#manage) |
 
-<a name=""></a>
-* 
+<a name="manage"></a>
+* DNF (Dandified YUM) replaced YUM as the package manager in Red Hat Enterprise Linux 9. DNF commands are functionally the same as YUM commands. For compatibility, YUM commands still exist as symbolic links to DNF:
+  ```console
+  [user@host ~]$ ls -l /bin/ | grep yum | awk '{print $9 " " $10 " " $11}'
+  yum -> dnf-3
+  yum-builddep -> /usr/libexec/dnf-utils
+  yum-config-manager -> /usr/libexec/dnf-utils
+  yum-debug-dump -> /usr/libexec/dnf-utils
+  yum-debug-restore -> /usr/libexec/dnf-utils
+  yumdownloader -> /usr/libexec/dnf-utils
+  yum-groups-manager -> /usr/libexec/dnf-utils
+  ```
+* The low-level ```rpm``` command can be used to install packages, but it is not designed to work with package repositories or to resolve dependencies from multiple sources automatically.
+* DNF improves RPM-based software installation and updates. With the ```dnf``` command, you can install, update, remove, and get information about software packages and their dependencies. You can get a history of transactions and work with multiple Red Hat and third-party software repositories.
+
 
 
 <a name="14.7"></a>
