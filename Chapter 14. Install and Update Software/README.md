@@ -16,6 +16,8 @@
 | [dnf](#dnf) |
 | [Simple Content Access](#SCA) |
 | [subscription-manager](#subscription-manager) |
+| [Activation Keys](#key) |
+| [Entitlement Certificates](#cert) |
 
 <a name="dnf"></a>
 * ```dnf``` command obtain software packages and updates through a content distribution network that the Red Hat Content Delivery Network provides.
@@ -63,6 +65,16 @@
     Unregistering from: subscription.rhsm.redhat.com:443/subscription
     System has been unregistered.
     ```
+
+<a name="key"></a>
+* An activation key is a preconfigured subscription management file that available for use with both Red Hat Satellite Server and subscription management through the Red Hat Customer Portal. Use the ```subscription-manager``` command with activation keys to simplify the registration and assignment of predefined subscriptions. This method of registration is beneficial for automating installations and deployments. For organizations that enable Simple Content Access, activation keys can register systems and enable repositories without needing to attach subscriptions.
+
+<a name="cert"></a>
+* Digital certificates store current entitlement information on the local system. The registered system stores the entitlement certificates under the ```/etc/pki``` directory.
+  * ```/etc/pki/product``` certificates indicates installed Red Hat products.
+  * ```/etc/pki/consumer``` certificates identifies the Red Hat account for registration.
+  * ```/etc/pki/entitlement``` certificates indicate which subscriptions are attached.
+* The ```rct``` command inspects the certificates and the subscription-manager command examines the attached subscriptions on the system.
 
 
 <a name="14.3"></a>
