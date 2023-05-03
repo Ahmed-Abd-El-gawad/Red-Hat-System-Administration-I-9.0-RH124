@@ -87,6 +87,10 @@
 <a name="format"></a>
 * ![rpm_name_structure](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2014.%20Install%20and%20Update%20Software/rpm_name_structure.svg)
 
+  * ***NAME*** is one or more words describing the contents (```coreutils```).
+  * ***VERSION*** is the version number of the original software (```8.32```).
+  * ***RELEAS***E is the release number of the package based on that version, and is set by the packager, who might not be the original software developer (```31.el9```).
+  * ***ARCH*** is the processor architecture the package is compiled to run on. The ```x86_64``` value indicates that this package is built for the 64-bit version of the x86 instruction set (as opposed to ```aarch64``` for 64-bit ARM, and so on).
 
 * 
 
