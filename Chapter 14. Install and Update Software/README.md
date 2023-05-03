@@ -83,6 +83,7 @@
 | Content |
 | --- |
 | [Software Packages and RPM](#format) |
+| [Examine RPM Packages](#examine) |
 
 <a name="format"></a>
 * ![rpm_name_structure](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2014.%20Install%20and%20Update%20Software/rpm_name_structure.svg)
@@ -92,7 +93,76 @@
   * ***RELEAS***E is the release number of the package based on that version, and is set by the packager, who might not be the original software developer (```31.el9```).
   * ***ARCH*** is the processor architecture the package is compiled to run on. The ```x86_64``` value indicates that this package is built for the 64-bit version of the x86 instruction set (as opposed to ```aarch64``` for 64-bit ARM, and so on).
 
-* 
+<a name="examine"></a>
+* Use the ```rpm``` command ```-p``` option to get information about a downloaded but uninstalled package file. 
+* Retrieve general information about installed packages:
+  * ```rpm -qa``` : List all installed packages.
+  * ```rpm -qf FILENAME``` : Determine what package provides FILENAME.
+    ```console
+    [user@host ~]$ rpm -qf /etc/yum.repos.d
+    redhat-release-9.1-1.0.el9.x86_64
+    ```
+* Get information about specific packages:
+  * ```rpm -q``` : Lists the currently installed package version.
+    ```console
+    [user@host ~]$ rpm -q dnf
+    dnf-4.10.0-4.el9.noarch
+    ```
+  * ```rpm -qi``` : Get detailed package information.
+  * ```rpm -ql``` : List the files that the package installs.
+    ```console
+    [user@host ~]$ rpm -ql dnf
+    /usr/bin/dnf
+    /usr/lib/systemd/system/dnf-makecache.service
+    /usr/lib/systemd/system/dnf-makecache.timer
+    /usr/share/bash-completion
+    /usr/share/bash-completion/completions
+    /usr/share/bash-completion/completions/dnf
+    ...output omitted...
+    ```
+  * ```rpm -qc``` : List only the configuration files that the package installs.
+    ```console
+    [user@host ~]$ rpm -qc openssh-clients
+    /etc/ssh/ssh_config
+    /etc/ssh/ssh_config.d/50-redhat.conf
+    ```
+  * ```rpm -qd``` : List only the documentation files that the package installs.
+    ```console
+    [user@host ~]$ rpm -qd openssh-clients
+    /usr/share/man/man1/scp.1.gz
+    /usr/share/man/man1/sftp.1.gz
+    /usr/share/man/man1/ssh-add.1.gz
+    /usr/share/man/man1/ssh-agent.1.gz
+    ...output omitted...
+    ```
+  * ```rpm -q --scripts``` : List the shell scripts that run before or after you install or remove the package.
+    ```console
+    [user@host ~]$ rpm -q --scripts openssh-server
+    preinstall scriptlet (using /bin/sh):
+    getent group sshd >/dev/null || groupadd -g 74 -r sshd || :
+    getent passwd sshd >/dev/null || \
+      useradd -c "Privilege-separated SSH" -u 74 -g sshd \
+      -s /sbin/nologin -r -d /usr/share/empty.sshd sshd 2> /dev/null || :
+    postinstall scriptlet (using /bin/sh):
+
+    if [ $1 -eq 1 ] && [ -x "/usr/lib/systemd/systemd-update-helper" ]; then
+        # Initial installation
+        /usr/lib/systemd/systemd-update-helper install-system-units sshd.service sshd.socket || :
+    fi
+    ...output omitted...
+    ```
+  * ```rpm -q --changelog``` : List the change log information for the package.
+    ```console
+    [user@host ~]$ rpm -q --changelog audit
+    * Tue Feb 22 2022 Sergio Correia <scorreia@redhat.com> - 3.0.7-101
+    - Adjust sample-rules dir permissions
+      Resolves: rhbz#2054432 - /usr/share/audit/sample-rules is no longer readable by non-root users
+
+    * Tue Jan 25 2022 Sergio Correia <scorreia@redhat.com> - 3.0.7-100
+    - New upstream release, 3.0.7
+      Resolves: rhbz#2019929 - capability=unknown-capability(39) in audit messages
+    ...output omitted...
+    ```
 
 
 <a name="14.5"></a>
