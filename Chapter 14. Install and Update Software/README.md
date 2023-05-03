@@ -193,6 +193,7 @@
 | Content |
 | --- |
 | [Manage Software Packages with DNF](#manage) |
+| [Find Software with DNF](#find) |
 
 <a name="manage"></a>
 * DNF (Dandified YUM) replaced YUM as the package manager in Red Hat Enterprise Linux 9. DNF commands are functionally the same as YUM commands. For compatibility, YUM commands still exist as symbolic links to DNF:
@@ -209,6 +210,22 @@
 * The low-level ```rpm``` command can be used to install packages, but it is not designed to work with package repositories or to resolve dependencies from multiple sources automatically.
 * DNF improves RPM-based software installation and updates. With the ```dnf``` command, you can install, update, remove, and get information about software packages and their dependencies. You can get a history of transactions and work with multiple Red Hat and third-party software repositories.
 
+<a name="find"></a>
+* The ```dnf help``` command displays usage information. The ```dnf list``` command displays installed and available packages.
+  ```console
+  [user@host ~]$ dnf list 'http*'
+  Available Packages
+  http-parser.i686               2.9.4-6.el9    rhel-9.0-for-x86_64-appstream-rpms
+  http-parser.x86_64             2.9.4-6.el9    rhel-9.0-for-x86_64-appstream-rpms
+  httpcomponents-client.noarch   4.5.13-2.el9   rhel-9.0-for-x86_64-appstream-rpms
+  httpcomponents-core.noarch     4.4.13-6.el9   rhel-9.0-for-x86_64-appstream-rpms
+  httpd.x86_64                   2.4.51-5.el9   rhel-9.0-for-x86_64-appstream-rpms
+  httpd-devel.x86_64             2.4.51-5.el9   rhel-9.0-for-x86_64-appstream-rpms
+  httpd-filesystem.noarch        2.4.51-5.el9   rhel-9.0-for-x86_64-appstream-rpms
+  httpd-manual.noarch            2.4.51-5.el9   rhel-9.0-for-x86_64-appstream-rpms
+  httpd-tools.x86_64             2.4.51-5.el9   rhel-9.0-for-x86_64-appstream-rpms
+  ```
+* 
 
 
 <a name="14.7"></a>
