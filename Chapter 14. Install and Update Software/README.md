@@ -13,9 +13,16 @@
 
 | Content |
 | --- |
+| [dnf](#dnf) |
+| [Simple Content Access](#SCA) |
 
-<a name=""></a>
-* 
+<a name="dnf"></a>
+* ```dnf``` command obtain software packages and updates through a content distribution network that the Red Hat Content Delivery Network provides.
+
+<a name="SCA"></a>
+* Simple Content Access (SCA) is a Red Hat subscription management capability. When you enable SCA for your organization, the entitlement process is simplified. SCA eliminates the requirement to attach subscriptions at a per-system level. You register your systems, enable the repositories that each system needs, and begin installing software packages.
+
+
 
 
 <a name="14.3"></a>
