@@ -225,7 +225,53 @@
   httpd-manual.noarch            2.4.51-5.el9   rhel-9.0-for-x86_64-appstream-rpms
   httpd-tools.x86_64             2.4.51-5.el9   rhel-9.0-for-x86_64-appstream-rpms
   ```
-* 
+* The ```dnf search KEYWORD``` command lists packages by keywords found in the name and summary fields only. To search for packages with "web server" in their name, summary, and description fields, use ```search all```:
+  ```console
+  [user@host ~]$ dnf search all 'web server'
+  ================== Summary & Description Matched: web server ===================
+  nginx.x86_64 : A high performance web server and reverse proxy server
+  pcp-pmda-weblog.x86_64 : Performance Co-Pilot (PCP) metrics from web server logs
+  ========================= Summary Matched: web server ==========================
+  libcurl.x86_64 : A library for getting files from web servers
+  libcurl.i686 : A library for getting files from web servers
+  ======================= Description Matched: web server ========================
+  freeradius.x86_64 : High-performance and highly configurable free RADIUS server
+  git-instaweb.noarch : Repository browser in gitweb
+  http-parser.i686 : HTTP request/response parser for C
+  http-parser.x86_64 : HTTP request/response parser for C
+  httpd.x86_64 : Apache HTTP Server
+  mod_auth_openidc.x86_64 : OpenID Connect auth module for Apache HTTP Server
+  mod_jk.x86_64 : Tomcat mod_jk connector for Apache
+  mod_security.x86_64 : Security module for the Apache HTTP Server
+  varnish.i686 : High-performance HTTP accelerator
+  varnish.x86_64 : High-performance HTTP accelerator
+  ...output omitted...
+  ```
+* The ```dnf info PACKAGENAME``` command returns detailed information about a package, including the needed disk space for installation. For example, the following command retrieves information about the ```httpd``` package:
+  ```console
+  [user@host ~]$ dnf info httpd
+  Available Packages
+  Name         : httpd
+  Version      : 2.4.51
+  Release      : 5.el9
+  Architecture : x86_64
+  Size         : 1.5 M
+  Source       : httpd-2.4.51-5.el9.src.rpm
+  Repository   : rhel-9.0-for-x86_64-appstream-rpms
+  Summary      : Apache HTTP Server
+  URL          : https://httpd.apache.org/
+  License      : ASL 2.0
+  Description  : The Apache HTTP Server is a powerful, efficient, and extensible
+               : web server.
+  ```
+* The ```dnf provides PATHNAME``` command displays packages that match the specified path name (the path names often include wildcard characters). For example, the following command finds packages that provide the ```/var/www/html``` directory:
+  ```console
+  [user@host ~]$ dnf provides /var/www/html
+  httpd-filesystem-2.4.51-5.el9.noarch : The basic directory layout for the Apache HTTP Server
+  Repo        : rhel-9.0-for-x86_64-appstream-rpms
+  Matched from:
+  Filename    : /var/www/html
+  ```
 
 
 <a name="14.7"></a>
