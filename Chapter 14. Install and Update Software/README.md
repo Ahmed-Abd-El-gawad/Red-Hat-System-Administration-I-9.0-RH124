@@ -84,6 +84,7 @@
 | --- |
 | [Software Packages and RPM](#format) |
 | [Examine RPM Packages](#examine) |
+| [Install RPM Packages](#install) |
 
 <a name="format"></a>
 * ![rpm_name_structure](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2014.%20Install%20and%20Update%20Software/rpm_name_structure.svg)
@@ -163,6 +164,27 @@
       Resolves: rhbz#2019929 - capability=unknown-capability(39) in audit messages
     ...output omitted...
     ```
+* Query local package files:
+  * ```rpm -qlp``` : List the files that the local package installs.
+    ```console
+    [user@host ~]$ ls -l podman-4.0.0-6.el9.x86_64.rpm
+    -rw-r--r--. 1 student student 13755101 Mar 22 11:35 podman-4.0.0-6.el9.x86_64.rpm2637-15.el9.x86_64.rpm
+    [user@host ~]$ rpm -qlp podman-4.0.0-6.el9.x86_64.rpm
+    /etc/cni/net.d
+    /etc/cni/net.d/87-podman-bridge.conflist
+    /usr/bin/podman
+    ...output omitted...
+    ```
+
+<a name="install"></a>
+* se the ```rpm``` command to install an RPM package that you downloaded to your local directory.
+  ```console
+  [root@host ~]# rpm -ivh podman-4.0.0-6.el9.x86_64.rpm
+  Verifying...                          ################################# [100%]
+  Preparing...                          ################################# [100%]
+  Updating / installing...
+          podman-2:4.0.0-6              ################################# [100%]
+  ```
 
 
 <a name="14.5"></a>
