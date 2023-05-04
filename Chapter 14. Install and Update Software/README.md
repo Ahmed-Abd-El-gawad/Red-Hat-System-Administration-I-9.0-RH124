@@ -195,6 +195,7 @@
 | [Manage Software Packages with DNF](#manage) |
 | [Find Software with DNF](#find) |
 | [Install and Remove Software with DNF](#remove) |
+| [View Transaction History](#hist) |
 
 <a name="manage"></a>
 * DNF (Dandified YUM) replaced YUM as the package manager in Red Hat Enterprise Linux 9. DNF commands are functionally the same as YUM commands. For compatibility, YUM commands still exist as symbolic links to DNF:
@@ -324,6 +325,38 @@
   ...output omitted...
   ```
 
+<a name="hist"></a>
+* All installation and removal transactions are logged in the ```/var/log/dnf.rpm.log``` file.
+  ```console
+  [user@host ~]$ tail -5 /var/log/dnf.rpm.log
+  2022-03-23T16:46:43-0400 SUBDEBUG Installed: python-srpm-macros-3.9-52.el9.noarch
+  2022-03-23T16:46:43-0400 SUBDEBUG Installed: redhat-rpm-config-194-1.el9.noarch
+  2022-03-23T16:46:44-0400 SUBDEBUG Installed: elfutils-0.186-1.el9.x86_64
+  2022-03-23T16:46:44-0400 SUBDEBUG Installed: rpm-build-4.16.1.3-11.el9.x86_64
+  2022-03-23T16:46:44-0400 SUBDEBUG Installed: rpmdevtools-9.5-1.el9.noarch
+  ```
+  * The ```dnf history``` command displays a summary of installation and removal transactions.
+  ```console
+  [root@host ~]# dnf history
+  ID     | Command line              | Date and time    | Action(s)      | Altered
+  --------------------------------------------------------------------------------
+       7 | group install RPM Develop | 2022-03-23 16:46 | Install        |   20
+       6 | install httpd             | 2022-03-23 16:21 | Install        |   10 EE
+       5 | history undo 4            | 2022-03-23 15:04 | Removed        |   20
+       4 | group install RPM Develop | 2022-03-23 15:03 | Install        |   20
+       3 |                           | 2022-03-04 03:36 | Install        |    5
+       2 |                           | 2022-03-04 03:33 | Install        |  767 EE
+       1 | -y install patch ansible- | 2022-03-04 03:31 | Install        |   80
+  ```
+* The ```dnf history undo``` command reverses a transaction.
+  ```console
+  [root@host ~]# dnf history undo 6
+  ...output omitted...
+  Removing:
+   apr-util-openssl x86_64 1.6.1-20.el9 @rhel-9.0-for-x86_64-appstream-rpms  24 k
+   httpd            x86_64 2.4.51-5.el9 @rhel-9.0-for-x86_64-appstream-rpms 4.7 M
+  ...output omitted...
+  ```
 
 
 <a name="14.7"></a>
