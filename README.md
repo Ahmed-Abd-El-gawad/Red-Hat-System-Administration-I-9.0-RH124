@@ -16,3 +16,4 @@ A learning guide to keep track of the content discussed or commands used.
 | [Chapter 12. Manage Networking](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2012.%20Manage%20Networking/README.md) |
 | [Chapter 13. Archive and Transfer Files](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2013.%20Archive%20and%20Transfer%20Files/README.md) |
 | [Chapter 14. Install and Update Software](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2014.%20Install%20and%20Update%20Software/README.md) |
+| [Chapter 15. Access Linux File Systems](https://github.com/Ahmed-Abd-El-gawad/Red-Hat-System-Administration-I-9.0-RH124/blob/main/Chapter%2015.%20Access%20Linux%20File%20Systems/README.md) |
