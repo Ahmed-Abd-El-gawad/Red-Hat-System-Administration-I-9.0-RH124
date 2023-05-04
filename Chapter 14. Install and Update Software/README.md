@@ -274,6 +274,57 @@
   Filename    : /var/www/html
   ```
 
+<a name="remove"></a>
+* In Red Hat Enterprise Linux 9, the ```dnf``` command can install two kinds of package groups. 
+  * Regular groups are collections of packages. 
+  * Environment groups are collections of regular groups. 
+  * The packages or groups that these collections provide might be listed as mandatory (they must be installed if the group is installed), default (normally installed if the group is installed), or optional (not installed when the group is installed, unless specifically requested).
+  * Similar to the ```dnf list``` command, the ```dnf group list``` command shows the names of installed and available groups.
+    ```
+    [user@host ~]$ dnf group list
+    Available Environment Groups:
+       Server with GUI
+       Server
+       Minimal Install
+    ...output omitted...
+    Available Groups:
+       Legacy UNIX Compatibility
+       Console Internet Tools
+       Container Management
+    ...output omitted...
+    ```
+  * Some groups are normally installed through environment groups and are hidden by default. List these hidden groups with the ```dnf group list hidden``` command.
+* The ```dnf group info``` command displays information about a group. It includes a list of mandatory, default, and optional package names.
+  ```console
+  [user@host ~]$ dnf group info "RPM Development Tools"
+  Group: RPM Development Tools
+   Description: Tools used for building RPMs, such as rpmbuild.
+   Mandatory Packages:
+     redhat-rpm-config
+     rpm-build
+   Default Packages:
+     rpmdevtools
+   Optional Packages:
+     rpmlint
+  ```
+* The ```dnf group install``` command installs a group that installs its mandatory and default packages and their dependent packages.
+  ```console
+  [root@host ~]# dnf group install "RPM Development Tools"
+  ...output omitted...
+  Installing Groups:
+   RPM Development Tools
+
+  Transaction Summary
+  ================================================================================
+  Install  19 Packages
+
+  Total download size: 4.7 M
+  Installed size: 15 M
+  Is this ok [y/N]: y
+  ...output omitted...
+  ```
+
+
 
 <a name="14.7"></a>
 ## 14.7 Enable DNF Software Repositories
