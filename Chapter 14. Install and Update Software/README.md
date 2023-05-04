@@ -196,6 +196,7 @@
 | [Find Software with DNF](#find) |
 | [Install and Remove Software with DNF](#remove) |
 | [View Transaction History](#hist) |
+| [Summary of DNF Commands](#summary) |
 
 <a name="manage"></a>
 * DNF (Dandified YUM) replaced YUM as the package manager in Red Hat Enterprise Linux 9. DNF commands are functionally the same as YUM commands. For compatibility, YUM commands still exist as symbolic links to DNF:
@@ -357,6 +358,22 @@
    httpd            x86_64 2.4.51-5.el9 @rhel-9.0-for-x86_64-appstream-rpms 4.7 M
   ...output omitted...
   ```
+
+<a name="summary"></a>
+* Summary
+ 
+    | Task: | Command: |
+    | --- | --- |
+    | List installed and available packages by name | ```dnf list [NAME-PATTERN]``` |
+    | List installed and available groups | ```dnf group list``` |
+    | Search for a package by keyword | ```dnf search KEYWORD``` |
+    | Show details of a package | ```dnf info PACKAGENAME``` |
+    | Install a package | ```dnf install PACKAGENAME``` |
+    | Install a package group | ```dnf group install GROUPNAME``` |
+    | Update all packages | ```dnf update``` |
+    | Remove a package | ```dnf remove PACKAGENAME``` |
+    | Display transaction history | ```dnf history``` |
+
 
 
 <a name="14.7"></a>
