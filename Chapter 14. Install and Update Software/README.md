@@ -375,14 +375,68 @@
     | Display transaction history | ```dnf history``` |
 
 
-
 <a name="14.7"></a>
 ## 14.7 Enable DNF Software Repositories
 
 | Content |
 | --- |
+| [repolist](#repolist) |
+| [config-manager](#config-manager) |
+| [Add DNF Repositories](#add) |
+| [RPM Configuration Packages for Local Repositories](#rpm) |
 
-<a name=""></a>
-* 
+<a name="repolist"></a>
+* In many cases, systems have access to numerous Red Hat repositories. The ```dnf repolist all``` command lists all available repositories and their statuses:
+  ```console
+  [user@host ~]$ dnf repolist all
+  repo id                                repo name                status
+  rhel-9.0-for-x86_64-appstream-rpms     RHEL 9.0 AppStream       enabled
+  rhel-9.0-for-x86_64-baseos-rpms        RHEL 9.0 BaseOS          enabled
+  ```
 
+<a name="config-manager"></a>
+* The ```dnf config-manager``` command can enable and disable repositories. For example, the following command enables the ```rhel-9-server-debug-rpms``` repository:
+  ```console
+  [user@host ~]$ dnf config-manager --enable rhel-9-server-debug-rpms
+  ```
 
+<a name="add"></a>
+* The ```dnf config-manager``` command can also add repositories to the machine. The following command creates a ```.repo``` file by using an existing repository's URL.
+  ```console
+  [user@host ~]$ dnf config-manager \
+  --add-repo="https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/"
+  Adding repo from: https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/
+  ```
+
+<a name="rpm"></a>
+* Some repositories provide a configuration file and GPG public key as part of an RPM package to simplify their installation. The ```dnf install``` command can download and install these RPM packages.
+
+  For example, the following command installs the RHEL9 Extra Packages for Enterprise Linux (EPEL) repository RPM:
+  ```console
+  [user@host ~]$ rpm --import \
+  http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+  [user@host ~]$ dnf install \
+  https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+  ```
+* The ```.repo``` files often list multiple repository references in a single file. Each repository reference begins with a single-word name in square brackets.
+  ```console
+  [user@host ~]$ cat /etc/yum.repos.d/epel.repo
+  [epel]
+  name=Extra Packages for Enterprise Linux $releasever - $basearch
+  #baseurl=https://download.example/pub/epel/$releasever/Everything/$basearch/
+  metalink=https://mirrors.fedoraproject.org/metalink?repo=epel-$releasever&arch=$basearch&infra=$infra&content=$contentdir
+  enabled=1
+  gpgcheck=1
+  countme=1
+  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-$releasever
+  ...output omitted...
+  [epel-source]
+  name=Extra Packages for Enterprise Linux $releasever - $basearch - Source
+  #baseurl=https://download.example/pub/epel/$releasever/Everything/source/tree/
+  metalink=https://mirrors.fedoraproject.org/metalink?repo=epel-source-$releasever&arch=$basearch&infra=$infra&content=$contentdir
+  enabled=0
+  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-$releasever
+  gpgcheck=1
+  ```
+  
+  
