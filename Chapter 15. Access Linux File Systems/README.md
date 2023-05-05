@@ -216,8 +216,244 @@
 
 | Content |
 | --- |
+| [Search for Files](#Search_for_Files) |
+| [Locate Files by Name](#Locate_Files_by_Name) |
+| [Search for Files in Real Time](#Search_for_Files_in_Real_Time) |
+| [Search for Files Based on Ownership or Permission](#Search_for_Files_Based_on_Ownership_or_Permission) |
 
-<a name=""></a>
-* 
+<a name="Search_for_Files"></a>
+* Search for Files
+  * A system administrator needs tools to search for files that match specific criteria on the file system. This section discusses two commands to search for files in the file-system hierarchy:
+  * The ```locate``` command searches a pre-generated index for file names or file paths and returns the results instantly.
+  * The ```find``` command searches for files in real time by parsing the file-system hierarchy.
+
+<a name="Locate_Files_by_Name"></a>
+* Locate Files by Name
+  * The ```locate``` command searches for files based on the name or path to the file. The command is fast, because it looks up this information from the ```mlocate``` database. However, this database does not update in real time and requires frequent updates for accurate results. This feature also means that the ```locate``` command does not search for files that were created since the last database update.
+  * The locate database updates automatically every day. However, the ```root``` user might issue the ```updatedb``` command to force an immediate update.
+    ```console
+    [root@host ~]# updatedb
+    ```
+  * The ```locate``` command restricts results for unprivileged users. To see the resulting file name, the user must have search permission on the directory where the file resides. For example, locate the files that the ```developer``` user can read, and that match the passwd keyword in the name or path:
+    ```console
+    [developer@host ~]$ locate passwd
+    /etc/passwd
+    /etc/passwd-
+    /etc/pam.d/passwd
+    ...output omitted...
+    ```
+  * The following example show the file name or path for a partial match with the search query:
+    ```console
+    [root@host ~]# locate image
+    /etc/selinux/targeted/contexts/virtual\_image_context
+    /usr/bin/grub2-mkimage
+    /usr/lib/sysimage
+    ...output omitted...
+    ```
+  * The ```locate``` command ```-i``` option performs a case-insensitive search. This option returns all possible combinations of matching uppercase and lowercase letters:
+    ```console
+    [developer@host ~]$ locate -i messages
+    ...output omitted...
+    /usr/share/locale/zza/LC_MESSAGES
+    /usr/share/makedumpfile/eppic_scripts/ap_messages_3_10_to_4_8.c
+    /usr/share/vim/vim82/ftplugin/msmessages.vim
+    ...output omitted...
+    ```
+  * The ```locate``` command ```-n``` option limits the number of returned search results. The following example limits the search results from the ```locate``` command to the first five matches:
+    ```console
+    [developer@host ~]$ locate -n 5 passwd
+    /etc/passwd
+    /etc/passwd-
+    /etc/pam.d/passwd
+    ...output omitted...
+    ```
+
+<a name="Search_for_Files_in_Real_Time"></a>
+* Search for Files in Real Time
+  * The ```find``` command locates files by searching in real time in the file-system hierarchy. This command is slower but more accurate than the ```locate``` command. The ```find``` command also searches for files based on criteria other than the file name, such as the file's permissions, type of file, size, or modification time.
+  * The ```find``` command looks at files in the file system with the user account that executed the search. The user that runs the ```find``` command must have read and execute permission on a directory to examine its contents.
+  * The first argument to the ```find``` command is the directory to search. If the ```find``` command omits the directory argument, then it starts the search in the current directory and looks for matches in any subdirectory.
+  * To search for files by file name, use the ```find``` command ```-name FILENAME``` option to return the path of files that match ***FILENAME*** exactly. For example, to search for the ```sshd_config``` files in the root ```/``` directory, run the following command:
+    ```console
+    [root@host ~]# find / -name sshd_config
+    /etc/ssh/sshd_config
+    ```
+  * Wildcards are available to search for a file name and to return all results for a partial match. With wildcards, it is essential to quote the file name, to prevent the terminal from misinterpreting the wildcard.
+  * In the following example, starting in the ```/``` directory, search for files that end with the ```.txt``` extension:
+    ```console
+    [root@host ~]# find / -name '*.txt'
+    ...output omitted...
+    /usr/share/libgpg-error/errorref.txt
+    /usr/share/licenses/audit-libs/lgpl-2.1.txt
+    /usr/share/licenses/pam/gpl-2.0.txt
+    ...output omitted...
+    ```
+  * To search for files in the ```/etc/``` directory that contain the ```pass``` string, run the following command:
+    ```console
+    [root@host ~]# find /etc -name '*pass*'
+    /etc/passwd-
+    /etc/passwd
+    /etc/security/opasswd
+    ...output omitted...
+    ```
+  * To perform a case-insensitive search for a file name, use the ```find``` command ```-iname``` option, followed by the file name to search. To search files with case-insensitive text that matches the ```messages``` string in their names in the root ```/``` directory, run the following command:
+    ```console
+    [root@host ~]# find / -iname '*messages*'
+    /sys/power/pm_debug_messages
+    /usr/lib/locale/C.utf8/LC_MESSAGES
+    /usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES
+    ...output omitted...
+    ```
+
+Search for Files Based on Ownership or Permission
+The find command searches for files based on their ownership or permissions. The find command -user and -group options search by a user and group name, or by user ID and group ID.
+
+To search for files in the /home/developer directory that the developer user owns:
+
+[developer@host ~]$ find -user developer
+.
+./.bash_logout
+./.bash_profile
+...output omitted...
+To search for files in the /home/developer directory that the developer group owns:
+
+[developer@host ~]$ find -group developer
+.
+./.bash_logout
+./.bash_profile
+...output omitted...
+To search for files in the /home/developer directory that the 1000 user ID owns:
+
+[developer@host ~]$ find -uid 1000
+.
+./.bash_logout
+./.bash_profile
+...output omitted...
+To search for files in the /home/developer directory that the 1000 group ID owns:
+
+[developer@host ~]$ find -gid 1000
+.
+./.bash_logout
+./.bash_profile
+...output omitted...
+The find command -user and -group options search for files where the file owner and group owner are different. The following example lists files that the root user owns and with the mail group:
+
+[root@host ~]# find / -user root -group mail
+/var/spool/mail
+...output omitted...
+The find command -perm option looks for files with a particular permission set. The octal values define the permissions with 4, 2, and 1 for read, write, and execute. Permissions are preceded with a / or - sign to control the search results.
+
+Octal permission preceded by the / sign matches files where at least one permission is set for user, group, or other for that permission set. A file with the r--r--r-- permissions does not match the /222 permission but matches the rw-r--r-- permission. A - sign before the permission means that all three parts of the permissions must match. For the previous example, files with the rw-rw-rw- permissions match. You can also use the find command -perm option with the symbolic method for permissions.
+
+For example, the following commands match any file in the /home directory for which the owning user has read, write, and execute permissions, members of the owning group have read and write permissions, and others have read-only access. Both commands are equivalent, but the first one uses the octal method for permissions while the second one uses the symbolic methods.
+
+[root@host ~]# find /home -perm 764
+...output omitted...
+[root@host ~]# find /home -perm u=rw,g=rwx,o=r
+...output omitted...
+The find command -ls option is very convenient when searching files by permissions, because it provides information for the files including their permissions.
+
+[root@host ~]# find /home -perm 764 -ls
+ 26207447   0 -rwxrw-r--   1 user  user   0 May 10 04:29 /home/user/file1
+To search for files for which the user has at least write and execute permissions, the group has at least write permission, and others have at least read permission:
+
+[root@host ~]# find /home -perm -324
+...output omitted...
+[root@host ~]# find /home -perm -u=wx,g=w,o=r
+...output omitted...
+To search for files for which the user has read permissions, or the group has at least read permissions, or others have at least write permission:
+
+[root@host ~]# find /home -perm /442
+...output omitted...
+[root@host ~]# find /home -perm /u=r,g=r,o=w
+...output omitted...
+When used with / or - signs, the 0 value works as a wildcard because it means any permission.
+
+To search for any file in the /home/developer directory for which others have at least read access on the host machine:
+
+[developer@host ~]$ find -perm -004
+...output omitted...
+[developer@host ~]$ find -perm -o=r
+...output omitted...
+To search for all files in the /home/developer directory where others have write permission:
+
+[developer@host ~]$ find -perm -002
+...output omitted...
+[developer@host ~]$ find -perm -o=w
+...output omitted...
+Find Files Based on Size
+The find command -size option is followed by a numeric value, and the unit looks up files that match a specified size. Use the following list for the units with the find command -size option:
+
+For kilobytes, use the k unit with k always in lowercase.
+
+For megabytes, use the M unit with M always in uppercase.
+
+For gigabytes, use the G unit with G always in uppercase.
+
+You can use the plus + and minus - characters to include files that are larger and smaller than the given size, respectively. The following example shows a search for files with an exact size of 10 megabytes:
+
+[developer@host ~]$ find -size 10M
+...output omitted...
+To search for files with a size of more than 10 gigabytes:
+
+[developer@host ~]$ find -size +10G
+...output omitted...
+To search for files with a size of less than 10 kilobytes:
+
+[developer@host ~]$ find -size -10k
+...output omitted...
+Important
+The find command -size option rounds everything to single units. For example, the find -size 1M command shows files smaller than 1 MB because it rounds up all files to 1 MB.
+
+Search for Files Based on Modification Time
+The find command -mmin option, followed by the time in minutes, searches for all files with content that changed n minutes ago. The file's time stamp is rounded down and supports fractional values with the +n and -n range.
+
+To search for all files with content that changed 120 minutes ago:
+
+[root@host ~]# find / -mmin 120
+...output omitted...
+The + modifier in front of the minutes finds all files in the / directory that changed more than n minutes ago. To search for all files with content that changed 200 minutes ago:
+
+[root@host ~]# find / -mmin +200
+...output omitted...
+The - modifier searches for all files in the / directory that changed less than n minutes ago. The following example lists files that changed less than 150 minutes ago:
+
+[root@host ~]# find / -mmin -150
+...output omitted...
+Search for Files Based on File Type
+The find command -type option limits the search scope to a given file type. Use the following flags to limit the search scope:
+
+For regular files, use the f flag.
+
+For directories, use the d flag.
+
+For soft links, use the l flag.
+
+For block devices, use the b flag.
+
+Search for all directories in the /etc directory:
+
+[root@host ~]# find /etc -type d
+/etc
+/etc/tmpfiles.d
+/etc/systemd
+/etc/systemd/system
+/etc/systemd/system/getty.target.wants
+...output omitted...
+Search for all soft links in the / directory:
+
+[root@host ~]# find / -type l
+...output omitted...
+Search for all block devices in the /dev directory:
+
+[root@host ~]# find /dev -type b
+/dev/vda1
+/dev/vda
+The find command -links option followed by a number looks for all files with a specific hard link count. The number preceded by a + modifier looks for files with a higher count than the given hard link count. If the number precedes a - modifier, then the search is limited to files with a lower hard link count than the given number.
+
+Search for all regular files with more than one hard link:
+
+[root@host ~]# find / -type f -links +1
+...output omitted...
 
 
