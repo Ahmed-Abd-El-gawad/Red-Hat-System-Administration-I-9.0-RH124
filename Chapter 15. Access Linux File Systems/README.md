@@ -113,9 +113,102 @@
 
 | Content |
 | --- |
+| [Mount File Systems Manually](#Mount_File_Systems_Manually) |
+| [Identify a Block Device](#Identify_a_Block_Device) |
+| [Mount File System with the Partition Name](#Mount_File_System_with_the_Partition_Name) |
+| [Mount File System with Partition UUID](#Mount_File_System_with_Partition_UUID) |
+| [Automatically Mount Removable Storage Devices](#Automatically_Mount_Removable_Storage_Devices) |
+| [Unmount File Systems](#Unmount_File_Systems) |
 
-<a name=""></a>
-* 
+<a name="Mount_File_Systems_Manually"></a>
+* Mount File Systems Manually
+  * To access the file system on a removable storage device, you must mount the storage device. With the mount command, the ```root``` user can mount a file system manually. The first argument of the ```mount``` command specifies the file system to mount. The second argument specifies the directory as the mount point in the file-system hierarchy.
+  * You can mount the file system in one of the following ways with the ```mount``` command:
+    * With the device file name in the ```/dev directory```.
+    * With the UUID, a universally unique identifier of the device.
+
+<a name="Identify_a_Block_Device"></a>
+* Identify a Block Device
+  * A hot-pluggable storage device, whether a hard disk drive (HDD) or a solid-state device (SSD) in a server, or alternatively a USB storage device, might be plugged each time into a different port on a system. Use the ```lsblk``` command to list the details of a specified block device or of all the available devices.
+    ```console
+    [root@host ~]# lsblk
+    NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+    vda    252:0    0   10G  0 disk
+    ├─vda1 252:1    0    1M  0 part
+    ├─vda2 252:2    0  200M  0 part /boot/efi
+    ├─vda3 252:3    0  500M  0 part /boot
+    └─vda4 252:4    0  9.3G  0 part /
+    vdb    252:16   0    5G  0 disk
+    vdc    252:32   0    5G  0 disk
+    vdd    252:48   0    5G  0 disk
+    ```
+  * The partition size helps to identify the device when the partition name is unknown. For example, considering the previous output, if the size of the identified partition is 9.3 GB, then mount the ```/dev/vda4``` partition.
+
+<a name="Mount_File_System_with_the_Partition_Name"></a>
+* Mount File System with the Partition Name
+  * The following example mounts the ```/dev/vda4``` partition on the ```/mnt/data``` mount point.
+    ```console
+    [root@host ~]# mount /dev/vda4 /mnt/data
+    ```
+    The mount point directory must exist before mounting the file system. The /mnt directory exists for use as a temporary mount point.
+
+  * Device detection order and storage device naming can change when devices are added or removed on a system. It is recommended to use an unchanging device identifier for mount file systems consistently.
+
+<a name="Mount_File_System_with_Partition_UUID"></a>
+* Mount File System with Partition UUID
+  * One stable identifier that is associated with a file system is its universally unique identifier (UUID). This UUID is stored in the file system superblock and remains the same until the file system is re-created.
+  * The ```lsblk -fp``` command lists the full path of the device, the UUIDs and mount points, and the partition's file-system type. The mount point is blank when the file system is not mounted.
+    ```console
+    [root@host ~]# lsblk -fp
+    NAME        FSTYPE FSVER LABEL UUID                   FSAVAIL FSUSE% MOUNTPOINTS
+    /dev/vda
+    ├─/dev/vda1
+    ├─/dev/vda2 vfat   FAT16       7B77-95E7              192.3M     4% /boot/efi
+    ├─/dev/vda3 xfs          boot  2d67e6d0-...-1f091bf1  334.9M    32% /boot
+    └─/dev/vda4 xfs          root  efd314d0-...-ae98f652    7.7G    18% /
+    /dev/vdb
+    /dev/vdc
+    /dev/vdd
+    ```
+  * Mount the file system by the file-system UUID.
+    ```console
+    [root@host ~]# mount UUID="efd314d0-b56e-45db-bbb3-3f32ae98f652" /mnt/data
+    ```
+    
+<a name="Automatically_Mount_Removable_Storage_Devices"></a>
+* Automatically Mount Removable Storage Devices
+  * When using the graphical desktop environment, the system automatically mounts removable storage media when the media presence is detected.
+  * The removable storage device mounts at the ```/run/media/USERNAME/LABEL``` location. USERNAME is the name of the user that is logged in to the graphical environment. LABEL is an identifier, which is typically the label on the storage media.
+  * To safely detach a removable device, manually unmount all file systems on the device first.
+
+<a name="Unmount_File_Systems"></a>
+* Unmount File Systems
+  * System shutdown and reboot procedures unmount all file systems automatically. All file-system data that is flushed to the storage device, to ensure file system data integrity.
+  * The ```umount``` command uses the mount point as an argument to unmount a file system.
+    ```console
+    [root@host ~]# umount /mnt/data
+    ```
+  * Unmounting is not possible when the mounted file system is in use. All processes must stop accessing data under the mount point for the ```umount``` command to succeed.
+    
+    In the following example, the ```umount``` command fails because the shell uses the ```/mnt/data``` directory as its current working directory, and thus generates an error message.
+    ```console
+    [root@host ~]# cd /mnt/data
+    [root@host data]# umount /mnt/data
+    umount: /mnt/data: target is busy.
+    ```
+  * The ```lsof``` command lists all open files and the processes that are accessing the file system. The list helps to identify which processes are preventing the file system from successfully unmounting.
+    ```console
+    [root@host data]# lsof /mnt/data
+    COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+    bash    1593 root  cwd    DIR 253,17        6  128 /mnt/data
+    lsof    2532 root  cwd    DIR 253,17       19  128 /mnt/data
+    lsof    2533 root  cwd    DIR 253,17       19  128 /mnt/data
+    ```
+  * After identifying the processes, wait for the processes to complete or send the SIGTERM or ```SIGKILL``` signal to terminate them. In this case, it is sufficient to change the current working directory to a directory outside the mount point.
+    ```console
+    [root@host data]# cd
+    [root@host ~]# umount /mnt/data
+    ```
 
 
 <a name="15.5"></a>
