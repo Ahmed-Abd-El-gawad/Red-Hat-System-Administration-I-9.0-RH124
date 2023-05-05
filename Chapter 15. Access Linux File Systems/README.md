@@ -221,6 +221,8 @@
 | [Search for Files in Real Time](#Search_for_Files_in_Real_Time) |
 | [Search for Files Based on Ownership or Permission](#Search_for_Files_Based_on_Ownership_or_Permission) |
 | [Find Files Based on Size](#Find_Files_Based_on_Size) |
+| [Search for Files Based on Modification Time](#Search_for_Files_Based_on_Modification_Time) |
+| [Search for Files Based on File Type](#Search_for_Files_Based_on_File_Type) |
 
 <a name="Search_for_Files"></a>
 * Search for Files
@@ -407,62 +409,64 @@
     [developer@host ~]$ find -size +10G
     ...output omitted...
     ```
-To search for files with a size of less than 10 kilobytes:
+  * To search for files with a size of less than 10 kilobytes:
+    ```console
+    [developer@host ~]$ find -size -10k
+    ...output omitted...
+    ```
 
-[developer@host ~]$ find -size -10k
-...output omitted...
-Important
-The find command -size option rounds everything to single units. For example, the find -size 1M command shows files smaller than 1 MB because it rounds up all files to 1 MB.
+<a name="Search_for_Files_Based_on_Modification_Time"></a>
+* Search for Files Based on Modification Time
+  * The ```find``` command ```-mmin``` option, followed by the time in minutes, searches for all files with content that changed ```n``` minutes ago. The file's time stamp is rounded down and supports fractional values with the ```+n``` and ```-n``` range.
+  * To search for all files with content that changed 120 minutes ago:
+    ```console
+    [root@host ~]# find / -mmin 120
+    ...output omitted...
+    ```
+  * The ```+``` modifier in front of the minutes finds all files in the ```/``` directory that changed more than ```n``` minutes ago. To search for all files with content that changed 200 minutes ago:
+    ```console
+    [root@host ~]# find / -mmin +200
+    ...output omitted...
+    ```
+  * The ```-``` modifier searches for all files in the ```/``` directory that changed less than ```n``` minutes ago. The following example lists files that changed less than 150 minutes ago:
+    ```console
+    [root@host ~]# find / -mmin -150
+    ...output omitted...
+    ```
 
-Search for Files Based on Modification Time
-The find command -mmin option, followed by the time in minutes, searches for all files with content that changed n minutes ago. The file's time stamp is rounded down and supports fractional values with the +n and -n range.
+<a name="Search_for_Files_Based_on_File_Type"></a>
+* Search for Files Based on File Type
+  * The ```find``` command ```-type``` option limits the search scope to a given file type. Use the following flags to limit the search scope:
+    * For regular files, use the ```f``` flag.
+    * For directories, use the ```d``` flag.
+    * For soft links, use the ```l``` flag.
+    * For block devices, use the ```b``` flag.
+  * Search for all directories in the ```/etc``` directory:
+    ```console
+    [root@host ~]# find /etc -type d
+    /etc
+    /etc/tmpfiles.d
+    /etc/systemd
+    /etc/systemd/system
+    /etc/systemd/system/getty.target.wants
+    ...output omitted...
+    ```
+  * Search for all soft links in the ```/``` directory:
+    ```console
+    [root@host ~]# find / -type l
+    ...output omitted...
+    ```
+  * Search for all block devices in the ```/dev``` directory:
+    ```console
+    [root@host ~]# find /dev -type b
+    /dev/vda1
+    /dev/vda
+    ```
+  * The ```find``` command ```-links``` option followed by a number looks for all files with a specific hard link count. The number preceded by a ```+``` modifier looks for files with a higher count than the given hard link count. If the number precedes a ```-``` modifier, then the search is limited to files with a lower hard link count than the given number.
 
-To search for all files with content that changed 120 minutes ago:
-
-[root@host ~]# find / -mmin 120
-...output omitted...
-The + modifier in front of the minutes finds all files in the / directory that changed more than n minutes ago. To search for all files with content that changed 200 minutes ago:
-
-[root@host ~]# find / -mmin +200
-...output omitted...
-The - modifier searches for all files in the / directory that changed less than n minutes ago. The following example lists files that changed less than 150 minutes ago:
-
-[root@host ~]# find / -mmin -150
-...output omitted...
-Search for Files Based on File Type
-The find command -type option limits the search scope to a given file type. Use the following flags to limit the search scope:
-
-For regular files, use the f flag.
-
-For directories, use the d flag.
-
-For soft links, use the l flag.
-
-For block devices, use the b flag.
-
-Search for all directories in the /etc directory:
-
-[root@host ~]# find /etc -type d
-/etc
-/etc/tmpfiles.d
-/etc/systemd
-/etc/systemd/system
-/etc/systemd/system/getty.target.wants
-...output omitted...
-Search for all soft links in the / directory:
-
-[root@host ~]# find / -type l
-...output omitted...
-Search for all block devices in the /dev directory:
-
-[root@host ~]# find /dev -type b
-/dev/vda1
-/dev/vda
-The find command -links option followed by a number looks for all files with a specific hard link count. The number preceded by a + modifier looks for files with a higher count than the given hard link count. If the number precedes a - modifier, then the search is limited to files with a lower hard link count than the given number.
-
-Search for all regular files with more than one hard link:
-
-[root@host ~]# find / -type f -links +1
-...output omitted...
-
+  * Search for all regular files with more than one hard link:
+    ```console
+    [root@host ~]# find / -type f -links +1
+    ...output omitted...
+    ```
 
