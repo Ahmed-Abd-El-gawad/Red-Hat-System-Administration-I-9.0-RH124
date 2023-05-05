@@ -305,82 +305,91 @@
     ...output omitted...
     ```
 
-Search for Files Based on Ownership or Permission
-The find command searches for files based on their ownership or permissions. The find command -user and -group options search by a user and group name, or by user ID and group ID.
+<a name="Search_for_Files_Based_on_Ownership_or_Permission"></a>
+* Search for Files Based on Ownership or Permission
+  * The ```find``` command searches for files based on their ownership or permissions. The ```find``` command ```-user``` and ```-group``` options search by a user and group name, or by user ID and group ID.
+  * To search for files in the ```/home/developer``` directory that the developer user owns:
+    ```console
+    [developer@host ~]$ find -user developer
+    .
+    ./.bash_logout
+    ./.bash_profile
+    ...output omitted...
+    ```
+  * To search for files in the ```/home/developer``` directory that the developer group owns:
+    ```console
+    [developer@host ~]$ find -group developer
+    .
+    ./.bash_logout
+    ./.bash_profile
+    ...output omitted...
+    ```
+  * To search for files in the ```/home/developer``` directory that the 1000 user ID owns:
+    ```console
+    [developer@host ~]$ find -uid 1000
+    .
+    ./.bash_logout
+    ./.bash_profile
+    ...output omitted...
+    ```
+  * To search for files in the ```/home/developer``` directory that the 1000 group ID owns:
+    ```console
+    [developer@host ~]$ find -gid 1000
+    .
+    ./.bash_logout
+    ./.bash_profile
+    ...output omitted...
+    ```
+  * The ```find``` command ```-user``` and ```-group``` options search for files where the file owner and group owner are different. The following example lists files that the ```root``` user owns and with the ```mail``` group:
+    ```console
+    [root@host ~]# find / -user root -group mail
+    /var/spool/mail
+    ...output omitted...
+    ```
+  * The ```find``` command ```-perm``` option looks for files with a particular permission set. The octal values define the permissions with ```4```, ```2```, and ```1``` for read, write, and execute. Permissions are preceded with a ```/``` or ```-``` sign to control the search results.
+  * Octal permission preceded by the ```/``` sign matches files where at least one permission is set for user, group, or other for that permission set. A file with the ```r--r--r--``` permissions does not match the ```/222``` permission but matches the ```rw-r--r--``` permission. A ```-``` sign before the permission means that all three parts of the permissions must match. For the previous example, files with the ```rw-rw-rw-``` permissions match. You can also use the find command ```-perm``` option with the symbolic method for permissions.
+  * For example, the following commands match any file in the ```/home``` directory for which the owning user has read, write, and execute permissions, members of the owning group have read and write permissions, and others have read-only access. Both commands are equivalent, but the first one uses the octal method for permissions while the second one uses the symbolic methods.
+    ```console
+    [root@host ~]# find /home -perm 764
+    ...output omitted...
+    [root@host ~]# find /home -perm u=rw,g=rwx,o=r
+    ...output omitted...
+    ```
+  * The ```find``` command ```-ls``` option is very convenient when searching files by permissions, because it provides information for the files including their permissions.
+    ```console
+    [root@host ~]# find /home -perm 764 -ls
+     26207447   0 -rwxrw-r--   1 user  user   0 May 10 04:29 /home/user/file1
+    ```
+  * To search for files for which the user has at least write and execute permissions, the group has at least write permission, and others have at least read permission:
+    ```console
+    [root@host ~]# find /home -perm -324
+    ...output omitted...
+    [root@host ~]# find /home -perm -u=wx,g=w,o=r
+    ...output omitted...
+    ```
+  * To search for files for which the user has read permissions, or the group has at least read permissions, or others have at least write permission:
+    ```console
+    [root@host ~]# find /home -perm /442
+    ...output omitted...
+    [root@host ~]# find /home -perm /u=r,g=r,o=w
+    ...output omitted...
+    ```
+  * When used with ```/``` or ```-``` signs, the ```0``` value works as a wildcard because it means any permission.
+  * To search for any file in the ```/home/developer``` directory for which others have at least read access on the host machine:
+    ```console
+    [developer@host ~]$ find -perm -004
+    ...output omitted...
+    [developer@host ~]$ find -perm -o=r
+    ...output omitted...
+    ```
+  * To search for all files in the ```/home/developer``` directory where others have write permission:
+    ```console
+    [developer@host ~]$ find -perm -002
+    ...output omitted...
+    [developer@host ~]$ find -perm -o=w
+    ...output omitted...
+    ```
 
-To search for files in the /home/developer directory that the developer user owns:
-
-[developer@host ~]$ find -user developer
-.
-./.bash_logout
-./.bash_profile
-...output omitted...
-To search for files in the /home/developer directory that the developer group owns:
-
-[developer@host ~]$ find -group developer
-.
-./.bash_logout
-./.bash_profile
-...output omitted...
-To search for files in the /home/developer directory that the 1000 user ID owns:
-
-[developer@host ~]$ find -uid 1000
-.
-./.bash_logout
-./.bash_profile
-...output omitted...
-To search for files in the /home/developer directory that the 1000 group ID owns:
-
-[developer@host ~]$ find -gid 1000
-.
-./.bash_logout
-./.bash_profile
-...output omitted...
-The find command -user and -group options search for files where the file owner and group owner are different. The following example lists files that the root user owns and with the mail group:
-
-[root@host ~]# find / -user root -group mail
-/var/spool/mail
-...output omitted...
-The find command -perm option looks for files with a particular permission set. The octal values define the permissions with 4, 2, and 1 for read, write, and execute. Permissions are preceded with a / or - sign to control the search results.
-
-Octal permission preceded by the / sign matches files where at least one permission is set for user, group, or other for that permission set. A file with the r--r--r-- permissions does not match the /222 permission but matches the rw-r--r-- permission. A - sign before the permission means that all three parts of the permissions must match. For the previous example, files with the rw-rw-rw- permissions match. You can also use the find command -perm option with the symbolic method for permissions.
-
-For example, the following commands match any file in the /home directory for which the owning user has read, write, and execute permissions, members of the owning group have read and write permissions, and others have read-only access. Both commands are equivalent, but the first one uses the octal method for permissions while the second one uses the symbolic methods.
-
-[root@host ~]# find /home -perm 764
-...output omitted...
-[root@host ~]# find /home -perm u=rw,g=rwx,o=r
-...output omitted...
-The find command -ls option is very convenient when searching files by permissions, because it provides information for the files including their permissions.
-
-[root@host ~]# find /home -perm 764 -ls
- 26207447   0 -rwxrw-r--   1 user  user   0 May 10 04:29 /home/user/file1
-To search for files for which the user has at least write and execute permissions, the group has at least write permission, and others have at least read permission:
-
-[root@host ~]# find /home -perm -324
-...output omitted...
-[root@host ~]# find /home -perm -u=wx,g=w,o=r
-...output omitted...
-To search for files for which the user has read permissions, or the group has at least read permissions, or others have at least write permission:
-
-[root@host ~]# find /home -perm /442
-...output omitted...
-[root@host ~]# find /home -perm /u=r,g=r,o=w
-...output omitted...
-When used with / or - signs, the 0 value works as a wildcard because it means any permission.
-
-To search for any file in the /home/developer directory for which others have at least read access on the host machine:
-
-[developer@host ~]$ find -perm -004
-...output omitted...
-[developer@host ~]$ find -perm -o=r
-...output omitted...
-To search for all files in the /home/developer directory where others have write permission:
-
-[developer@host ~]$ find -perm -002
-...output omitted...
-[developer@host ~]$ find -perm -o=w
-...output omitted...
 Find Files Based on Size
 The find command -size option is followed by a numeric value, and the unit looks up files that match a specified size. Use the following list for the units with the find command -size option:
 
