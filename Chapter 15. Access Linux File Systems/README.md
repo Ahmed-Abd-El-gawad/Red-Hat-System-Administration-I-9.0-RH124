@@ -220,6 +220,7 @@
 | [Locate Files by Name](#Locate_Files_by_Name) |
 | [Search for Files in Real Time](#Search_for_Files_in_Real_Time) |
 | [Search for Files Based on Ownership or Permission](#Search_for_Files_Based_on_Ownership_or_Permission) |
+| [Find Files Based on Size](#Find_Files_Based_on_Size) |
 
 <a name="Search_for_Files"></a>
 * Search for Files
@@ -390,23 +391,22 @@
     ...output omitted...
     ```
 
-Find Files Based on Size
-The find command -size option is followed by a numeric value, and the unit looks up files that match a specified size. Use the following list for the units with the find command -size option:
-
-For kilobytes, use the k unit with k always in lowercase.
-
-For megabytes, use the M unit with M always in uppercase.
-
-For gigabytes, use the G unit with G always in uppercase.
-
-You can use the plus + and minus - characters to include files that are larger and smaller than the given size, respectively. The following example shows a search for files with an exact size of 10 megabytes:
-
-[developer@host ~]$ find -size 10M
-...output omitted...
-To search for files with a size of more than 10 gigabytes:
-
-[developer@host ~]$ find -size +10G
-...output omitted...
+<a name="Find_Files_Based_on_Size"></a>
+* Find Files Based on Size
+  * The ```find``` command ```-size``` option is followed by a numeric value, and the unit looks up files that match a specified size. Use the following list for the units with the ```find``` command ```-size``` option:
+    * For kilobytes, use the k unit with k always in lowercase.
+    * For megabytes, use the M unit with M always in uppercase.
+    * For gigabytes, use the G unit with G always in uppercase.
+  * You can use the plus ```+``` and minus ```-``` characters to include files that are larger and smaller than the given size, respectively. The following example shows a search for files with an exact size of 10 megabytes:
+    ```console
+    [developer@host ~]$ find -size 10M
+    ...output omitted...
+    ```
+  * To search for files with a size of more than 10 gigabytes:
+    ```console
+    [developer@host ~]$ find -size +10G
+    ...output omitted...
+    ```
 To search for files with a size of less than 10 kilobytes:
 
 [developer@host ~]$ find -size -10k
