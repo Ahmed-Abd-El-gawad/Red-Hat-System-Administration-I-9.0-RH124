@@ -17,6 +17,7 @@
 | [File Systems, Storage, and Block Devices](#File_Systems_Storage_and_Block_Devices) |
 | [Disk Partitions](#Disk_Partitions) |
 | [Logical Volumes](#Logical_Volumes) |
+| [Examine File Systems](#Examine_File_Systems) |
 
 <a name="Storage_Management_Concepts"></a>
 * Storage Management Concepts
@@ -58,6 +59,53 @@
 * Logical Volumes
   * Another way of organizing disks and partitions is with ***Logical Volume Management (LVM)***. With LVM, it is possible to aggregate block devices into a volume group. Disk space in the volume group is separated into logical volumes, which are the functional equivalent of a partition on a physical disk.
 * The LVM system assigns names to volume groups and logical volumes on their creation. LVM creates a directory in the ```/dev``` directory that matches the group name, and creates a symbolic link within that new directory with the same name as the logical volume. That logical volume file is then available to be mounted. For example, when a myvg volume group and the ```mylv``` logical volume are present, the full path to the logical volume is the ```/dev/myvg/mylv``` file.
+
+<a name="Examine_File_Systems"></a>
+* Examine File Systems
+  * Use the ```df``` command to display an overview of local and remote file-system devices, which includes the total disk space, used disk space, free disk space, and the percentage of the entire disk space.
+    ```console
+    [user@host ~]$ df
+    Filesystem     1K-blocks    Used Available Use% Mounted on
+    devtmpfs          912584       0    912584   0% /dev
+    tmpfs             936516       0    936516   0% /dev/shm
+    tmpfs             936516   16812    919704   2% /run
+    tmpfs             936516       0    936516   0% /sys/fs/cgroup
+    /dev/vda3        8377344 1411332   6966012  17% /
+    /dev/vda1        1038336  169896    868440  17% /boot
+    tmpfs             187300       0    187300   0% /run/user/1000
+    ```
+  * The partitioning shows that two physical file systems are mounted on the ```/``` and ```/boot``` directories that commonly exist on virtual machines. The ```tmpfs``` and ```devtmpfs``` devices are file systems in system memory. All files that are written to the tmpfs or devtmpfs file system disappear after a system reboot.
+  * The ```df``` command ```-h``` or ```-H``` options are human-readable options to improve the readability of the output sizes. The ```-h``` option reports in KiB (210), MiB (220), or GiB (230), while the ```-H``` option reports in SI units: KB (103), MB (106), or GB (109). Hard drive manufacturers usually use SI units when advertising their products.
+    ```console
+    [user@host ~]$ df -h
+    Filesystem      Size  Used Avail Use% Mounted on
+    devtmpfs        892M     0  892M   0% /dev
+    tmpfs           915M     0  915M   0% /dev/shm
+    tmpfs           915M   17M  899M   2% /run
+    tmpfs           915M     0  915M   0% /sys/fs/cgroup
+    /dev/vda3       8.0G  1.4G  6.7G  17% /
+    /dev/vda1      1014M  166M  849M  17% /boot
+    tmpfs           183M     0  183M   0% /run/user/1000
+    ```
+  * Use the ```du``` command for more detailed information about a specific directory tree space. The ```du``` command ```-h``` and ```-H``` options convert the output to a human-readable format. The ```du``` command shows the size of all files in the current directory tree recursively.
+    ```console
+    [root@host ~]# du /usr/share
+    ...output omitted...
+    176 /usr/share/smartmontools
+    184 /usr/share/nano
+    8 /usr/share/cmake/bash-completion
+    8 /usr/share/cmake
+    356676  /usr/share
+    ```
+    ```console
+    [root@host ~]# du -h /usr/share
+    ...output omitted...
+    176K  /usr/share/smartmontools
+    184K  /usr/share/nano
+    8.0K  /usr/share/cmake/bash-completion
+    8.0K  /usr/share/cmake
+    369M  /usr/share
+    ```
 
 
 <a name="15.3"></a>
